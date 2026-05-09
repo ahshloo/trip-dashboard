@@ -1,0 +1,411 @@
+// ─────────────────────────────────────────────────────────────
+//  TRIP DATA  –  edit this file to change days, regions, etc.
+//  index.html reads this and renders everything automatically.
+// ─────────────────────────────────────────────────────────────
+
+// ── MAP ROUTE (lat/lng pairs) ──────────────────────────────
+const ROUTE = [
+  [40.6895,-74.1745], // EWR / NJ start
+  [40.77,-74.07],     // NJ Turnpike north
+  [40.85,-73.96],     // George Washington Bridge
+  [41.07,-73.87],     // Tarrytown / Tappan Zee
+  [41.22,-73.98],     // Harriman
+  [41.50,-74.01],     // Newburgh / I-84 junction
+  [41.93,-73.99],     // Kingston
+  [42.22,-73.86],     // Catskill
+  [42.65,-73.75],     // Albany / I-90 junction
+  [43.08,-73.79],     // Saratoga Springs area
+  [43.43,-73.71],     // Lake George area
+  [43.83,-73.77],     // Schroon Lake
+  [44.18,-73.78],     // Keene / Au Sable Forks
+  [44.2795,-73.9799], // ★ LAKE PLACID
+  [44.18,-73.78],     // back south via NY-73
+  [43.83,-73.77],     // Schroon Lake
+  [43.4262,-73.7123], // ★ LAKE GEORGE
+  [42.65,-73.75],     // Albany
+  [42.82,-73.94],     // Schenectady
+  [42.94,-74.19],     // Amsterdam
+  [43.05,-74.85],     // Little Falls
+  [43.10,-75.23],     // Utica
+  [43.05,-76.15],     // Syracuse
+  [42.84,-76.14],     // I-81 south approach
+  [42.60,-76.18],     // Cortland
+  [42.51,-76.54],     // NY-13/414 junction
+  [42.3806,-76.8733], // ★ WATKINS GLEN
+  [42.42,-76.76],     // north on NY-414
+  [42.44,-76.60],     // Trumansburg
+  [42.4476,-76.4869], // ★ ITHACA
+  [42.30,-76.16],     // NY-13 south
+  [42.10,-75.91],     // Binghamton / I-86
+  [42.08,-75.38],     // I-86 east
+  [42.08,-74.91],     // Monticello
+  [41.80,-74.42],     // Liberty
+  [41.73,-74.19],     // Ellenville
+  [41.7476,-74.0868], // ★ NEW PALTZ
+  [41.50,-74.01],     // I-87 south / Newburgh
+  [41.22,-73.98],     // Harriman
+  [41.07,-73.87],     // Tarrytown
+  [40.85,-73.96],     // GWB
+  [40.77,-74.07],     // back into NJ
+  [40.6895,-74.1745]  // ★ EWR / NJ end
+];
+
+// ── MAP MARKERS ────────────────────────────────────────────
+const STOPS = [
+  { lat:40.6895, lng:-74.1745, label:'NJ', color:'#D97706', main:true,  title:'NJ Family Base / EWR',            dates:'Sep 27-28 · Oct 9-15' },
+  { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', main:true,  title:'Lake Placid / Mirror Lake',        dates:'Sep 29 – Oct 2' },
+  { lat:43.4262, lng:-73.7123, label:'LG', color:'#0284C7', main:true,  title:'Lake George Village',              dates:'Oct 2–4' },
+  { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', main:true,  title:'Watkins Glen State Park',          dates:'Oct 4–7' },
+  { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', main:true,  title:'Ithaca / Cornell Botanic Gardens', dates:'Oct 6' },
+  { lat:41.7476, lng:-74.0868, label:'NP', color:'#DC2626', main:true,  title:'New Paltz',                        dates:'Oct 7–9' },
+  { lat:44.3516, lng:-73.8587, label:'💧', color:'#64748b', main:false, title:'High Falls Gorge',                 dates:'Sep 30' },
+  { lat:44.3659, lng:-73.9026, label:'🚠', color:'#64748b', main:false, title:'Whiteface Gondola',                dates:'Oct 1 (weather)' },
+  { lat:44.2279, lng:-74.4644, label:'🦦', color:'#64748b', main:false, title:'The Wild Center, Tupper Lake',     dates:'Oct 1 (rain plan)' },
+  { lat:43.4246, lng:-73.7532, label:'⛰', color:'#64748b', main:false, title:'Prospect Mountain',                dates:'Oct 3' },
+  { lat:43.0831, lng:-73.7846, label:'🏛', color:'#64748b', main:false, title:'Saratoga Springs',                 dates:'Oct 3 optional' },
+  { lat:42.5386, lng:-76.6073, label:'💦', color:'#64748b', main:false, title:'Taughannock Falls',                dates:'Oct 5/6' },
+  { lat:41.7350, lng:-74.2373, label:'🏞', color:'#64748b', main:false, title:'Minnewaska State Park',            dates:'Oct 8' },
+  { lat:41.7688, lng:-74.1567, label:'🏰', color:'#64748b', main:false, title:'Mohonk Preserve',                  dates:'Oct 8 (optional splurge)' },
+];
+
+// ── REGIONS ────────────────────────────────────────────────
+// Each region has: id, emoji, title, colorVar (CSS var name),
+// dates, infoCard (or null), and an ordered list of day ids.
+const REGIONS = [
+  {
+    id: 'nj',
+    emoji: '🏠',
+    title: 'NJ Family Base',
+    colorVar: '--nj',
+    dates: 'Sep 27–28',
+    infoCard: null,
+    days: ['d1', 'd2']
+  },
+  {
+    id: 'adirondacks',
+    emoji: '🏔',
+    title: 'Adirondacks · Lake Placid',
+    colorVar: '--adirondacks',
+    dates: 'Sep 29 – Oct 2',
+    infoCard: {
+      prefix: 'adk',
+      eat: [
+        { icon:'🍺', name:'Lake Placid Pub &amp; Brewery',      badge:'rb-brew',   badgeLabel:'Brew',    sub:'Main St · Casual pub grub &amp; local craft beer. Fish &amp; chips are the move. No reservation needed.' },
+        { icon:'🍝', name:'Caffe Rustica',                       badge:'rb-fine',   badgeLabel:'Fine',    sub:'1936 Saranac Ave · House-made pasta &amp; fresh seafood. Best Italian in the Adirondacks.' },
+        { icon:'🌊', name:'The Cottage at Mirror Lake',          badge:'rb-casual', badgeLabel:'Casual',  sub:'77 Mirror Lake Dr · American food with lakeside patio views. Perfect for a relaxed dinner.' },
+        { icon:'🍕', name:'Big Slide Brewery &amp; Public House',badge:'rb-brew',   badgeLabel:'Brew',    sub:'5686 Cascade Rd · Farm-to-table, artisan wood-fired pizza, local craft beers. Relaxed vibe.' },
+        { icon:'🍔', name:'Noon Mark Burgers &amp; Pie',         badge:'rb-casual', badgeLabel:'Casual',  sub:'Main St · Classic diner energy. Great burgers, homemade pies. Very kid-friendly.' },
+      ],
+      nohike: [
+        { icon:'🏆', name:'Olympic Museum',              sub:'2634 Main St · Open 9:30am–5pm daily. North America\'s 2nd-largest Winter Olympic collection. 1980 "Miracle on Ice" artifacts. ~$15/adult, great for families.' },
+        { icon:'🛶', name:'Mirror Lake Paddling',         sub:'Kayak &amp; canoe rentals from Mirror Lake Inn or local outfitters. Calm flat water, easy for all ages. Beautiful foliage views.' },
+        { icon:'🎳', name:'Big Z\'s Bowling &amp; Entertainment', sub:'State-of-the-art lanes, full arcade, multi-sport simulator, shuffleboard. Solid rainy-day option.' },
+        { icon:'🎬', name:'Palace Theatre',               sub:'Downtown Lake Placid · Historic single-screen theater showing current films. Affordable, cozy afternoon escape.' },
+        { icon:'🛍', name:'Main Street Shopping',         sub:'Galleries, outdoor gear, fudge shops, Olympic memorabilia stores. An easy 2-hour wander with something for everyone.' },
+      ]
+    },
+    days: ['d3', 'd4', 'd5', 'd6']
+  },
+  {
+    id: 'lake-george',
+    emoji: '🌊',
+    title: 'Lake George',
+    colorVar: '--lake-george',
+    dates: 'Oct 2–4',
+    infoCard: {
+      prefix: 'lg',
+      eat: [
+        { icon:'🏕', name:'Log Jam Restaurant',      badge:'rb-fine',   badgeLabel:'Fine',   sub:'1484 US-9 · #1 rated in the area. Adirondack lodge decor, cozy fireplaces, unlimited salad bar. Book ahead on weekends.' },
+        { icon:'🌊', name:'Algonquin Restaurant',    badge:'rb-fine',   badgeLabel:'Fine',   sub:'Bolton Landing (~20 min) · True lakeside dining, live deck music in season, handcrafted dishes &amp; sweeping water views.' },
+        { icon:'🍝', name:'Mario\'s Restaurant',     badge:'rb-casual', badgeLabel:'Casual', sub:'Canada St · Authentic Italian: veal parm, fettuccine alfredo made fresh. Reliable family crowd-pleaser.' },
+        { icon:'🥞', name:'The Silo',                badge:'rb-casual', badgeLabel:'Casual', sub:'Queensbury (~10 min south) · Best breakfast in the region. Massive portions, signature apple cider donuts. Arrive early.' },
+        { icon:'🏰', name:'Shepard\'s',              badge:'rb-fine',   badgeLabel:'Fine',   sub:'Stone Queen Anne mansion, lakeside views. Great for a special dinner. Reserve ahead.' },
+      ],
+      nohike: [
+        { icon:'🏰', name:'Fort William Henry Museum',  sub:'Canada St · Living history museum of the 1757 French &amp; Indian War siege. Guided tours, re-enactments, period artifacts.' },
+        { icon:'🍷', name:'Adirondack Winery',          sub:'In the Village · Wine tasting room with Adirondack-inspired labels. Easy walk from the waterfront. Pick a bottle for the evening.' },
+        { icon:'🚢', name:'Lake George Boat Cruise',    sub:'Lake George Steamboat Co or Shoreline Cruises · See the fall foliage from the water. 1–2 hr tours depart from the village dock.' },
+        { icon:'🎨', name:'The Hyde Collection',        sub:'Glens Falls (~15 min) · World-class art in a 1912 historic home — Rembrandt, Picasso, Rubens. Free on Sundays.' },
+        { icon:'🛍', name:'Lake George Outlets',        sub:'Half-mile south of Village · 50+ stores (J.Crew, Coach, etc). Good backup for a rainy afternoon.' },
+      ]
+    },
+    days: ['d7', 'd8']
+  },
+  {
+    id: 'finger-lakes',
+    emoji: '🍷',
+    title: 'Finger Lakes',
+    colorVar: '--finger-lakes',
+    dates: 'Oct 4–7',
+    infoCard: {
+      prefix: 'fl',
+      eat: [
+        { icon:'🍷', name:'Graft Wine + Cider Bar',    badge:'rb-wine',   badgeLabel:'Wine',   sub:'413 N Franklin St, Watkins Glen · Farm-to-table, all locally sourced &amp; seasonal. Best sit-down dinner in town.' },
+        { icon:'🚂', name:'Seneca Harbor Station',     badge:'rb-casual', badgeLabel:'Casual', sub:'3 N Franklin St · 1876 train station turned restaurant. Seneca Lake views, great seafood &amp; steaks.' },
+        { icon:'🌿', name:'Ravinous Kitchen',          badge:'rb-casual', badgeLabel:'Casual', sub:'Watkins Glen · Field-to-table, weekly changing seasonal menu. Creative &amp; genuinely local.' },
+        { icon:'🌱', name:'Moosewood Restaurant',      badge:'rb-casual', badgeLabel:'Casual', sub:'215 N Cayuga St, Ithaca · Legendary vegetarian institution since 1973. A genuine Ithaca landmark.' },
+        { icon:'🐟', name:'BoatYard Grill',            badge:'rb-casual', badgeLabel:'Casual', sub:'525 Taughannock Blvd, Ithaca · Best seafood in Ithaca. Cayuga Lake dock views. Great clam chowder &amp; halibut.' },
+        { icon:'🍕', name:'Revelry Yards',             badge:'rb-brew',   badgeLabel:'Brew',   sub:'Ithaca · Wood-fired pizza, craft micro-brewery upstairs. Lunch, brunch &amp; dinner. Lively atmosphere.' },
+      ],
+      nohike: [
+        { icon:'🔬', name:'Corning Museum of Glass',      badge:'rb-must', badgeLabel:'★ Must-do', sub:'Corning, ~45 min from Watkins Glen · $25/adult, kids under 17 free. Open 9am–5pm daily. You can make your own glass piece. One of the best museums in the US — easily fills 3 hours.' },
+        { icon:'🍷', name:'Seneca Lake Wine Trail',        sub:'35+ wineries along both shores. Drive the loop, stop at 3–4. Highlights: Wagner Vineyards, Castel Grisch, Hazlitt\'s 1852. No reservation usually needed mid-week.' },
+        { icon:'🦕', name:'Museum of the Earth',           sub:'1259 Trumansburg Rd, Ithaca · Fossils, dinosaurs, hands-on paleontology. Very kid-friendly. ~$10/adult.' },
+        { icon:'🌾', name:'Windmill Farm &amp; Craft Market', sub:'Penn Yan, ~30 min · Saturdays only. Large open-air market: local food, crafts, produce, baked goods. Worth the drive.' },
+        { icon:'🎭', name:'Hangar Theatre',                sub:'Ithaca · Professional regional theater in a converted 1940s airplane hangar. Check schedule for fall shows.' },
+      ]
+    },
+    days: ['d9', 'd10', 'd11']
+  },
+  {
+    id: 'hudson',
+    emoji: '🍂',
+    title: 'Hudson Valley · Catskills',
+    colorVar: '--hudson',
+    dates: 'Oct 7–9',
+    infoCard: {
+      prefix: 'hv',
+      eat: [
+        { icon:'🥞', name:'Main Street Bistro',          badge:'rb-casual', badgeLabel:'Casual', sub:'59 Main St · New Paltz\'s beloved breakfast &amp; brunch institution for 30+ years. Arrive early on weekends — line forms outside.' },
+        { icon:'🍺', name:'Garvan\'s Gastropub',         badge:'rb-brew',   badgeLabel:'Brew',   sub:'215 Huguenot St · Traditional Irish food in an actual 1759 building. Full of character. Great for an evening out.' },
+        { icon:'🌶', name:'Lola\'s',                     badge:'rb-casual', badgeLabel:'Casual', sub:'Main St · Eclectic menu mixing Southern comfort, Thai, and global flavors. Strong cocktails. Local favorite.' },
+        { icon:'🍷', name:'Jar\'d Wine Pub',             badge:'rb-wine',   badgeLabel:'Wine',   sub:'68 Main St · Natural &amp; biodynamic wines, cozy back porch overlooking the Wallkill rail trail. Low-key and great.' },
+        { icon:'🍺', name:'Bacchus Restaurant &amp; Bar',badge:'rb-brew',   badgeLabel:'Brew',   sub:'Long list of Hudson Valley craft beers + full pub menu. Lively on weekend evenings.' },
+      ],
+      nohike: [
+        { icon:'🏛', name:'Huguenot Street Historic District', sub:'New Paltz · America\'s oldest surviving street (1692). Six original stone houses still standing. Self-guided walking or paid guided tours.' },
+        { icon:'🎨', name:'Samuel Dorsky Museum of Art',       sub:'SUNY New Paltz campus · Free. Strong rotating exhibitions, contemporary &amp; American art. Worth 1–2 hours.' },
+        { icon:'🎸', name:'Woodstock Village',                 sub:'~30 min west · The iconic music town. Great galleries, eclectic shops, live music &amp; coffee. Easy half-day escape.' },
+        { icon:'🏡', name:'FDR Home &amp; Presidential Library',sub:'Hyde Park, ~50 min north · Roosevelt\'s family estate + Eleanor\'s Val-Kill cottage. ~$20/adult. Fascinating in any season.' },
+        { icon:'🎨', name:'Olana State Historic Site',         sub:'Hudson, ~1 hr north · Frederic Church\'s Persian-style mansion with jaw-dropping Hudson Valley panorama. Stunning in October foliage.' },
+      ]
+    },
+    days: ['d12', 'd13']
+  }
+];
+
+// ── DAYS ───────────────────────────────────────────────────
+// content items: { type:'activity'|'drive'|'hiketabs', ... }
+//
+// activity fields:
+//   icon, title, sub
+//   tag  (optional) — shown as optional-tag badge: 'optional'|'rain plan'|'splurge'
+//   trailUrl (optional) — appends AllTrails link inside the sub text
+//   style (optional) — inline style on the outer .activity div
+//
+// drive fields: text
+//
+// hiketabs fields:
+//   prefix — used to form element IDs (e.g. 'oct1' → 'oct1-base')
+//   tabs   — array of { id, label, active?, title, desc?, note?, stats[], url }
+//     desc  — appended inline to title: "<strong>title</strong>desc"
+//     note  — rendered as a separate <p> below stats (no note → <br>)
+const DAYS = {
+  d1: {
+    date: 'Sep 27', title: 'Arrive EWR · Settle in with family',
+    badge: 'flex', badgeLabel: 'Flex',
+    content: [
+      { type:'activity', icon:'✈️', title:'Land at EWR',   sub:'Pick up rental car. Plan for traffic.' },
+      { type:'activity', icon:'🏠', title:'Family time',    sub:'Recharge, grocery run, sync on gear.' },
+    ]
+  },
+  d2: {
+    date: 'Sep 28', title: 'Rest day · Prep &amp; local explore',
+    badge: 'flex', badgeLabel: 'Flex',
+    content: [
+      { type:'activity', icon:'🛒', title:'Pack for Adirondacks',            sub:'Layers, rain gear, hiking shoes, snacks.' },
+      { type:'activity', icon:'🌳', title:'Local park or Palisades walk', tag:'optional', sub:'Easy leg-stretch before the long drive tomorrow.' },
+    ]
+  },
+  d3: {
+    date: 'Sep 29', title: 'Drive NJ → Lake Placid (~5 hrs)',
+    badge: 'drive', badgeLabel: 'Drive',
+    content: [
+      { type:'drive', text:'~290 miles · ~5 hrs · I-87 N to NY-73 W · Aim to arrive by 3pm' },
+      { type:'activity', icon:'🛑', title:'Saratoga Springs lunch stop',         sub:'Broadway Ave has great cafés. Easy exit off I-87.' },
+      { type:'activity', icon:'🏨', title:'Check in Lake Placid / Mirror Lake area', sub:'Mirror Lake Inn or budget motel on Main St. Walk Mirror Lake in the evening.' },
+    ]
+  },
+  d4: {
+    date: 'Sep 30', title: 'High Falls Gorge + Lake Placid village',
+    badge: 'explore', badgeLabel: 'Explore',
+    content: [
+      { type:'activity', icon:'💧', title:'High Falls Gorge',             sub:'Short paid walk along AuSable River gorge — great for all ages. ~45 min. Worth it.' },
+      { type:'activity', icon:'🍦', title:'Lake Placid village afternoon', sub:'Main Street shops, Olympic museum, Mirror Lake shoreline.' },
+      { type:'activity', icon:'🌙', title:'Dinner on Mirror Lake Drive',   sub:'Generations Restaurant or Lake Placid Pub &amp; Brewery.' },
+    ]
+  },
+  d5: {
+    date: 'Oct 1', title: 'Whiteface Gondola or Wild Center (weather choice)',
+    badge: 'hike', badgeLabel: 'Hike/Ride',
+    content: [
+      { type:'activity', icon:'🚠', title:'If clear: Whiteface Cloudsplitter Gondola', sub:'Weather-dependent. Best foliage view in the Adirondacks. Check forecast!' },
+      { type:'activity', icon:'🌧', title:'If rainy: The Wild Center, Tupper Lake', tag:'rain plan', sub:'Excellent nature museum + elevated Wild Walk canopy trail. ~45 min drive. Kids love it.' },
+      { type:'hiketabs', prefix:'oct1', tabs:[
+        { id:'base',    label:'Base Hike', active:true,
+          title:'Mt. Baker Trail', desc:' — easy family loop near Lake Placid village.',
+          stats:['2.2 mi','~250 ft gain','Easy'],
+          url:'https://www.alltrails.com/trail/us/new-york/mount-baker-loop' },
+        { id:'upgrade', label:'Upgrade',
+          title:'Mt. Van Hoevenberg', desc:' — solid panorama, moderate switchbacks.',
+          stats:['5.2 mi','~1,200 ft gain','Moderate'],
+          url:'https://www.alltrails.com/trail/us/new-york/mount-van-hoevenberg-trail' },
+      ]},
+    ]
+  },
+  d6: {
+    date: 'Oct 2', title: 'Drive Lake Placid → Lake George (~1.5 hrs)',
+    badge: 'drive', badgeLabel: 'Drive',
+    content: [
+      { type:'drive', text:'~70 miles · ~1.5 hrs · NY-73 E → I-87 S' },
+      { type:'activity', icon:'🏨', title:'Check in Lake George Village',    sub:'Fort William Henry Hotel or lakefront motel. Easy base for Prospect Mtn.' },
+      { type:'activity', icon:'🌊', title:'Lake George waterfront stroll',   sub:'Million Dollar Beach area, Canada St shops and ice cream.' },
+    ]
+  },
+  d7: {
+    date: 'Oct 3', title: 'Prospect Mountain + Lake George village',
+    badge: 'explore', badgeLabel: 'Explore',
+    content: [
+      { type:'activity', icon:'🚗', title:'Prospect Mountain Veterans Memorial Highway', sub:'Drive-up summit (or hike if trail open). Sweeping 100-mile foliage view. Free to hike, small fee to drive.' },
+      { type:'activity', icon:'🍺', title:'Saratoga Springs evening', tag:'optional', sub:'~45 min south. Beautiful historic downtown, great restaurant scene. Good pool-hotel alternative.' },
+    ]
+  },
+  d8: {
+    date: 'Oct 4', title: 'Drive Lake George → Watkins Glen (~3.5 hrs)',
+    badge: 'drive', badgeLabel: 'Drive',
+    content: [
+      { type:'drive', text:'~230 miles · ~3.5 hrs · I-87 S → I-90 W → I-88 → NY-414 S' },
+      { type:'activity', icon:'🛑', title:'Albany lunch stop',          sub:'Easy exit. Or push straight through and arrive Watkins Glen by 2pm.' },
+      { type:'activity', icon:'🏨', title:'Check in near Watkins Glen', sub:'Seneca Lodge (kitchenette cabins next to gorge entrance) or town motel.' },
+    ]
+  },
+  d9: {
+    date: 'Oct 5', title: 'Watkins Glen Gorge Trail',
+    badge: 'hike', badgeLabel: 'Hike',
+    content: [
+      { type:'activity', icon:'🏞', title:'Watkins Glen Gorge Trail', sub:'800 stone steps, 19 waterfalls, dramatic gorge walls. The best gorge hike in NY. Arrive early — gets busy.' },
+      { type:'hiketabs', prefix:'wg', tabs:[
+        { id:'base',    label:'Base',    active:true,
+          title:'Gorge Trail out-and-back',
+          note:'Walk to the top of the gorge, return same way. 45–60 min.',
+          stats:['1.6 mi rt','~420 ft','Easy-Mod'],
+          url:'https://www.alltrails.com/trail/us/new-york/gorge-trail' },
+        { id:'upgrade', label:'Upgrade',
+          title:'Gorge + South Rim loop',
+          note:'Full loop with elevated south rim views. 1.5–2 hrs.',
+          stats:['3 mi','~500 ft','Moderate'],
+          url:'https://www.alltrails.com/trail/us/new-york/gorge-trail-south-rim-trail-loop' },
+        { id:'stretch', label:'Stretch',
+          title:'All trails + North Rim',
+          note:'Complete the full trail system. 3–4 hrs. Bring lunch.',
+          stats:['5+ mi','~700 ft','Strenuous'],
+          url:'https://www.alltrails.com/trail/us/new-york/gorge-trail-rim-trail-loop' },
+      ]},
+    ]
+  },
+  d10: {
+    date: 'Oct 6', title: 'Taughannock Falls + Ithaca',
+    badge: 'hike', badgeLabel: 'Hike',
+    content: [
+      { type:'activity', icon:'💧', title:'Taughannock Falls State Park',
+        sub:'Tallest waterfall in the Northeast (215 ft — taller than Niagara!). Easy flat gorge walk, ~1.5 mi rt.',
+        trailUrl:'https://www.alltrails.com/trail/us/new-york/taughannock-gorge-trail' },
+      { type:'activity', icon:'🌿', title:'Cornell Botanic Gardens, Ithaca', sub:'Free. Beautiful fall color. Good rainy-day option — much of it is covered/greenhouse.' },
+      { type:'activity', icon:'🍕', title:'Ithaca Commons for dinner',       sub:'Collegetown energy, great food diversity.' },
+    ]
+  },
+  d11: {
+    date: 'Oct 7', title: 'Drive Finger Lakes → New Paltz (~3 hrs)',
+    badge: 'drive', badgeLabel: 'Drive',
+    content: [
+      { type:'drive', text:'~200 miles · ~3 hrs · I-86 E → NY-17 → I-87 S → Exit 18' },
+      { type:'activity', icon:'🛑', title:'Catskill Mountains scenic drive', sub:'Route 28 through the Catskills is stunning in October. Add 30 min but worth it.' },
+      { type:'activity', icon:'🏨', title:'Check in New Paltz',              sub:'Village is walkable. Minnewaska accessible by 15-min drive. Mohonk nearby.' },
+    ]
+  },
+  d12: {
+    date: 'Oct 8', title: 'Minnewaska State Park · Shawangunk Ridge',
+    badge: 'hike', badgeLabel: 'Hike',
+    content: [
+      { type:'activity', icon:'🏔', title:'Minnewaska State Park Preserve', sub:'Sky Lakes, white conglomerate cliffs, incredible foliage. Reserve parking online in advance — fills up fast on weekends.' },
+      { type:'hiketabs', prefix:'minn', tabs:[
+        { id:'base',    label:'Base',    active:true,
+          title:'Awosting Falls + Lake Minnewaska loop',
+          note:'Hits the best highlights. Family-friendly.',
+          stats:['3.5 mi','~350 ft','Easy-Mod'],
+          url:'https://www.alltrails.com/trail/us/new-york/awosting-falls-and-lake-minnewaska-via-undercliff-and-overcliff-roads' },
+        { id:'upgrade', label:'Upgrade',
+          title:'Lake Awosting loop',
+          note:'Full ridge traverse. More solitude. Pack lunch.',
+          stats:['8 mi','~900 ft','Moderate'],
+          url:'https://www.alltrails.com/trail/us/new-york/lake-awosting-loop-trail' },
+      ]},
+      { type:'activity', icon:'🏰', title:'Mohonk Preserve / Mountain House', tag:'splurge', style:'margin-top:10px',
+        sub:'Spectacular Victorian castle resort. Day hiker fee ~$30/person. Worth it if budget allows.' },
+    ]
+  },
+  d13: {
+    date: 'Oct 9', title: 'Drive New Paltz → NJ (~1.5 hrs)',
+    badge: 'drive', badgeLabel: 'Drive',
+    content: [
+      { type:'drive', text:'~90 miles · ~1.5 hrs · I-87 S → I-287 W' },
+      { type:'activity', icon:'🏠', title:'Return to NJ family base', sub:'Oct 9–15 wind-down, family time, EWR departure.' },
+    ]
+  },
+};
+
+// ── LOGISTICS ──────────────────────────────────────────────
+const LOGISTICS = {
+  carRental: {
+    icon: '🚗',
+    title: 'Car Rental — EWR',
+    intro: 'All major agencies operate from the <strong>EWR Rental Car Center</strong> — take the free AirTrain from your terminal (follow signs, ~10 min ride). On-site: <strong>Hertz, Avis, Budget, Enterprise, National, Alamo, Dollar, Thrifty.</strong>',
+    items: [
+      '<strong>Book in advance</strong> — walk-up rates can be 3–4× higher. Compare on <em>AutoSlash</em> or Kayak, then book direct.',
+      '<strong>Get an SUV or wagon</strong> — Adirondack mountain roads + luggage + passengers = you want the space &amp; clearance.',
+      '<strong>E-ZPass transponder</strong> — NY &amp; NJ tolls are fully cashless. Accept one from the rental agency or bring your own. Without it, "toll-by-mail" adds $3.50+ per toll at a high markup.',
+      '<strong>Photograph all 4 corners</strong> at pickup and again at dropoff — timestamp photos protect against disputes.',
+      '<strong>Return with a full tank</strong> — refuel 2–3 miles from the airport. Gas at the rental return is expensive.',
+      'Have passport, home driver\'s license, and credit card (main driver\'s name) ready at the counter.',
+    ]
+  },
+  cards: [
+    {
+      icon: '🏨', title: 'Accommodations',
+      items: [
+        'Book Lake Placid hotel (Mirror Lake Inn or Main St motel)',
+        'Book Lake George hotel (lakefront)',
+        'Book near Watkins Glen (Seneca Lodge?)',
+        'Book New Paltz hotel/B&amp;B',
+      ]
+    },
+    {
+      icon: '🎟', title: 'Reservations Needed',
+      items: [
+        'Minnewaska parking reservation (fills fast)',
+        'Whiteface Gondola tickets (check weather first)',
+        'Mohonk day hiker pass (if splurging)',
+        'Watkins Glen entry (check pass options)',
+      ]
+    },
+    {
+      icon: '🎒', title: 'Gear Checklist',
+      items: [
+        'Waterproof layer (rain is likely in Adirondacks)',
+        'Hiking shoes / waterproof boots',
+        'Layers (Oct nights are cold 35–45°F)',
+        'Snacks, reusable water bottles',
+        'Car phone mount + offline maps downloaded',
+      ]
+    },
+    {
+      icon: '🍂', title: 'Foliage Tips',
+      items: [
+        'Check foliagetracker.com week before departure',
+        'Adirondacks peak: late Sep (arrive early!)',
+        'Finger Lakes/Hudson Valley peak: early Oct',
+        'Book weekend activities early — foliage crowds!',
+      ]
+    },
+  ]
+};

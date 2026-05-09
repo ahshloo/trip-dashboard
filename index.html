@@ -247,6 +247,7 @@
     color: #e2e8f0;
   }
 </style>
+<script src="trip-data.js"></script>
 </head>
 <body>
 
@@ -281,460 +282,161 @@
 </section>
 
 <!-- ═══════════════ ITINERARY ═══════════════ -->
-<section id="itinerary">
-
-  <!-- NJ -->
-  <div id="nj" class="region-header" style="border-color:var(--nj)">
-    <span style="font-size:24px">🏠</span>
-    <h2 style="color:var(--nj)">NJ Family Base</h2>
-    <span class="dates">Sep 27–28</span>
-  </div>
-
-  <div class="day-card" id="d1">
-    <div class="day-card-header" onclick="toggle('d1')">
-      <span class="day-num">Sep 27</span>
-      <span class="day-title">Arrive EWR · Settle in with family</span>
-      <span class="day-badge badge-flex">Flex</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="activity"><div class="activity-icon">✈️</div><div class="activity-text"><strong>Land at EWR</strong><div class="sub">Pick up rental car. Plan for traffic.</div></div></div>
-      <div class="activity"><div class="activity-icon">🏠</div><div class="activity-text"><strong>Family time</strong><div class="sub">Recharge, grocery run, sync on gear.</div></div></div>
-    </div></div>
-  </div>
-
-  <div class="day-card" id="d2">
-    <div class="day-card-header" onclick="toggle('d2')">
-      <span class="day-num">Sep 28</span>
-      <span class="day-title">Rest day · Prep &amp; local explore</span>
-      <span class="day-badge badge-flex">Flex</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="activity"><div class="activity-icon">🛒</div><div class="activity-text"><strong>Pack for Adirondacks</strong><div class="sub">Layers, rain gear, hiking shoes, snacks.</div></div></div>
-      <div class="activity"><div class="activity-icon">🌳</div><div class="activity-text"><strong>Local park or Palisades walk</strong> <span class="optional-tag">optional</span><div class="sub">Easy leg-stretch before the long drive tomorrow.</div></div></div>
-    </div></div>
-  </div>
-
-  <!-- ADIRONDACKS -->
-  <div id="adirondacks" class="region-header" style="border-color:var(--adirondacks)">
-    <span style="font-size:24px">🏔</span>
-    <h2 style="color:var(--adirondacks)">Adirondacks · Lake Placid</h2>
-    <span class="dates">Sep 29 – Oct 2</span>
-  </div>
-
-  <!-- Adirondacks — Eat & No-Hike -->
-  <div class="region-info-card">
-    <div class="ri-tabs">
-      <button class="ri-tab active" onclick="riTab('adk','eat')">🍽 Where to Eat</button>
-      <button class="ri-tab" onclick="riTab('adk','nohike')">🎭 Skip the Hike?</button>
-    </div>
-    <div id="adk-eat" class="ri-panel active">
-      <div class="ri-item"><div class="ri-icon">🍺</div><div class="ri-text"><strong>Lake Placid Pub &amp; Brewery</strong> <span class="ri-badge rb-brew">Brew</span><div class="ri-sub">Main St · Casual pub grub &amp; local craft beer. Fish &amp; chips are the move. No reservation needed.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍝</div><div class="ri-text"><strong>Caffe Rustica</strong> <span class="ri-badge rb-fine">Fine</span><div class="ri-sub">1936 Saranac Ave · House-made pasta &amp; fresh seafood. Best Italian in the Adirondacks.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🌊</div><div class="ri-text"><strong>The Cottage at Mirror Lake</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">77 Mirror Lake Dr · American food with lakeside patio views. Perfect for a relaxed dinner.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍕</div><div class="ri-text"><strong>Big Slide Brewery &amp; Public House</strong> <span class="ri-badge rb-brew">Brew</span><div class="ri-sub">5686 Cascade Rd · Farm-to-table, artisan wood-fired pizza, local craft beers. Relaxed vibe.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍔</div><div class="ri-text"><strong>Noon Mark Burgers &amp; Pie</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">Main St · Classic diner energy. Great burgers, homemade pies. Very kid-friendly.</div></div></div>
-    </div>
-    <div id="adk-nohike" class="ri-panel">
-      <div class="ri-item"><div class="ri-icon">🏆</div><div class="ri-text"><strong>Olympic Museum</strong><div class="ri-sub">2634 Main St · Open 9:30am–5pm daily. North America's 2nd-largest Winter Olympic collection. 1980 "Miracle on Ice" artifacts. ~$15/adult, great for families.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🛶</div><div class="ri-text"><strong>Mirror Lake Paddling</strong><div class="ri-sub">Kayak &amp; canoe rentals from Mirror Lake Inn or local outfitters. Calm flat water, easy for all ages. Beautiful foliage views.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🎳</div><div class="ri-text"><strong>Big Z's Bowling &amp; Entertainment</strong><div class="ri-sub">State-of-the-art lanes, full arcade, multi-sport simulator, shuffleboard. Solid rainy-day option.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🎬</div><div class="ri-text"><strong>Palace Theatre</strong><div class="ri-sub">Downtown Lake Placid · Historic single-screen theater showing current films. Affordable, cozy afternoon escape.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🛍</div><div class="ri-text"><strong>Main Street Shopping</strong><div class="ri-sub">Galleries, outdoor gear, fudge shops, Olympic memorabilia stores. An easy 2-hour wander with something for everyone.</div></div></div>
-    </div>
-  </div>
-
-  <div class="day-card" id="d3">
-    <div class="day-card-header" onclick="toggle('d3')">
-      <span class="day-num">Sep 29</span>
-      <span class="day-title">Drive NJ → Lake Placid (~5 hrs)</span>
-      <span class="day-badge badge-drive">Drive</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="drive-bar">🚗 ~290 miles · ~5 hrs · I-87 N to NY-73 W · Aim to arrive by 3pm</div>
-      <div class="activity"><div class="activity-icon">🛑</div><div class="activity-text"><strong>Saratoga Springs lunch stop</strong><div class="sub">Broadway Ave has great cafés. Easy exit off I-87.</div></div></div>
-      <div class="activity"><div class="activity-icon">🏨</div><div class="activity-text"><strong>Check in Lake Placid / Mirror Lake area</strong><div class="sub">Mirror Lake Inn or budget motel on Main St. Walk Mirror Lake in the evening.</div></div></div>
-    </div></div>
-  </div>
-
-  <div class="day-card" id="d4">
-    <div class="day-card-header" onclick="toggle('d4')">
-      <span class="day-num">Sep 30</span>
-      <span class="day-title">High Falls Gorge + Lake Placid village</span>
-      <span class="day-badge badge-explore">Explore</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="activity"><div class="activity-icon">💧</div><div class="activity-text"><strong>High Falls Gorge</strong><div class="sub">Short paid walk along AuSable River gorge — great for all ages. ~45 min. Worth it.</div></div></div>
-      <div class="activity"><div class="activity-icon">🍦</div><div class="activity-text"><strong>Lake Placid village afternoon</strong><div class="sub">Main Street shops, Olympic museum, Mirror Lake shoreline.</div></div></div>
-      <div class="activity"><div class="activity-icon">🌙</div><div class="activity-text"><strong>Dinner on Mirror Lake Drive</strong><div class="sub">Generations Restaurant or Lake Placid Pub & Brewery.</div></div></div>
-    </div></div>
-  </div>
-
-  <div class="day-card" id="d5">
-    <div class="day-card-header" onclick="toggle('d5')">
-      <span class="day-num">Oct 1</span>
-      <span class="day-title">Whiteface Gondola or Wild Center (weather choice)</span>
-      <span class="day-badge badge-hike">Hike/Ride</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="activity"><div class="activity-icon">🚠</div><div class="activity-text"><strong>If clear: Whiteface Cloudsplitter Gondola</strong><div class="sub">Weather-dependent. Best foliage view in the Adirondacks. Check forecast!</div></div></div>
-      <div class="activity"><div class="activity-icon">🌧</div><div class="activity-text"><strong>If rainy: The Wild Center, Tupper Lake</strong> <span class="optional-tag">rain plan</span><div class="sub">Excellent nature museum + elevated Wild Walk canopy trail. ~45 min drive. Kids love it.</div></div></div>
-
-      <div class="hike-tabs">
-        <div class="hike-tab-btns">
-          <button class="htab active" onclick="hikeTab('oct1','base')">Base Hike</button>
-          <button class="htab" onclick="hikeTab('oct1','upgrade')">Upgrade</button>
-        </div>
-        <div id="oct1-base" class="hike-option active">
-          <p><strong>Mt. Baker Trail</strong> — easy family loop near Lake Placid village.</p>
-          <span class="trail-stat">2.2 mi</span><span class="trail-stat">~250 ft gain</span><span class="trail-stat">Easy</span>
-          <br>
-          <a class="trail-link" href="https://www.alltrails.com/trail/us/new-york/mount-baker-loop" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            View on AllTrails
-          </a>
-        </div>
-        <div id="oct1-upgrade" class="hike-option">
-          <p><strong>Mt. Van Hoevenberg</strong> — solid panorama, moderate switchbacks.</p>
-          <span class="trail-stat">5.2 mi</span><span class="trail-stat">~1,200 ft gain</span><span class="trail-stat">Moderate</span>
-          <br>
-          <a class="trail-link" href="https://www.alltrails.com/trail/us/new-york/mount-van-hoevenberg-trail" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            View on AllTrails
-          </a>
-        </div>
-      </div>
-    </div></div>
-  </div>
-
-  <div class="day-card" id="d6">
-    <div class="day-card-header" onclick="toggle('d6')">
-      <span class="day-num">Oct 2</span>
-      <span class="day-title">Drive Lake Placid → Lake George (~1.5 hrs)</span>
-      <span class="day-badge badge-drive">Drive</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="drive-bar">🚗 ~70 miles · ~1.5 hrs · NY-73 E → I-87 S</div>
-      <div class="activity"><div class="activity-icon">🏨</div><div class="activity-text"><strong>Check in Lake George Village</strong><div class="sub">Fort William Henry Hotel or lakefront motel. Easy base for Prospect Mtn.</div></div></div>
-      <div class="activity"><div class="activity-icon">🌊</div><div class="activity-text"><strong>Lake George waterfront stroll</strong><div class="sub">Million Dollar Beach area, Canada St shops and ice cream.</div></div></div>
-    </div></div>
-  </div>
-
-  <!-- LAKE GEORGE -->
-  <div id="lake-george" class="region-header" style="border-color:var(--lake-george)">
-    <span style="font-size:24px">🌊</span>
-    <h2 style="color:var(--lake-george)">Lake George</h2>
-    <span class="dates">Oct 2–4</span>
-  </div>
-
-  <!-- Lake George — Eat & No-Hike -->
-  <div class="region-info-card">
-    <div class="ri-tabs">
-      <button class="ri-tab active" onclick="riTab('lg','eat')">🍽 Where to Eat</button>
-      <button class="ri-tab" onclick="riTab('lg','nohike')">🎭 Skip the Hike?</button>
-    </div>
-    <div id="lg-eat" class="ri-panel active">
-      <div class="ri-item"><div class="ri-icon">🏕</div><div class="ri-text"><strong>Log Jam Restaurant</strong> <span class="ri-badge rb-fine">Fine</span><div class="ri-sub">1484 US-9 · #1 rated in the area. Adirondack lodge decor, cozy fireplaces, unlimited salad bar. Book ahead on weekends.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🌊</div><div class="ri-text"><strong>Algonquin Restaurant</strong> <span class="ri-badge rb-fine">Fine</span><div class="ri-sub">Bolton Landing (~20 min) · True lakeside dining, live deck music in season, handcrafted dishes &amp; sweeping water views.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍝</div><div class="ri-text"><strong>Mario's Restaurant</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">Canada St · Authentic Italian: veal parm, fettuccine alfredo made fresh. Reliable family crowd-pleaser.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🥞</div><div class="ri-text"><strong>The Silo</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">Queensbury (~10 min south) · Best breakfast in the region. Massive portions, signature apple cider donuts. Arrive early.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🏰</div><div class="ri-text"><strong>Shepard's</strong> <span class="ri-badge rb-fine">Fine</span><div class="ri-sub">Stone Queen Anne mansion, lakeside views. Great for a special dinner. Reserve ahead.</div></div></div>
-    </div>
-    <div id="lg-nohike" class="ri-panel">
-      <div class="ri-item"><div class="ri-icon">🏰</div><div class="ri-text"><strong>Fort William Henry Museum</strong><div class="ri-sub">Canada St · Living history museum of the 1757 French &amp; Indian War siege. Guided tours, re-enactments, period artifacts.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍷</div><div class="ri-text"><strong>Adirondack Winery</strong><div class="ri-sub">In the Village · Wine tasting room with Adirondack-inspired labels. Easy walk from the waterfront. Pick a bottle for the evening.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🚢</div><div class="ri-text"><strong>Lake George Boat Cruise</strong><div class="ri-sub">Lake George Steamboat Co or Shoreline Cruises · See the fall foliage from the water. 1–2 hr tours depart from the village dock.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🎨</div><div class="ri-text"><strong>The Hyde Collection</strong><div class="ri-sub">Glens Falls (~15 min) · World-class art in a 1912 historic home — Rembrandt, Picasso, Rubens. Free on Sundays.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🛍</div><div class="ri-text"><strong>Lake George Outlets</strong><div class="ri-sub">Half-mile south of Village · 50+ stores (J.Crew, Coach, etc). Good backup for a rainy afternoon.</div></div></div>
-    </div>
-  </div>
-
-  <div class="day-card" id="d7">
-    <div class="day-card-header" onclick="toggle('d7')">
-      <span class="day-num">Oct 3</span>
-      <span class="day-title">Prospect Mountain + Lake George village</span>
-      <span class="day-badge badge-explore">Explore</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="activity"><div class="activity-icon">🚗</div><div class="activity-text"><strong>Prospect Mountain Veterans Memorial Highway</strong><div class="sub">Drive-up summit (or hike if trail open). Sweeping 100-mile foliage view. Free to hike, small fee to drive.</div></div></div>
-      <div class="activity"><div class="activity-icon">🍺</div><div class="activity-text"><strong>Saratoga Springs evening</strong> <span class="optional-tag">optional</span><div class="sub">~45 min south. Beautiful historic downtown, great restaurant scene. Good pool-hotel alternative.</div></div></div>
-    </div></div>
-  </div>
-
-  <div class="day-card" id="d8">
-    <div class="day-card-header" onclick="toggle('d8')">
-      <span class="day-num">Oct 4</span>
-      <span class="day-title">Drive Lake George → Watkins Glen (~3.5 hrs)</span>
-      <span class="day-badge badge-drive">Drive</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="drive-bar">🚗 ~230 miles · ~3.5 hrs · I-87 S → I-90 W → I-88 → NY-414 S</div>
-      <div class="activity"><div class="activity-icon">🛑</div><div class="activity-text"><strong>Albany lunch stop</strong><div class="sub">Easy exit. Or push straight through and arrive Watkins Glen by 2pm.</div></div></div>
-      <div class="activity"><div class="activity-icon">🏨</div><div class="activity-text"><strong>Check in near Watkins Glen</strong><div class="sub">Seneca Lodge (kitchenette cabins next to gorge entrance) or town motel.</div></div></div>
-    </div></div>
-  </div>
-
-  <!-- FINGER LAKES -->
-  <div id="finger-lakes" class="region-header" style="border-color:var(--finger-lakes)">
-    <span style="font-size:24px">🍷</span>
-    <h2 style="color:var(--finger-lakes)">Finger Lakes</h2>
-    <span class="dates">Oct 4–7</span>
-  </div>
-
-  <!-- Finger Lakes — Eat & No-Hike -->
-  <div class="region-info-card">
-    <div class="ri-tabs">
-      <button class="ri-tab active" onclick="riTab('fl','eat')">🍽 Where to Eat</button>
-      <button class="ri-tab" onclick="riTab('fl','nohike')">🎭 Skip the Hike?</button>
-    </div>
-    <div id="fl-eat" class="ri-panel active">
-      <div class="ri-item"><div class="ri-icon">🍷</div><div class="ri-text"><strong>Graft Wine + Cider Bar</strong> <span class="ri-badge rb-wine">Wine</span><div class="ri-sub">413 N Franklin St, Watkins Glen · Farm-to-table, all locally sourced &amp; seasonal. Best sit-down dinner in town.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🚂</div><div class="ri-text"><strong>Seneca Harbor Station</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">3 N Franklin St · 1876 train station turned restaurant. Seneca Lake views, great seafood &amp; steaks.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🌿</div><div class="ri-text"><strong>Ravinous Kitchen</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">Watkins Glen · Field-to-table, weekly changing seasonal menu. Creative &amp; genuinely local.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🌱</div><div class="ri-text"><strong>Moosewood Restaurant</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">215 N Cayuga St, Ithaca · Legendary vegetarian institution since 1973. A genuine Ithaca landmark.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🐟</div><div class="ri-text"><strong>BoatYard Grill</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">525 Taughannock Blvd, Ithaca · Best seafood in Ithaca. Cayuga Lake dock views. Great clam chowder &amp; halibut.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍕</div><div class="ri-text"><strong>Revelry Yards</strong> <span class="ri-badge rb-brew">Brew</span><div class="ri-sub">Ithaca · Wood-fired pizza, craft micro-brewery upstairs. Lunch, brunch &amp; dinner. Lively atmosphere.</div></div></div>
-    </div>
-    <div id="fl-nohike" class="ri-panel">
-      <div class="ri-item"><div class="ri-icon">🔬</div><div class="ri-text"><strong>Corning Museum of Glass</strong> <span class="ri-badge rb-must">★ Must-do</span><div class="ri-sub">Corning, ~45 min from Watkins Glen · $25/adult, kids under 17 free. Open 9am–5pm daily. You can make your own glass piece. One of the best museums in the US — easily fills 3 hours.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍷</div><div class="ri-text"><strong>Seneca Lake Wine Trail</strong><div class="ri-sub">35+ wineries along both shores. Drive the loop, stop at 3–4. Highlights: Wagner Vineyards, Castel Grisch, Hazlitt's 1852. No reservation usually needed mid-week.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🦕</div><div class="ri-text"><strong>Museum of the Earth</strong><div class="ri-sub">1259 Trumansburg Rd, Ithaca · Fossils, dinosaurs, hands-on paleontology. Very kid-friendly. ~$10/adult.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🌾</div><div class="ri-text"><strong>Windmill Farm &amp; Craft Market</strong><div class="ri-sub">Penn Yan, ~30 min · Saturdays only. Large open-air market: local food, crafts, produce, baked goods. Worth the drive.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🎭</div><div class="ri-text"><strong>Hangar Theatre</strong><div class="ri-sub">Ithaca · Professional regional theater in a converted 1940s airplane hangar. Check schedule for fall shows.</div></div></div>
-    </div>
-  </div>
-
-  <div class="day-card" id="d9">
-    <div class="day-card-header" onclick="toggle('d9')">
-      <span class="day-num">Oct 5</span>
-      <span class="day-title">Watkins Glen Gorge Trail</span>
-      <span class="day-badge badge-hike">Hike</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="activity"><div class="activity-icon">🏞</div><div class="activity-text"><strong>Watkins Glen Gorge Trail</strong><div class="sub">800 stone steps, 19 waterfalls, dramatic gorge walls. The best gorge hike in NY. Arrive early — gets busy.</div></div></div>
-
-      <div class="hike-tabs">
-        <div class="hike-tab-btns">
-          <button class="htab active" onclick="hikeTab('wg','base')">Base</button>
-          <button class="htab" onclick="hikeTab('wg','upgrade')">Upgrade</button>
-          <button class="htab" onclick="hikeTab('wg','stretch')">Stretch</button>
-        </div>
-        <div id="wg-base" class="hike-option active">
-          <p><strong>Gorge Trail out-and-back</strong></p>
-          <span class="trail-stat">1.6 mi rt</span><span class="trail-stat">~420 ft</span><span class="trail-stat">Easy-Mod</span>
-          <p style="margin-top:8px; font-size:12px; color:var(--muted)">Walk to the top of the gorge, return same way. 45–60 min.</p>
-          <a class="trail-link" href="https://www.alltrails.com/trail/us/new-york/gorge-trail" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            View on AllTrails
-          </a>
-        </div>
-        <div id="wg-upgrade" class="hike-option">
-          <p><strong>Gorge + South Rim loop</strong></p>
-          <span class="trail-stat">3 mi</span><span class="trail-stat">~500 ft</span><span class="trail-stat">Moderate</span>
-          <p style="margin-top:8px; font-size:12px; color:var(--muted)">Full loop with elevated south rim views. 1.5–2 hrs.</p>
-          <a class="trail-link" href="https://www.alltrails.com/trail/us/new-york/gorge-trail-south-rim-trail-loop" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            View on AllTrails
-          </a>
-        </div>
-        <div id="wg-stretch" class="hike-option">
-          <p><strong>All trails + North Rim</strong></p>
-          <span class="trail-stat">5+ mi</span><span class="trail-stat">~700 ft</span><span class="trail-stat">Strenuous</span>
-          <p style="margin-top:8px; font-size:12px; color:var(--muted)">Complete the full trail system. 3–4 hrs. Bring lunch.</p>
-          <a class="trail-link" href="https://www.alltrails.com/trail/us/new-york/gorge-trail-rim-trail-loop" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            View on AllTrails
-          </a>
-        </div>
-      </div>
-    </div></div>
-  </div>
-
-  <div class="day-card" id="d10">
-    <div class="day-card-header" onclick="toggle('d10')">
-      <span class="day-num">Oct 6</span>
-      <span class="day-title">Taughannock Falls + Ithaca</span>
-      <span class="day-badge badge-hike">Hike</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="activity"><div class="activity-icon">💧</div><div class="activity-text"><strong>Taughannock Falls State Park</strong><div class="sub">Tallest waterfall in the Northeast (215 ft — taller than Niagara!). Easy flat gorge walk, ~1.5 mi rt.
-        <br><a class="trail-link" href="https://www.alltrails.com/trail/us/new-york/taughannock-gorge-trail" target="_blank" rel="noopener" style="margin-top:8px">
-          <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          View on AllTrails
-        </a>
-      </div></div></div>
-      <div class="activity"><div class="activity-icon">🌿</div><div class="activity-text"><strong>Cornell Botanic Gardens, Ithaca</strong><div class="sub">Free. Beautiful fall color. Good rainy-day option — much of it is covered/greenhouse.</div></div></div>
-      <div class="activity"><div class="activity-icon">🍕</div><div class="activity-text"><strong>Ithaca Commons for dinner</strong><div class="sub">Collegetown energy, great food diversity.</div></div></div>
-    </div></div>
-  </div>
-
-  <div class="day-card" id="d11">
-    <div class="day-card-header" onclick="toggle('d11')">
-      <span class="day-num">Oct 7</span>
-      <span class="day-title">Drive Finger Lakes → New Paltz (~3 hrs)</span>
-      <span class="day-badge badge-drive">Drive</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="drive-bar">🚗 ~200 miles · ~3 hrs · I-86 E → NY-17 → I-87 S → Exit 18</div>
-      <div class="activity"><div class="activity-icon">🛑</div><div class="activity-text"><strong>Catskill Mountains scenic drive</strong><div class="sub">Route 28 through the Catskills is stunning in October. Add 30 min but worth it.</div></div></div>
-      <div class="activity"><div class="activity-icon">🏨</div><div class="activity-text"><strong>Check in New Paltz</strong><div class="sub">Village is walkable. Minnewaska accessible by 15-min drive. Mohonk nearby.</div></div></div>
-    </div></div>
-  </div>
-
-  <!-- HUDSON VALLEY -->
-  <div id="hudson" class="region-header" style="border-color:var(--hudson)">
-    <span style="font-size:24px">🍂</span>
-    <h2 style="color:var(--hudson)">Hudson Valley · Catskills</h2>
-    <span class="dates">Oct 7–9</span>
-  </div>
-
-  <!-- Hudson Valley — Eat & No-Hike -->
-  <div class="region-info-card">
-    <div class="ri-tabs">
-      <button class="ri-tab active" onclick="riTab('hv','eat')">🍽 Where to Eat</button>
-      <button class="ri-tab" onclick="riTab('hv','nohike')">🎭 Skip the Hike?</button>
-    </div>
-    <div id="hv-eat" class="ri-panel active">
-      <div class="ri-item"><div class="ri-icon">🥞</div><div class="ri-text"><strong>Main Street Bistro</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">59 Main St · New Paltz's beloved breakfast &amp; brunch institution for 30+ years. Arrive early on weekends — line forms outside.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍺</div><div class="ri-text"><strong>Garvan's Gastropub</strong> <span class="ri-badge rb-brew">Brew</span><div class="ri-sub">215 Huguenot St · Traditional Irish food in an actual 1759 building. Full of character. Great for an evening out.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🌶</div><div class="ri-text"><strong>Lola's</strong> <span class="ri-badge rb-casual">Casual</span><div class="ri-sub">Main St · Eclectic menu mixing Southern comfort, Thai, and global flavors. Strong cocktails. Local favorite.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍷</div><div class="ri-text"><strong>Jar'd Wine Pub</strong> <span class="ri-badge rb-wine">Wine</span><div class="ri-sub">68 Main St · Natural &amp; biodynamic wines, cozy back porch overlooking the Wallkill rail trail. Low-key and great.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🍺</div><div class="ri-text"><strong>Bacchus Restaurant &amp; Bar</strong> <span class="ri-badge rb-brew">Brew</span><div class="ri-sub">Long list of Hudson Valley craft beers + full pub menu. Lively on weekend evenings.</div></div></div>
-    </div>
-    <div id="hv-nohike" class="ri-panel">
-      <div class="ri-item"><div class="ri-icon">🏛</div><div class="ri-text"><strong>Huguenot Street Historic District</strong><div class="ri-sub">New Paltz · America's oldest surviving street (1692). Six original stone houses still standing. Self-guided walking or paid guided tours.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🎨</div><div class="ri-text"><strong>Samuel Dorsky Museum of Art</strong><div class="ri-sub">SUNY New Paltz campus · Free. Strong rotating exhibitions, contemporary &amp; American art. Worth 1–2 hours.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🎸</div><div class="ri-text"><strong>Woodstock Village</strong><div class="ri-sub">~30 min west · The iconic music town. Great galleries, eclectic shops, live music &amp; coffee. Easy half-day escape.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🏡</div><div class="ri-text"><strong>FDR Home &amp; Presidential Library</strong><div class="ri-sub">Hyde Park, ~50 min north · Roosevelt's family estate + Eleanor's Val-Kill cottage. ~$20/adult. Fascinating in any season.</div></div></div>
-      <div class="ri-item"><div class="ri-icon">🎨</div><div class="ri-text"><strong>Olana State Historic Site</strong><div class="ri-sub">Hudson, ~1 hr north · Frederic Church's Persian-style mansion with jaw-dropping Hudson Valley panorama. Stunning in October foliage.</div></div></div>
-    </div>
-  </div>
-
-  <div class="day-card" id="d12">
-    <div class="day-card-header" onclick="toggle('d12')">
-      <span class="day-num">Oct 8</span>
-      <span class="day-title">Minnewaska State Park · Shawangunk Ridge</span>
-      <span class="day-badge badge-hike">Hike</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="activity"><div class="activity-icon">🏔</div><div class="activity-text"><strong>Minnewaska State Park Preserve</strong><div class="sub">Sky Lakes, white conglomerate cliffs, incredible foliage. Reserve parking online in advance — fills up fast on weekends.</div></div></div>
-
-      <div class="hike-tabs">
-        <div class="hike-tab-btns">
-          <button class="htab active" onclick="hikeTab('minn','base')">Base</button>
-          <button class="htab" onclick="hikeTab('minn','upgrade')">Upgrade</button>
-        </div>
-        <div id="minn-base" class="hike-option active">
-          <p><strong>Awosting Falls + Lake Minnewaska loop</strong></p>
-          <span class="trail-stat">3.5 mi</span><span class="trail-stat">~350 ft</span><span class="trail-stat">Easy-Mod</span>
-          <p style="margin-top:8px; font-size:12px; color:var(--muted)">Hits the best highlights. Family-friendly.</p>
-          <a class="trail-link" href="https://www.alltrails.com/trail/us/new-york/awosting-falls-and-lake-minnewaska-via-undercliff-and-overcliff-roads" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            View on AllTrails
-          </a>
-        </div>
-        <div id="minn-upgrade" class="hike-option">
-          <p><strong>Lake Awosting loop</strong></p>
-          <span class="trail-stat">8 mi</span><span class="trail-stat">~900 ft</span><span class="trail-stat">Moderate</span>
-          <p style="margin-top:8px; font-size:12px; color:var(--muted)">Full ridge traverse. More solitude. Pack lunch.</p>
-          <a class="trail-link" href="https://www.alltrails.com/trail/us/new-york/lake-awosting-loop-trail" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            View on AllTrails
-          </a>
-        </div>
-      </div>
-
-      <div class="activity" style="margin-top:10px"><div class="activity-icon">🏰</div><div class="activity-text"><strong>Mohonk Preserve / Mountain House</strong> <span class="optional-tag">splurge</span><div class="sub">Spectacular Victorian castle resort. Day hiker fee ~$30/person. Worth it if budget allows.</div></div></div>
-    </div></div>
-  </div>
-
-  <div class="day-card" id="d13">
-    <div class="day-card-header" onclick="toggle('d13')">
-      <span class="day-num">Oct 9</span>
-      <span class="day-title">Drive New Paltz → NJ (~1.5 hrs)</span>
-      <span class="day-badge badge-drive">Drive</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="day-card-body"><div class="day-card-body-inner">
-      <div class="drive-bar">🚗 ~90 miles · ~1.5 hrs · I-87 S → I-287 W</div>
-      <div class="activity"><div class="activity-icon">🏠</div><div class="activity-text"><strong>Return to NJ family base</strong><div class="sub">Oct 9–15 wind-down, family time, EWR departure.</div></div></div>
-    </div></div>
-  </div>
-
-</section>
+<section id="itinerary"></section>
 
 <!-- ═══════════════ LOGISTICS / CHECKLIST ═══════════════ -->
-<section id="logistics">
-  <div class="region-header" style="border-color:var(--border); padding-top:8px">
-    <span style="font-size:24px">✅</span>
-    <h2>Logistics &amp; Checklist</h2>
-  </div>
-
-  <div class="logistics-grid">
-
-    <!-- Car Rental — full width -->
-    <div class="log-card" style="grid-column: 1 / -1; border-color: rgba(99,102,241,0.4);">
-      <h3>🚗 Car Rental — EWR</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px; line-height:1.5">
-        All major agencies operate from the <strong style="color:var(--text)">EWR Rental Car Center</strong> — take the free AirTrain from your terminal (follow signs, ~10 min ride).
-        On-site: <strong style="color:var(--text)">Hertz, Avis, Budget, Enterprise, National, Alamo, Dollar, Thrifty.</strong>
-      </p>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span><strong>Book in advance</strong> — walk-up rates can be 3–4× higher. Compare on <em>AutoSlash</em> or Kayak, then book direct.</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span><strong>Get an SUV or wagon</strong> — Adirondack mountain roads + luggage + passengers = you want the space &amp; clearance.</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span><strong>E-ZPass transponder</strong> — NY &amp; NJ tolls are fully cashless. Accept one from the rental agency or bring your own. Without it, "toll-by-mail" adds $3.50+ per toll at a high markup.</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span><strong>Photograph all 4 corners</strong> at pickup and again at dropoff — timestamp photos protect against disputes.</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span><strong>Return with a full tank</strong> — refuel 2–3 miles from the airport. Gas at the rental return is expensive.</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Have passport, home driver's license, and credit card (main driver's name) ready at the counter.</span></label>
-    </div>
-
-    <div class="log-card">
-      <h3>🏨 Accommodations</h3>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Book Lake Placid hotel (Mirror Lake Inn or Main St motel)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Book Lake George hotel (lakefront)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Book near Watkins Glen (Seneca Lodge?)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Book New Paltz hotel/B&B</span></label>
-    </div>
-    <div class="log-card">
-      <h3>🎟 Reservations Needed</h3>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Minnewaska parking reservation (fills fast)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Whiteface Gondola tickets (check weather first)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Mohonk day hiker pass (if splurging)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Watkins Glen entry (check pass options)</span></label>
-    </div>
-    <div class="log-card">
-      <h3>🎒 Gear Checklist</h3>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Waterproof layer (rain is likely in Adirondacks)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Hiking shoes / waterproof boots</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Layers (Oct nights are cold 35–45°F)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Snacks, reusable water bottles</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Car phone mount + offline maps downloaded</span></label>
-    </div>
-    <div class="log-card">
-      <h3>🍂 Foliage Tips</h3>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Check foliagetracker.com week before departure</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Adirondacks peak: late Sep (arrive early!)</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Finger Lakes/Hudson Valley peak: early Oct</span></label>
-      <label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>Book weekend activities early — foliage crowds!</span></label>
-    </div>
-  </div>
-</section>
+<section id="logistics"></section>
 
 <footer>Upstate NY Family Foliage 2026 · Sep 27 – Oct 15 · Built with ❤️ for the Ofek family</footer>
 
 </div><!-- .page -->
 
 <script>
+// ══════════════════════════════════════
+// RENDERING  (reads from trip-data.js)
+// ══════════════════════════════════════
+
+const AT_SVG = `<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
+
+function renderActivity(a) {
+  const tagHtml    = a.tag      ? ` <span class="optional-tag">${a.tag}</span>` : '';
+  const trailHtml  = a.trailUrl ? `<br><a class="trail-link" href="${a.trailUrl}" target="_blank" rel="noopener" style="margin-top:8px">${AT_SVG} View on AllTrails</a>` : '';
+  const styleAttr  = a.style    ? ` style="${a.style}"` : '';
+  return `<div class="activity"${styleAttr}>
+    <div class="activity-icon">${a.icon}</div>
+    <div class="activity-text">
+      <strong>${a.title}</strong>${tagHtml}
+      <div class="sub">${a.sub}${trailHtml}</div>
+    </div>
+  </div>`;
+}
+
+function renderDriveBar(d) {
+  return `<div class="drive-bar">🚗 ${d.text}</div>`;
+}
+
+function renderHikePanel(prefix, tab) {
+  const stats     = tab.stats.map(s => `<span class="trail-stat">${s}</span>`).join('');
+  const separator = tab.note
+    ? `<p style="margin-top:8px; font-size:12px; color:var(--muted)">${tab.note}</p>`
+    : '<br>';
+  const titlePara = tab.desc
+    ? `<p><strong>${tab.title}</strong>${tab.desc}</p>`
+    : `<p><strong>${tab.title}</strong></p>`;
+  return `<div id="${prefix}-${tab.id}" class="hike-option${tab.active ? ' active' : ''}">
+    ${titlePara}
+    ${stats}
+    ${separator}
+    <a class="trail-link" href="${tab.url}" target="_blank" rel="noopener">
+      ${AT_SVG}
+      View on AllTrails
+    </a>
+  </div>`;
+}
+
+function renderHikeTabs(ht) {
+  const btns   = ht.tabs.map(t =>
+    `<button class="htab${t.active ? ' active' : ''}" onclick="hikeTab('${ht.prefix}','${t.id}')">${t.label}</button>`
+  ).join('');
+  const panels = ht.tabs.map(t => renderHikePanel(ht.prefix, t)).join('');
+  return `<div class="hike-tabs">
+    <div class="hike-tab-btns">${btns}</div>
+    ${panels}
+  </div>`;
+}
+
+function renderDay(id, day) {
+  const content = day.content.map(item => {
+    if (item.type === 'activity')  return renderActivity(item);
+    if (item.type === 'drive')     return renderDriveBar(item);
+    if (item.type === 'hiketabs')  return renderHikeTabs(item);
+    return '';
+  }).join('');
+  return `<div class="day-card" id="${id}">
+    <div class="day-card-header" onclick="toggle('${id}')">
+      <span class="day-num">${day.date}</span>
+      <span class="day-title">${day.title}</span>
+      <span class="day-badge badge-${day.badge}">${day.badgeLabel}</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="day-card-body"><div class="day-card-body-inner">
+      ${content}
+    </div></div>
+  </div>`;
+}
+
+function renderRiItem(item) {
+  const badgeHtml = item.badge
+    ? ` <span class="ri-badge ${item.badge}">${item.badgeLabel}</span>`
+    : '';
+  return `<div class="ri-item">
+    <div class="ri-icon">${item.icon}</div>
+    <div class="ri-text">
+      <strong>${item.name}</strong>${badgeHtml}
+      <div class="ri-sub">${item.sub}</div>
+    </div>
+  </div>`;
+}
+
+function renderInfoCard(card) {
+  const eatItems    = card.eat.map(renderRiItem).join('');
+  const nohikeItems = card.nohike.map(renderRiItem).join('');
+  return `<div class="region-info-card">
+    <div class="ri-tabs">
+      <button class="ri-tab active" onclick="riTab('${card.prefix}','eat')">🍽 Where to Eat</button>
+      <button class="ri-tab" onclick="riTab('${card.prefix}','nohike')">🎭 Skip the Hike?</button>
+    </div>
+    <div id="${card.prefix}-eat" class="ri-panel active">${eatItems}</div>
+    <div id="${card.prefix}-nohike" class="ri-panel">${nohikeItems}</div>
+  </div>`;
+}
+
+function renderRegion(region) {
+  const header = `<div id="${region.id}" class="region-header" style="border-color:var(${region.colorVar})">
+    <span style="font-size:24px">${region.emoji}</span>
+    <h2 style="color:var(${region.colorVar})">${region.title}</h2>
+    <span class="dates">${region.dates}</span>
+  </div>`;
+  const infoCard = region.infoCard ? renderInfoCard(region.infoCard) : '';
+  const days     = region.days.map(id => renderDay(id, DAYS[id])).join('');
+  return header + infoCard + days;
+}
+
+function renderItinerary() {
+  document.getElementById('itinerary').innerHTML = REGIONS.map(renderRegion).join('');
+}
+
+function renderLogistics() {
+  const { carRental, cards } = LOGISTICS;
+  const carItems = carRental.items.map(item =>
+    `<label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>${item}</span></label>`
+  ).join('');
+  const gridCards = cards.map(card => {
+    const items = card.items.map(item =>
+      `<label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>${item}</span></label>`
+    ).join('');
+    return `<div class="log-card"><h3>${card.icon} ${card.title}</h3>${items}</div>`;
+  }).join('');
+
+  document.getElementById('logistics').innerHTML = `
+    <div class="region-header" style="border-color:var(--border); padding-top:8px">
+      <span style="font-size:24px">✅</span>
+      <h2>Logistics &amp; Checklist</h2>
+    </div>
+    <div class="logistics-grid">
+      <div class="log-card" style="grid-column: 1 / -1; border-color: rgba(99,102,241,0.4);">
+        <h3>${carRental.icon} ${carRental.title}</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:12px; line-height:1.5">${carRental.intro}</p>
+        ${carItems}
+      </div>
+      ${gridCards}
+    </div>`;
+}
+
+// Render everything synchronously so the DOM is ready for the map observer
+renderItinerary();
+renderLogistics();
+
 // ══════════════════════════════════════
 // NON-MAP UTILS (work without Leaflet)
 // ══════════════════════════════════════
@@ -809,72 +511,8 @@ window.addEventListener('load', function () {
   // Force a size recalculation in case the container dimensions weren't final at init time
   setTimeout(() => map.invalidateSize(), 200);
 
-  // ── HARDCODED ROUTE (no fetch / no OSRM) ──
-  const ROUTE = [
-    [40.6895,-74.1745], // EWR / NJ start
-    [40.77,-74.07],     // NJ Turnpike north
-    [40.85,-73.96],     // George Washington Bridge
-    [41.07,-73.87],     // Tarrytown / Tappan Zee
-    [41.22,-73.98],     // Harriman
-    [41.50,-74.01],     // Newburgh / I-84 junction
-    [41.93,-73.99],     // Kingston
-    [42.22,-73.86],     // Catskill
-    [42.65,-73.75],     // Albany / I-90 junction
-    [43.08,-73.79],     // Saratoga Springs area
-    [43.43,-73.71],     // Lake George area
-    [43.83,-73.77],     // Schroon Lake
-    [44.18,-73.78],     // Keene / Au Sable Forks
-    [44.2795,-73.9799], // ★ LAKE PLACID
-    [44.18,-73.78],     // back south via NY-73
-    [43.83,-73.77],     // Schroon Lake
-    [43.4262,-73.7123], // ★ LAKE GEORGE
-    [42.65,-73.75],     // Albany
-    [42.82,-73.94],     // Schenectady
-    [42.94,-74.19],     // Amsterdam
-    [43.05,-74.85],     // Little Falls
-    [43.10,-75.23],     // Utica
-    [43.05,-76.15],     // Syracuse
-    [42.84,-76.14],     // I-81 south approach
-    [42.60,-76.18],     // Cortland
-    [42.51,-76.54],     // NY-13/414 junction
-    [42.3806,-76.8733], // ★ WATKINS GLEN
-    [42.42,-76.76],     // north on NY-414
-    [42.44,-76.60],     // Trumansburg
-    [42.4476,-76.4869], // ★ ITHACA
-    [42.30,-76.16],     // NY-13 south
-    [42.10,-75.91],     // Binghamton / I-86
-    [42.08,-75.38],     // I-86 east
-    [42.08,-74.91],     // Monticello
-    [41.80,-74.42],     // Liberty
-    [41.73,-74.19],     // Ellenville
-    [41.7476,-74.0868], // ★ NEW PALTZ
-    [41.50,-74.01],     // I-87 south / Newburgh
-    [41.22,-73.98],     // Harriman
-    [41.07,-73.87],     // Tarrytown
-    [40.85,-73.96],     // GWB
-    [40.77,-74.07],     // back into NJ
-    [40.6895,-74.1745]  // ★ EWR / NJ end
-  ];
-
+  // ── ROUTE & MARKERS (from trip-data.js) ──
   L.polyline(ROUTE, { color:'#1E40AF', weight:4, opacity:0.85, smoothFactor:1 }).addTo(map);
-
-  // ── MARKERS ──
-  const STOPS = [
-    { lat:40.6895, lng:-74.1745, label:'NJ', color:'#D97706', main:true,  title:'NJ Family Base / EWR',           dates:'Sep 27-28 · Oct 9-15' },
-    { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', main:true,  title:'Lake Placid / Mirror Lake',       dates:'Sep 29 – Oct 2' },
-    { lat:43.4262, lng:-73.7123, label:'LG', color:'#0284C7', main:true,  title:'Lake George Village',             dates:'Oct 2–4' },
-    { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', main:true,  title:'Watkins Glen State Park',         dates:'Oct 4–7' },
-    { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', main:true,  title:'Ithaca / Cornell Botanic Gardens',dates:'Oct 6' },
-    { lat:41.7476, lng:-74.0868, label:'NP', color:'#DC2626', main:true,  title:'New Paltz',                       dates:'Oct 7–9' },
-    { lat:44.3516, lng:-73.8587, label:'💧', color:'#64748b', main:false, title:'High Falls Gorge',                dates:'Sep 30' },
-    { lat:44.3659, lng:-73.9026, label:'🚠', color:'#64748b', main:false, title:'Whiteface Gondola',               dates:'Oct 1 (weather)' },
-    { lat:44.2279, lng:-74.4644, label:'🦦', color:'#64748b', main:false, title:'The Wild Center, Tupper Lake',    dates:'Oct 1 (rain plan)' },
-    { lat:43.4246, lng:-73.7532, label:'⛰', color:'#64748b', main:false, title:'Prospect Mountain',               dates:'Oct 3' },
-    { lat:43.0831, lng:-73.7846, label:'🏛', color:'#64748b', main:false, title:'Saratoga Springs',                dates:'Oct 3 optional' },
-    { lat:42.5386, lng:-76.6073, label:'💦', color:'#64748b', main:false, title:'Taughannock Falls',               dates:'Oct 5/6' },
-    { lat:41.7350, lng:-74.2373, label:'🏞', color:'#64748b', main:false, title:'Minnewaska State Park',           dates:'Oct 8' },
-    { lat:41.7688, lng:-74.1567, label:'🏰', color:'#64748b', main:false, title:'Mohonk Preserve',                 dates:'Oct 8 (optional splurge)' },
-  ];
 
   STOPS.forEach(s => {
     const iconHtml = s.main
