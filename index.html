@@ -103,11 +103,12 @@
   #itinerary { padding: 32px 16px 64px; max-width: 760px; margin: 0 auto; }
 
   .region-header {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
     padding: 24px 0 12px; border-bottom: 2px solid; margin-bottom: 16px;
   }
   .region-header h2 { font-size: 20px; font-weight: 700; }
   .region-header .dates { font-size: 13px; color: var(--muted); margin-left: auto; }
+  .region-header .wx-chip { font-size: 12px; color: var(--muted); white-space: nowrap; }
 
   /* Day card */
   .day-card {
@@ -445,10 +446,14 @@ function renderInfoCard(card) {
 }
 
 function renderRegion(region) {
+  const wxChip = region.weather
+    ? `<span class="wx-chip" id="wxchip-${region.id}">🌡️ …</span>`
+    : '';
   const header = `<div id="${region.id}" class="region-header" style="border-color:var(${region.colorVar})">
     <span style="font-size:24px">${region.emoji}</span>
     <h2 style="color:var(${region.colorVar})">${region.title}</h2>
     <span class="dates">${region.dates}</span>
+    ${wxChip}
   </div>`;
   const infoCard = region.infoCard ? renderInfoCard(region.infoCard) : '';
   const days     = region.days.map(id => renderDay(id, DAYS[id])).join('');
@@ -535,9 +540,55 @@ function safeRender(name, fn) {
   catch (err) { console.error('Render step "' + name + '" failed:', err); }
 }
 
+// ══════════════════════════════════════
+// LIVE WEATHER  (Open-Meteo — no API key, CORS-enabled, free for non-commercial use)
+// Used here only for the small "now" chip in each region header.
+// ══════════════════════════════════════
+const WX_CODES = {
+  0:['☀️','Clear'], 1:['🌤️','Mostly clear'], 2:['⛅','Partly cloudy'], 3:['☁️','Overcast'],
+  45:['🌫️','Fog'], 48:['🌫️','Freezing fog'],
+  51:['🌦️','Light drizzle'], 53:['🌦️','Drizzle'], 55:['🌧️','Heavy drizzle'],
+  56:['🌧️','Freezing drizzle'], 57:['🌧️','Freezing drizzle'],
+  61:['🌦️','Light rain'], 63:['🌧️','Rain'], 65:['🌧️','Heavy rain'],
+  66:['🌧️','Freezing rain'], 67:['🌧️','Freezing rain'],
+  71:['🌨️','Light snow'], 73:['🌨️','Snow'], 75:['❄️','Heavy snow'], 77:['🌨️','Snow grains'],
+  80:['🌦️','Rain showers'], 81:['🌧️','Rain showers'], 82:['⛈️','Heavy rain showers'],
+  85:['🌨️','Snow showers'], 86:['❄️','Heavy snow showers'],
+  95:['⛈️','Thunderstorm'], 96:['⛈️','Thunderstorm w/ hail'], 99:['⛈️','Severe thunderstorm']
+};
+function wxInfo(code) { return WX_CODES[code] || ['🌡️','—']; }
+function wxApiUrl(loc) {
+  return 'https://api.open-meteo.com/v1/forecast?latitude=' + loc.lat + '&longitude=' + loc.lon
+    + '&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=auto';
+}
+// Fill a region-header chip with current conditions. On any failure the chip
+// just disappears — it must never throw into the synchronous render path.
+async function loadWeatherChip(el, loc) {
+  try {
+    const r = await fetch(wxApiUrl(loc));
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    const [emoji] = wxInfo(j.current.weather_code);
+    el.textContent = emoji + ' ' + Math.round(j.current.temperature_2m) + '°F now';
+    el.title = 'Live conditions in ' + loc.name;
+  } catch (err) {
+    console.warn('Weather chip failed for ' + loc.name + ':', err);
+    el.textContent = '';
+  }
+}
+
 // Render everything synchronously so the DOM is ready for the map observer
 safeRender('itinerary', renderItinerary);
 safeRender('resources', renderResources);
+
+// Kick off the live "now" weather chips (async, fire-and-forget)
+safeRender('weather-chips', function () {
+  REGIONS.forEach(function (r) {
+    if (!r.weather) return;
+    const chip = document.getElementById('wxchip-' + r.id);
+    if (chip) loadWeatherChip(chip, r.weather);
+  });
+});
 
 // ══════════════════════════════════════
 // NON-MAP UTILS (work without Leaflet)

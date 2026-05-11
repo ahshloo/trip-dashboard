@@ -78,6 +78,7 @@ const REGIONS = [
     title: 'NJ Family Base',
     colorVar: '--nj',
     dates: 'Oct 9–15',
+    weather: { name: 'Newark, NJ', lat: 40.7357, lon: -74.1724 },
     infoCard: {
       prefix: 'nj',
       eat: [
@@ -98,6 +99,7 @@ const REGIONS = [
     title: 'Adirondacks · Lake Placid',
     colorVar: '--adirondacks',
     dates: 'Sep 27 – Oct 2',
+    weather: { name: 'Lake Placid, NY', lat: 44.2795, lon: -73.9799 },
     infoCard: {
       prefix: 'adk',
       eat: [
@@ -123,6 +125,7 @@ const REGIONS = [
     title: 'Lake George',
     colorVar: '--lake-george',
     dates: 'Oct 2–4',
+    weather: { name: 'Lake George, NY', lat: 43.4262, lon: -73.7123 },
     infoCard: {
       prefix: 'lg',
       eat: [
@@ -148,6 +151,7 @@ const REGIONS = [
     title: 'Finger Lakes',
     colorVar: '--finger-lakes',
     dates: 'Oct 4–7',
+    weather: { name: 'Watkins Glen, NY', lat: 42.3806, lon: -76.8733 },
     infoCard: {
       prefix: 'fl',
       eat: [
@@ -174,6 +178,7 @@ const REGIONS = [
     title: 'Hudson Valley · Catskills',
     colorVar: '--hudson',
     dates: 'Oct 7–9',
+    weather: { name: 'New Paltz, NY', lat: 41.7476, lon: -74.0868 },
     infoCard: {
       prefix: 'hv',
       eat: [
