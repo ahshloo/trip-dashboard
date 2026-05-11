@@ -53,7 +53,7 @@ const ROUTE = [
 // ── MAP MARKERS ────────────────────────────────────────────
 const STOPS = [
   { lat:40.6895, lng:-74.1745, label:'NJ', color:'#D97706', main:true,  title:'NJ Family Base / EWR',            dates:'Sep 27-28 · Oct 9-15' },
-  { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', main:true,  title:'Lake Placid / Mirror Lake',        dates:'Sep 29 – Oct 2' },
+  { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', main:true,  title:'Lake Placid / Mirror Lake',        dates:'Sep 27 – Oct 2' },
   { lat:43.4262, lng:-73.7123, label:'LG', color:'#0284C7', main:true,  title:'Lake George Village',              dates:'Oct 2–4' },
   { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', main:true,  title:'Watkins Glen State Park',          dates:'Oct 4–7' },
   { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', main:true,  title:'Ithaca / Cornell Botanic Gardens', dates:'Oct 6' },
@@ -90,14 +90,14 @@ const REGIONS = [
         { icon:'🗽', name:'Statue of Liberty (Liberty State Park ferry)', sub:'~25–30 min drive to ferry terminal. Ferries year-round, last ~3:30pm. Best for a half-day — don\'t attempt on a compressed airport day.' },
       ]
     },
-    days: ['d1', 'd2']
+    days: []
   },
   {
     id: 'adirondacks',
     emoji: '🏔',
     title: 'Adirondacks · Lake Placid',
     colorVar: '--adirondacks',
-    dates: 'Sep 29 – Oct 2',
+    dates: 'Sep 27 – Oct 2',
     infoCard: {
       prefix: 'adk',
       eat: [
@@ -229,10 +229,11 @@ const DAYS = {
     ]
   },
   d3: {
-    date: 'Sep 29', title: 'Drive NJ → Lake Placid (~5 hrs)',
+    date: 'Sep 27', title: 'Arrive EWR → Drive to Lake Placid (~5 hrs)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
-      { type:'drive', text:'~290 miles · ~5 hrs · I-87 N to NY-73 W · Aim to arrive by 3pm' },
+      { type:'activity', icon:'✈️', title:'Land at EWR',   sub:'Pick up rental car. Plan for traffic out of the metro area.' },
+      { type:'drive', text:'~290 miles · ~5 hrs · I-87 N to NY-73 W · Aim to arrive by 3–4pm' },
       { type:'activity', icon:'🛑', title:'Saratoga Springs lunch stop',         sub:'Broadway Ave has great cafés. Easy exit off I-87.' },
       { type:'activity', icon:'🏨', title:'Check in Lake Placid / Mirror Lake area', sub:'Mirror Lake Inn or budget motel on Main St. Walk Mirror Lake in the evening.' },
     ]
