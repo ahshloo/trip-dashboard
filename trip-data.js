@@ -234,8 +234,11 @@ const DAYS = {
     content: [
       { type:'activity', icon:'✈️', title:'Land at EWR', sub:'Pick up rental car at the EWR Rental Car Center — AirTrain to Terminal A, then walk the covered corridor to the rental building.' },
       { type:'drive', text:'~290 miles · ~4.5–5.5 hrs total · I-87 N → NY-73 W · Final stretch through Keene Valley is spectacular' },
-      { type:'activity', icon:'🛑', title:'Recommended stop: Saratoga Springs (~3 hrs in)', sub:'Lunch on Broadway Ave. Congress Park Carousel runs Sundays through Halloween — 27 Sep is a Sunday. Target nearby for supplies. Best family decompression stop before the mountains.' },
-      { type:'activity', icon:'🌊', title:'Alternative stop: Lake George village', tag:'optional', sub:'More scenic than Saratoga. Waterfront walk on Canada St, lakeside lunch, possible short cruise. This is where the Adirondack feeling begins. Better in good weather.' },
+      { type:'activity', icon:'🎠', title:'Stop option A: Saratoga Springs (~3 hrs in)', sub:'Congress Park Carousel: $1/ride, kids under 5 free. Runs Sundays through Halloween — 27 Sep is a Sunday. Stroller-friendly park with duck pond. Lunch on Broadway Ave, Target nearby for supplies. Best family decompression stop before the mountains.' },
+      { type:'activity', icon:'🏛', title:'Saratoga indoor backup (weekdays)', tag:'optional', sub:'Children\'s Museum at Saratoga (65 S Broadway) — Tue–Sat 9am–4pm, Sun 1–4pm. $14/person, under 12 months free. Ages 0–10, dedicated infant/toddler zone. Good if weather is poor.' },
+      { type:'activity', icon:'🌊', title:'Stop option B: Lake George village (3.5 hrs in)', tag:'optional', sub:'More scenic than Saratoga. Shepard Park waterfront is free with a playground and foliage views. Minne Ha-Ha 1-hr paddlewheel cruise (~$17–26/adult, kids under 4 free) — book ahead, check October schedule. This is where the Adirondack feeling properly begins.' },
+      { type:'activity', icon:'🍽', title:'Lunch stop: Noon Mark Diner, Keene Valley', tag:'optional', sub:'1770 NY-73, Keene Valley — daily 7am–4pm. Classic Adirondack diner since 1981. Homemade pies, locally sourced comfort food, high chairs. Perfect 30-min break right on the NY-73 mountain stretch into Lake Placid.' },
+      { type:'activity', icon:'🏞', title:'Photo stop: Cascade Lakes pull-off (on NY-73)', sub:'Best zero-effort foliage stop on the entire drive. Twin alpine lakes with sheer cliffs reflecting fall colour. Free parking lot, picnic tables, 10–20 min. Fills early on fall weekends — stop on the way in, not the way back.' },
       { type:'activity', icon:'🏨', title:'Check in Lake Placid', sub:'Mirror Lake Inn or condo with kitchenette. Walk Mirror Lake in the evening — the Rt 73 stretch through Keene Valley is dramatic even at dusk.' },
     ]
   },
@@ -246,7 +249,8 @@ const DAYS = {
       { type:'activity', icon:'☕', title:'Slow village morning', sub:'Origin Coffee Co. (2669 Main St) for specialty coffee and breakfast. No alarm — recovery day, especially if the Sep 27 drive was tiring.' },
       { type:'activity', icon:'🚣', title:'Mirror Lake Boat Rentals', sub:'Pedal-boats and hydrobikes daily 10am–sunset through mid-October. No reservations. Calm flat water, perfect for small kids.' },
       { type:'activity', icon:'🌿', title:'Mirror Lake Loop walk', sub:'Easy flat shoreline loop, stroller-friendly. Beautiful late-September foliage right from the village. Good substitute if the boats don\'t interest the kids.' },
-      { type:'activity', icon:'🏘', title:'Day trip: Saranac Lake', tag:'optional', sub:'15 min away. Calmer, less touristy, more authentic Adirondack feel — waterfront park, independent shops, cheaper dining. Many locals prefer it to Lake Placid. Worth a half-day wander.' },
+      { type:'activity', icon:'🏘', title:'Day trip option: Saranac Lake (15 min)', tag:'optional', sub:'Calmer and less touristy than Lake Placid. Adirondack Carousel ($2.50/ride, Fri 12–5pm, Sat 10am–5pm, Sun 12–5pm) — 24 hand-carved wildlife figures, very popular with young kids. Lake Flower waterfront walk. Significantly cheaper dining and lodging than Lake Placid.' },
+      { type:'activity', icon:'🦋', title:'Paul Smith\'s VIC (20 min from Saranac Lake)', tag:'optional', sub:'Free trails, Tue–Sun 9am–5pm. One fully paved stroller/wheelchair-accessible mile with lookouts. Free butterfly house. Best zero-cost nature stop in the region if you want an easy walk.' },
     ]
   },
   d4: {
