@@ -460,11 +460,10 @@ const RESOURCES = {
       icon: '🍂',
       title: 'Foliage Tracking',
       items: [
-        { label: 'New England Peak Foliage Map', type: 'live-map', priority: 'critical', status: 'pending', url: 'https://newengland.com/foliage/foliage/peak-fall-foliage-map/', notes: 'Best overall regional predictor' },
-        { label: 'New Hampshire Official Foliage Tracker', type: 'live-map', priority: 'critical', status: 'pending', url: 'https://www.visitnh.gov/plan-your-trip/fall/foliage-tracker', notes: 'Official NH tourism source' },
-        { label: 'White Mountains Foliage Tracker', type: 'live-map', priority: 'recommended', status: 'pending', url: 'https://www.visitwhitemountains.com/events/fall-foliage/foliage-tracker/', notes: 'Best for Kancamagus / North Conway area' },
-        { label: 'Jeff Foliage Guide', type: 'forecast', priority: 'recommended', status: 'pending', url: 'https://jeff-foliage.com/', notes: 'Strong practical recommendations for avoiding crowds' },
-        { label: 'NH Peak Foliage Prediction Map', type: 'forecast', priority: 'recommended', status: 'pending', url: 'https://www.visitnh.gov/plan-your-trip/fall/peak-foliage-map' },
+        { label: 'Official I LOVE NY Fall Foliage Report', type: 'live-map', priority: 'critical', status: 'pending', url: 'https://www.iloveny.com/things-to-do/fall/foliage-report/', notes: 'Statewide weekly report + interactive color map (Adirondacks, Catskills, Finger Lakes regions)' },
+        { label: 'ExploreFall — New York', type: 'live-map', priority: 'recommended', status: 'pending', url: 'https://www.explorefall.com/states/new-york', notes: 'County-by-county color predictions and reader reports' },
+        { label: 'SmokyMountains.com Predictive Foliage Map', type: 'forecast', priority: 'recommended', status: 'pending', url: 'https://smokymountains.com/fall-foliage-map/', notes: 'Nationwide week-by-week slider — drag to your travel dates' },
+        { label: 'Adirondack Foliage Report', type: 'live-map', priority: 'recommended', status: 'pending', url: 'https://visitadirondacks.com/things-to-do/foliage', notes: 'Best for the Lake Placid / High Peaks stretch (peaks late Sep — you arrive on time)' },
         { label: 'Monitor foliage reports — 7 days before Sep 27 arrival', type: 'todo', priority: 'critical', status: 'pending' },
       ]
     },
@@ -487,9 +486,10 @@ const RESOURCES = {
       icon: '🌤',
       title: 'Live Weather',
       items: [
-        { label: 'White Mountains / Mt Washington forecast', type: 'live-weather', priority: 'critical', status: 'pending', url: 'https://www.mountain-forecast.com/peaks/Mount-Washington-2/forecasts/1917', notes: 'Summit often 20°F colder than base' },
-        { label: 'Adirondacks Weather — NWS Burlington', type: 'live-weather', priority: 'recommended', status: 'pending', url: 'https://www.weather.gov/btv/' },
-        { label: 'Kancamagus Highway scenic drive conditions', type: 'live-weather', priority: 'recommended', status: 'pending', url: 'https://kancamagushighway.com/' },
+        { label: 'Whiteface Mountain summit forecast (Adirondacks)', type: 'live-weather', priority: 'critical', status: 'pending', url: 'https://www.mountain-forecast.com/peaks/Whiteface-Mountain/forecasts/1483', notes: 'Summit often 10–20°F colder than the village — pack extra layers' },
+        { label: 'Adirondacks / North Country — NWS Burlington', type: 'live-weather', priority: 'recommended', status: 'pending', url: 'https://www.weather.gov/btv/' },
+        { label: 'Capital Region & Hudson Valley — NWS Albany', type: 'live-weather', priority: 'recommended', status: 'pending', url: 'https://www.weather.gov/aly/' },
+        { label: 'Finger Lakes / Southern Tier — NWS Binghamton', type: 'live-weather', priority: 'recommended', status: 'pending', url: 'https://www.weather.gov/bgm/' },
       ]
     },
     {
