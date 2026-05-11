@@ -433,36 +433,78 @@ function renderItinerary() {
   document.getElementById('itinerary').innerHTML = REGIONS.map(renderRegion).join('');
 }
 
-function renderLogistics() {
-  const { carRental, cards } = LOGISTICS;
-  const carItems = carRental.items.map(item =>
-    `<label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>${item}</span></label>`
-  ).join('');
-  const gridCards = cards.map(card => {
-    const items = card.items.map(item =>
-      `<label class="check-item"><input type="checkbox" onchange="markDone(this)"><span>${item}</span></label>`
-    ).join('');
-    return `<div class="log-card"><h3>${card.icon} ${card.title}</h3>${items}</div>`;
-  }).join('');
+const STATUS_LABELS = { pending: '⬜ Pending', reserved: '🟨 Reserved', done: '🟩 Done' };
+const STATUS_CYCLE  = { pending: 'reserved', reserved: 'done', done: 'pending' };
 
+const TYPE_BTN = {
+  booking:      ['📅 Book',       'res-btn-booking'],
+  info:         ['ℹ Info',        'res-btn-info'],
+  'live-map':   ['🗺 Map',        'res-btn-map'],
+  'live-weather':['🌤 Weather',   'res-btn-weather'],
+  forecast:     ['📊 Forecast',   'res-btn-map'],
+  todo:         ['↗ Guide',       'res-btn-guide'],
+};
+
+function getResBtn(item) {
+  if (!item.url) return '';
+  const [label, cls] = TYPE_BTN[item.type] || ['↗ Open', 'res-btn-info'];
+  return `<a class="res-btn ${cls}" href="${item.url}" target="_blank" rel="noopener">${label}</a>`;
+}
+
+function renderResItem(item) {
+  const priClass = `pri-${item.priority || 'optional'}`;
+  const status   = item.status || 'pending';
+  const subParts = [item.dates, item.notes];
+  if (item.reservation_deadline) subParts.push(`⚠️ Book by ${item.reservation_deadline}`);
+  const sub = subParts.filter(Boolean).join(' · ');
+  return `<div class="res-item">
+    <div class="res-item-left">
+      <div class="pri-dot ${priClass}"></div>
+      <div>
+        <div class="res-item-label">${item.label}</div>
+        ${sub ? `<div class="res-item-sub">${sub}</div>` : ''}
+      </div>
+    </div>
+    <div class="res-item-right">
+      ${getResBtn(item)}
+      <button class="status-chip status-${status}" data-status="${status}"
+        onclick="cycleStatus(this)">${STATUS_LABELS[status]}</button>
+    </div>
+  </div>`;
+}
+
+function renderResSection(section) {
+  const intro = section.intro ? `<div class="res-intro">${section.intro}</div>` : '';
+  const items = section.items.map(renderResItem).join('');
+  return `<div class="res-section">
+    <div class="res-section-header">
+      <span style="font-size:20px">${section.icon}</span>
+      <h3>${section.title}</h3>
+    </div>
+    ${intro}
+    ${items}
+  </div>`;
+}
+
+function renderResources() {
+  const sections = RESOURCES.sections.map(renderResSection).join('');
   document.getElementById('logistics').innerHTML = `
     <div class="region-header" style="border-color:var(--border); padding-top:8px">
       <span style="font-size:24px">✅</span>
-      <h2>Logistics &amp; Checklist</h2>
+      <h2>Trip Operations Center</h2>
     </div>
-    <div class="logistics-grid">
-      <div class="log-card" style="grid-column: 1 / -1; border-color: rgba(99,102,241,0.4);">
-        <h3>${carRental.icon} ${carRental.title}</h3>
-        <p style="font-size:13px; color:var(--muted); margin-bottom:12px; line-height:1.5">${carRental.intro}</p>
-        ${carItems}
-      </div>
-      ${gridCards}
-    </div>`;
+    <div class="res-legend">
+      <span class="res-legend-item"><span class="pri-dot pri-critical" style="display:inline-block"></span> Critical</span>
+      <span class="res-legend-item"><span class="pri-dot pri-recommended" style="display:inline-block"></span> Recommended</span>
+      <span class="res-legend-item"><span class="pri-dot pri-optional" style="display:inline-block"></span> Optional</span>
+      <span style="color:#475569">· tap status chip to update</span>
+    </div>
+    ${sections}`;
 }
 
 // Render everything synchronously so the DOM is ready for the map observer
 renderItinerary();
-renderLogistics();
+renderResources();
 
 // ══════════════════════════════════════
 // NON-MAP UTILS (work without Leaflet)
@@ -485,8 +527,11 @@ function hikeTab(prefix, tab) {
   });
 }
 
-function markDone(cb) {
-  cb.closest('.check-item').classList.toggle('done', cb.checked);
+function cycleStatus(chip) {
+  const next = STATUS_CYCLE[chip.dataset.status];
+  chip.dataset.status = next;
+  chip.className = `status-chip status-${next}`;
+  chip.textContent = STATUS_LABELS[next];
 }
 
 function riTab(region, tab) {
