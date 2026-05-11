@@ -502,9 +502,16 @@ function renderResources() {
     ${sections}`;
 }
 
+// Run a render step in isolation — a failure in one section must never
+// blank out the rest of the page (map, itinerary, ops center, …).
+function safeRender(name, fn) {
+  try { fn(); }
+  catch (err) { console.error('Render step "' + name + '" failed:', err); }
+}
+
 // Render everything synchronously so the DOM is ready for the map observer
-renderItinerary();
-renderResources();
+safeRender('itinerary', renderItinerary);
+safeRender('resources', renderResources);
 
 // ══════════════════════════════════════
 // NON-MAP UTILS (work without Leaflet)
