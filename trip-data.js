@@ -53,8 +53,8 @@ const ROUTE = [
 // ── MAP MARKERS ────────────────────────────────────────────
 const STOPS = [
   { lat:40.6895, lng:-74.1745, label:'NJ', color:'#D97706', main:true,  regionId:'nj',           title:'NJ Family Base / EWR',            dates:'Oct 9–15' },
-  { lat:43.0831, lng:-73.7846, label:'SS', color:'#059669', main:true,  regionId:'adirondacks',   title:'Saratoga Springs',                 dates:'Sep 27' },
-  { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', main:true,  regionId:'adirondacks',   title:'Lake Placid / Mirror Lake',        dates:'Sep 28 – Oct 2' },
+  { lat:43.0831, lng:-73.7846, label:'🏛', color:'#64748b', main:false, regionId:'adirondacks',   title:'Saratoga Springs (lunch stop)',     dates:'Sep 27' },
+  { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', main:true,  regionId:'adirondacks',   title:'Lake Placid / Mirror Lake',        dates:'Sep 27 – Oct 2' },
   { lat:43.4262, lng:-73.7123, label:'LG', color:'#0284C7', main:true,  regionId:'lake-george',   title:'Lake George Village',              dates:'Oct 2–4' },
   { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', main:true,  regionId:'finger-lakes',  title:'Watkins Glen State Park',          dates:'Oct 4–7' },
   { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', main:true,  regionId:'finger-lakes',  title:'Ithaca / Cornell Botanic Gardens', dates:'Oct 6' },
@@ -229,24 +229,24 @@ const DAYS = {
     ]
   },
   d3: {
-    date: 'Sep 27', title: 'Arrive EWR → Drive to Saratoga Springs (~3.5 hrs)',
+    date: 'Sep 27', title: 'Arrive EWR → Drive to Lake Placid (~5 hrs)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
-      { type:'activity', icon:'✈️', title:'Land at EWR', sub:'Pick up rental car. Take the AirTrain to Terminal A AirTrain Station, then walk the covered corridor to the rental car centre.' },
-      { type:'drive', text:'~178 miles · ~3h20–3h30 · I-87 N · Aim to arrive mid-afternoon' },
-      { type:'activity', icon:'🎠', title:'Congress Park Carousel', sub:'Historic carousel in downtown Congress Park. Open Sundays through Halloween — 27 Sep is a Sunday. Easy first stop for kids.' },
-      { type:'activity', icon:'🌿', title:'Geyser Loop Trail', tag:'optional', sub:'Easy 3-mile loop in Saratoga Spa State Park with natural carbonated springs. ~1 hour. Flat and shaded.', trailUrl:'https://www.alltrails.com/trail/us/new-york/geyser-loop' },
-      { type:'activity', icon:'🏨', title:'Overnight in Saratoga Springs', sub:'Suite hotel or simple downtown hotel with parking. Keep dinner local — arrival day, no timed tickets.' },
+      { type:'activity', icon:'✈️', title:'Land at EWR', sub:'Pick up rental car at the EWR Rental Car Center — AirTrain to Terminal A, then walk the covered corridor to the rental building.' },
+      { type:'drive', text:'~290 miles · ~4.5–5.5 hrs total · I-87 N → NY-73 W · Final stretch through Keene Valley is spectacular' },
+      { type:'activity', icon:'🛑', title:'Recommended stop: Saratoga Springs (~3 hrs in)', sub:'Lunch on Broadway Ave. Congress Park Carousel runs Sundays through Halloween — 27 Sep is a Sunday. Target nearby for supplies. Best family decompression stop before the mountains.' },
+      { type:'activity', icon:'🌊', title:'Alternative stop: Lake George village', tag:'optional', sub:'More scenic than Saratoga. Waterfront walk on Canada St, lakeside lunch, possible short cruise. This is where the Adirondack feeling begins. Better in good weather.' },
+      { type:'activity', icon:'🏨', title:'Check in Lake Placid', sub:'Mirror Lake Inn or condo with kitchenette. Walk Mirror Lake in the evening — the Rt 73 stretch through Keene Valley is dramatic even at dusk.' },
     ]
   },
   d_sep28: {
-    date: 'Sep 28', title: 'Saratoga Springs → Lake Placid (~2 hrs)',
-    badge: 'drive', badgeLabel: 'Drive',
+    date: 'Sep 28', title: 'First morning in Lake Placid — soft settle-in day',
+    badge: 'explore', badgeLabel: 'Explore',
     content: [
-      { type:'drive', text:'~107 miles · ~1h45–2h · I-87 N → NY-73 W · Arrive by lunchtime' },
-      { type:'activity', icon:'🏨', title:'Check in Lake Placid', sub:'Condo, suite hotel, or cabin with kitchenette. Treat as a recovery day — no summit plans, no timed tickets, nap-friendly afternoon.' },
-      { type:'activity', icon:'🚣', title:'Mirror Lake Boat Rentals', sub:'Pedal-boats and hydrobikes daily 10am–sunset through mid-October. No reservations needed. Calm flat water, great for kids.' },
-      { type:'activity', icon:'🌿', title:'Mirror Lake Loop walk', tag:'optional', sub:'Easy flat shoreline loop. Stroller-friendly. Beautiful late-September foliage.' },
+      { type:'activity', icon:'☕', title:'Slow village morning', sub:'Origin Coffee Co. (2669 Main St) for specialty coffee and breakfast. No alarm — recovery day, especially if the Sep 27 drive was tiring.' },
+      { type:'activity', icon:'🚣', title:'Mirror Lake Boat Rentals', sub:'Pedal-boats and hydrobikes daily 10am–sunset through mid-October. No reservations. Calm flat water, perfect for small kids.' },
+      { type:'activity', icon:'🌿', title:'Mirror Lake Loop walk', sub:'Easy flat shoreline loop, stroller-friendly. Beautiful late-September foliage right from the village. Good substitute if the boats don\'t interest the kids.' },
+      { type:'activity', icon:'🏘', title:'Day trip: Saranac Lake', tag:'optional', sub:'15 min away. Calmer, less touristy, more authentic Adirondack feel — waterfront park, independent shops, cheaper dining. Many locals prefer it to Lake Placid. Worth a half-day wander.' },
     ]
   },
   d4: {
