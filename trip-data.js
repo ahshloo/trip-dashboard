@@ -52,20 +52,20 @@ const ROUTE = [
 
 // ── MAP MARKERS ────────────────────────────────────────────
 const STOPS = [
-  { lat:40.6895, lng:-74.1745, label:'NJ', color:'#D97706', main:true,  title:'NJ Family Base / EWR',            dates:'Sep 27-28 · Oct 9-15' },
-  { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', main:true,  title:'Lake Placid / Mirror Lake',        dates:'Sep 27 – Oct 2' },
-  { lat:43.4262, lng:-73.7123, label:'LG', color:'#0284C7', main:true,  title:'Lake George Village',              dates:'Oct 2–4' },
-  { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', main:true,  title:'Watkins Glen State Park',          dates:'Oct 4–7' },
-  { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', main:true,  title:'Ithaca / Cornell Botanic Gardens', dates:'Oct 6' },
-  { lat:41.7476, lng:-74.0868, label:'NP', color:'#DC2626', main:true,  title:'New Paltz',                        dates:'Oct 7–9' },
-  { lat:44.3516, lng:-73.8587, label:'💧', color:'#64748b', main:false, title:'High Falls Gorge',                 dates:'Sep 30' },
-  { lat:44.3659, lng:-73.9026, label:'🚠', color:'#64748b', main:false, title:'Whiteface Gondola',                dates:'Oct 1 (weather)' },
-  { lat:44.2279, lng:-74.4644, label:'🦦', color:'#64748b', main:false, title:'The Wild Center, Tupper Lake',     dates:'Oct 1 (rain plan)' },
-  { lat:43.4246, lng:-73.7532, label:'⛰', color:'#64748b', main:false, title:'Prospect Mountain',                dates:'Oct 3' },
-  { lat:43.0831, lng:-73.7846, label:'🏛', color:'#64748b', main:false, title:'Saratoga Springs',                 dates:'Oct 3 optional' },
-  { lat:42.5386, lng:-76.6073, label:'💦', color:'#64748b', main:false, title:'Taughannock Falls',                dates:'Oct 5/6' },
-  { lat:41.7350, lng:-74.2373, label:'🏞', color:'#64748b', main:false, title:'Minnewaska State Park',            dates:'Oct 8' },
-  { lat:41.7688, lng:-74.1567, label:'🏰', color:'#64748b', main:false, title:'Mohonk Preserve',                  dates:'Oct 8 (optional splurge)' },
+  { lat:40.6895, lng:-74.1745, label:'NJ', color:'#D97706', main:true,  regionId:'nj',           title:'NJ Family Base / EWR',            dates:'Sep 27-28 · Oct 9-15' },
+  { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', main:true,  regionId:'adirondacks',   title:'Lake Placid / Mirror Lake',        dates:'Sep 27 – Oct 2' },
+  { lat:43.4262, lng:-73.7123, label:'LG', color:'#0284C7', main:true,  regionId:'lake-george',   title:'Lake George Village',              dates:'Oct 2–4' },
+  { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', main:true,  regionId:'finger-lakes',  title:'Watkins Glen State Park',          dates:'Oct 4–7' },
+  { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', main:true,  regionId:'finger-lakes',  title:'Ithaca / Cornell Botanic Gardens', dates:'Oct 6' },
+  { lat:41.7476, lng:-74.0868, label:'NP', color:'#DC2626', main:true,  regionId:'hudson',        title:'New Paltz',                        dates:'Oct 7–9' },
+  { lat:44.3516, lng:-73.8587, label:'💧', color:'#64748b', main:false, regionId:'adirondacks',   title:'High Falls Gorge',                 dates:'Sep 30' },
+  { lat:44.3659, lng:-73.9026, label:'🚠', color:'#64748b', main:false, regionId:'adirondacks',   title:'Whiteface Gondola',                dates:'Oct 1 (weather)' },
+  { lat:44.2279, lng:-74.4644, label:'🦦', color:'#64748b', main:false, regionId:'adirondacks',   title:'The Wild Center, Tupper Lake',     dates:'Oct 1 (rain plan)' },
+  { lat:43.4246, lng:-73.7532, label:'⛰', color:'#64748b', main:false, regionId:'lake-george',   title:'Prospect Mountain',                dates:'Oct 3' },
+  { lat:43.0831, lng:-73.7846, label:'🏛', color:'#64748b', main:false, regionId:'lake-george',   title:'Saratoga Springs',                 dates:'Oct 3 optional' },
+  { lat:42.5386, lng:-76.6073, label:'💦', color:'#64748b', main:false, regionId:'finger-lakes',  title:'Taughannock Falls',                dates:'Oct 5/6' },
+  { lat:41.7350, lng:-74.2373, label:'🏞', color:'#64748b', main:false, regionId:'hudson',        title:'Minnewaska State Park',            dates:'Oct 8' },
+  { lat:41.7688, lng:-74.1567, label:'🏰', color:'#64748b', main:false, regionId:'hudson',        title:'Mohonk Preserve',                  dates:'Oct 8 (optional splurge)' },
 ];
 
 // ── REGIONS ────────────────────────────────────────────────
