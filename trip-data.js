@@ -333,23 +333,18 @@ const DAYS = {
     date: 'Oct 5', title: 'Watkins Glen Gorge Trail',
     badge: 'hike', badgeLabel: 'Hike',
     content: [
-      { type:'activity', icon:'🏞', title:'Watkins Glen Gorge Trail', sub:'800 stone steps, 19 waterfalls, dramatic gorge walls. The best gorge hike in NY. Arrive early — gets busy.' },
+      { type:'activity', icon:'🏞', title:'Watkins Glen Gorge Trail', sub:'800 stone steps, 19 waterfalls, dramatic gorge walls. The best gorge hike in NY. Arrive early — gets busy. Note: the park shuttle runs weekends only after Sep 8 — Oct 5 is a Monday so no shuttle. Plan an out-and-back, not a full loop.' },
       { type:'hiketabs', prefix:'wg', tabs:[
         { id:'base',    label:'Base',    active:true,
           title:'Gorge Trail out-and-back',
-          note:'Walk to the top of the gorge, return same way. 45–60 min.',
+          note:'Walk to the top of the gorge, return same way. 45–60 min. Best option on a weekday — no shuttle needed.',
           stats:['1.6 mi rt','~420 ft','Easy-Mod'],
           url:'https://www.alltrails.com/trail/us/new-york/glen-creek-gorge-trail' },
         { id:'upgrade', label:'Upgrade',
           title:'Gorge + South Rim loop',
-          note:'Full loop with elevated south rim views. 1.5–2 hrs.',
+          note:'Full loop with elevated south rim views. 1.5–2 hrs. Requires walking back along road — manageable without the shuttle.',
           stats:['3 mi','~500 ft','Moderate'],
           url:'https://www.alltrails.com/trail/us/new-york/watkins-glen-south-rim-trail' },
-        { id:'stretch', label:'Stretch',
-          title:'All trails + North Rim',
-          note:'Complete the full trail system. 3–4 hrs. Bring lunch.',
-          stats:['5+ mi','~700 ft','Strenuous'],
-          url:'https://www.alltrails.com/trail/us/new-york/north-rim-and-gorge-loop' },
       ]},
     ]
   },
@@ -358,9 +353,10 @@ const DAYS = {
     badge: 'hike', badgeLabel: 'Hike',
     content: [
       { type:'activity', icon:'💧', title:'Taughannock Falls State Park',
-        sub:'Tallest waterfall in the Northeast (215 ft — taller than Niagara!). Easy flat gorge walk, ~1.5 mi rt.',
+        sub:'Tallest waterfall in the Northeast (215 ft — taller than Niagara!). Wide, flat gorge trail — easy for all ages, ~1.5 mi rt.',
         trailUrl:'https://www.alltrails.com/trail/us/new-york/taughannock-falls-via-gorge-trail' },
-      { type:'activity', icon:'🌿', title:'Cornell Botanic Gardens, Ithaca', sub:'Free. Beautiful fall color. Good rainy-day option — much of it is covered/greenhouse.' },
+      { type:'activity', icon:'🔬', title:'Sciencenter, Ithaca', tag:'rain plan', sub:'601 1st St, Ithaca · 250+ interactive exhibits, free parking. Curiosity Corner specifically designed for age 4 and under. Best indoor backup in the area — go here if weather shuts down the gorge.' },
+      { type:'activity', icon:'🌿', title:'Cornell Botanic Gardens, Ithaca', tag:'optional', sub:'Free. Beautiful fall colour. Only viable in dry weather — mostly outdoor.' },
       { type:'activity', icon:'🍕', title:'Ithaca Commons for dinner',       sub:'Collegetown energy, great food diversity.' },
     ]
   },
@@ -390,6 +386,7 @@ const DAYS = {
           stats:['8 mi','~900 ft','Moderate'],
           url:'https://www.alltrails.com/trail/us/new-york/lake-awosting-via-reserve-access-and-purple-loop' },
       ]},
+      { type:'activity', icon:'🌉', title:'Walkway Over the Hudson', sub:'Highland, ~20 min from New Paltz · Free, open 7am–sunset. 1.28 miles gate-to-gate, 212 ft above the Hudson River. Fully fenced — excellent with small children. The best dramatic Hudson Valley view without any trail difficulty. Easy 5.1 km out-and-back.' },
       { type:'activity', icon:'🏰', title:'Mohonk Preserve / Mountain House', tag:'splurge', style:'margin-top:10px',
         sub:'Spectacular Victorian castle resort. Day hiker fee ~$30/person. Worth it if budget allows.' },
     ]
