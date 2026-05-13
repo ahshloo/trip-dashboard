@@ -103,15 +103,15 @@ const REGIONS = [
     infoCard: {
       prefix: 'adk',
       eat: [
-        { icon:'🥪', name:'Big Mountain Deli &amp; Creperie',    badge:'rb-casual', badgeLabel:'Casual',  sub:'2475 Main St · Crêpes, sandwiches, smoothies, vegetarian options. Kid-friendly, quick turnover. Sun–Thu 8am–3pm, Fri–Sat 8am–5pm.' },
-        { icon:'☕', name:'Origin Coffee Co.',                   badge:'rb-casual', badgeLabel:'Casual',  sub:'2669 Main St · Best specialty coffee, matcha &amp; smoothies in the village. Breakfast and lunch all day. Strongest non-alcoholic menu in Lake Placid.' },
-        { icon:'🍝', name:'Caffe Rustica',                       badge:'rb-fine',   badgeLabel:'Fine',    sub:'1936 Saranac Ave · House-made pasta &amp; fresh seafood. Best Italian in the Adirondacks.' },
-        { icon:'🌊', name:'The Cottage at Mirror Lake',          badge:'rb-casual', badgeLabel:'Casual',  sub:'77 Mirror Lake Dr · American food with lakeside patio views. Perfect for a relaxed dinner.' },
+        { icon:'🥪', name:'Big Mountain Deli &amp; Creperie',    badge:'rb-casual', badgeLabel:'Casual',  sub:'2475 Main St · Crêpes, sandwiches, smoothies, vegetarian options. Kid-friendly, quick turnover. Sun–Thu 8am–3pm, Fri–Sat 8am–5pm.', url:'https://order.toasttab.com/online/big-mountain-deli-creperie-2475-main-street' },
+        { icon:'☕', name:'Origin Coffee Co.',                   badge:'rb-casual', badgeLabel:'Casual',  sub:'2669 Main St · Best specialty coffee, matcha &amp; smoothies in the village. Breakfast and lunch all day. Strongest non-alcoholic menu in Lake Placid.', url:'https://www.origincoffeeadk.com/menus' },
+        { icon:'🍝', name:'Caffe Rustica',                       badge:'rb-fine',   badgeLabel:'Fine',    sub:'1936 Saranac Ave · House-made pasta &amp; fresh seafood. Best Italian in the Adirondacks.', url:'https://www.rusticalp.com/menu' },
+        { icon:'🌊', name:'The Cottage at Mirror Lake',          badge:'rb-casual', badgeLabel:'Casual',  sub:'77 Mirror Lake Dr · American food with lakeside patio views. Perfect for a relaxed dinner.', url:'https://www.toasttab.com/local/order/mirror-lake-inn-resort-and-spa-the-cottage-77-mirror-lake-drive' },
         { icon:'🍔', name:'Noon Mark Burgers &amp; Pie',         badge:'rb-casual', badgeLabel:'Casual',  sub:'Main St · Classic diner energy. Great burgers, homemade pies. Very kid-friendly.' },
       ],
       nohike: [
-        { icon:'🏆', name:'Olympic Museum',              sub:'2634 Main St · Open 9:30am–5pm daily. North America\'s 2nd-largest Winter Olympic collection. 1980 "Miracle on Ice" artifacts. ~$15/adult, great for families.' },
-        { icon:'🛶', name:'Mirror Lake Paddling',         sub:'Kayak &amp; canoe rentals from Mirror Lake Inn or local outfitters. Calm flat water, easy for all ages. Beautiful foliage views.' },
+        { icon:'🏆', name:'Olympic Museum',              sub:'2634 Main St · Open 9:30am–5pm daily. North America\'s 2nd-largest Winter Olympic collection. 1980 "Miracle on Ice" artifacts. ~$15/adult, great for families.', url:'https://lakeplacidolympicmuseum.org/visit/' },
+        { icon:'🛶', name:'Mirror Lake Paddling',         sub:'Kayak &amp; canoe rentals from Mirror Lake Inn or local outfitters. Calm flat water, easy for all ages. Beautiful foliage views.', url:'https://www.mlboatrental.com/' },
         { icon:'🎳', name:'Big Z\'s Bowling &amp; Entertainment', sub:'State-of-the-art lanes, full arcade, multi-sport simulator, shuffleboard. Solid rainy-day option.' },
         { icon:'🎬', name:'Palace Theatre',               sub:'Downtown Lake Placid · Historic single-screen theater showing current films. Affordable, cozy afternoon escape.' },
         { icon:'🛍', name:'Main Street Shopping',         sub:'Galleries, outdoor gear, fudge shops, Olympic memorabilia stores. An easy 2-hour wander with something for everyone.' },
@@ -129,17 +129,17 @@ const REGIONS = [
     infoCard: {
       prefix: 'lg',
       eat: [
-        { icon:'🏕', name:'Log Jam Restaurant',      badge:'rb-fine',   badgeLabel:'Fine',   sub:'1484 US-9 · #1 rated in the area. Adirondack lodge decor, cozy fireplaces, unlimited salad bar. Book ahead on weekends.' },
-        { icon:'🌊', name:'Algonquin Restaurant',    badge:'rb-fine',   badgeLabel:'Fine',   sub:'Bolton Landing (~20 min) · True lakeside dining, live deck music in season, handcrafted dishes &amp; sweeping water views.' },
-        { icon:'🍝', name:'Mario\'s Restaurant',     badge:'rb-casual', badgeLabel:'Casual', sub:'Canada St · Authentic Italian: veal parm, fettuccine alfredo made fresh. Reliable family crowd-pleaser.' },
-        { icon:'🥞', name:'The Silo',                badge:'rb-casual', badgeLabel:'Casual', sub:'Queensbury (~10 min south) · Best breakfast in the region. Massive portions, signature apple cider donuts. Arrive early.' },
-        { icon:'🏰', name:'Shepard\'s',              badge:'rb-fine',   badgeLabel:'Fine',   sub:'Stone Queen Anne mansion, lakeside views. Great for a special dinner. Reserve ahead.' },
+        { icon:'🏕', name:'Log Jam Restaurant',      badge:'rb-fine',   badgeLabel:'Fine',   sub:'1484 US-9 · #1 rated in the area. Adirondack lodge decor, cozy fireplaces, unlimited salad bar. Book ahead on weekends.', url:'https://www.logjamrestaurant.com/menus/' },
+        { icon:'🌊', name:'Algonquin Restaurant',    badge:'rb-fine',   badgeLabel:'Fine',   sub:'Bolton Landing (~20 min) · True lakeside dining, live deck music in season, handcrafted dishes &amp; sweeping water views.', url:'https://www.thealgonquin.com/algonquin-restaurant/' },
+        { icon:'🍝', name:'Mario\'s Restaurant',     badge:'rb-casual', badgeLabel:'Casual', sub:'Canada St · Authentic Italian: veal parm, fettuccine alfredo made fresh. Reliable family crowd-pleaser.', url:'https://marioslakegeorge.com/menu/' },
+        { icon:'🥞', name:'The Silo',                badge:'rb-casual', badgeLabel:'Casual', sub:'Queensbury (~10 min south) · Best breakfast in the region. Massive portions, signature apple cider donuts. Arrive early.', url:'https://thesiloqueensbury.com/home/silo_menu/' },
+        { icon:'🏰', name:'Shepard\'s',              badge:'rb-fine',   badgeLabel:'Fine',   sub:'Stone Queen Anne mansion, lakeside views. Great for a special dinner. Reserve ahead.', url:'https://www.erlowest.com/dining/shepards-at-erlowest/' },
       ],
       nohike: [
-        { icon:'🏰', name:'Fort William Henry Museum',  sub:'Canada St · Living history museum of the 1757 French &amp; Indian War siege. Guided tours, re-enactments, period artifacts.' },
-        { icon:'🍷', name:'Adirondack Winery',          sub:'In the Village · Wine tasting room with Adirondack-inspired labels. Easy walk from the waterfront. Pick a bottle for the evening.' },
-        { icon:'🚢', name:'Lake George Boat Cruise',    sub:'Lake George Steamboat Co or Shoreline Cruises · See the fall foliage from the water. 1–2 hr tours depart from the village dock.' },
-        { icon:'🎨', name:'The Hyde Collection',        sub:'Glens Falls (~15 min) · World-class art in a 1912 historic home — Rembrandt, Picasso, Rubens. Free on Sundays.' },
+        { icon:'🏰', name:'Fort William Henry Museum',  sub:'Canada St · Living history museum of the 1757 French &amp; Indian War siege. Guided tours, re-enactments, period artifacts.', url:'https://www.fwhmuseum.com/visit/tours-tickets/' },
+        { icon:'🍷', name:'Adirondack Winery',          sub:'In the Village · Wine tasting room with Adirondack-inspired labels. Easy walk from the waterfront. Pick a bottle for the evening.', url:'https://www.adirondackwinery.com/visit/' },
+        { icon:'🚢', name:'Lake George Boat Cruise',    sub:'Lake George Steamboat Co or Shoreline Cruises · See the fall foliage from the water. 1–2 hr tours depart from the village dock.', url:'https://lakegeorgesteamboat.com/' },
+        { icon:'🎨', name:'The Hyde Collection',        sub:'Glens Falls (~15 min) · World-class art in a 1912 historic home — Rembrandt, Picasso, Rubens. Free on Sundays.', url:'https://www.hydecollection.org/hours-admission/' },
         { icon:'🛍', name:'Lake George Outlets',        sub:'Half-mile south of Village · 50+ stores (J.Crew, Coach, etc). Good backup for a rainy afternoon.' },
       ]
     },
@@ -155,17 +155,17 @@ const REGIONS = [
     infoCard: {
       prefix: 'fl',
       eat: [
-        { icon:'🍷', name:'Graft Wine + Cider Bar',    badge:'rb-wine',   badgeLabel:'Wine',   sub:'413 N Franklin St, Watkins Glen · Farm-to-table, all locally sourced &amp; seasonal. Best sit-down dinner in town.' },
-        { icon:'🚂', name:'Seneca Harbor Station',     badge:'rb-casual', badgeLabel:'Casual', sub:'3 N Franklin St · 1876 train station turned restaurant. Seneca Lake views, great seafood &amp; steaks.' },
+        { icon:'🍷', name:'Graft Wine + Cider Bar',    badge:'rb-wine',   badgeLabel:'Wine',   sub:'413 N Franklin St, Watkins Glen · Farm-to-table, all locally sourced &amp; seasonal. Best sit-down dinner in town.', url:'https://www.graftwineciderbar.com/' },
+        { icon:'🚂', name:'Seneca Harbor Station',     badge:'rb-casual', badgeLabel:'Casual', sub:'3 N Franklin St · 1876 train station turned restaurant. Seneca Lake views, great seafood &amp; steaks.', url:'https://senecaharborstation.com/restaurant/' },
         { icon:'🌿', name:'Ravinous Kitchen',          badge:'rb-casual', badgeLabel:'Casual', sub:'Watkins Glen · Field-to-table, weekly changing seasonal menu. Creative &amp; genuinely local.' },
-        { icon:'🌱', name:'Moosewood Restaurant',      badge:'rb-casual', badgeLabel:'Casual', sub:'215 N Cayuga St, Ithaca · Legendary vegetarian institution since 1973. A genuine Ithaca landmark.' },
-        { icon:'🐟', name:'BoatYard Grill',            badge:'rb-casual', badgeLabel:'Casual', sub:'525 Taughannock Blvd, Ithaca · Best seafood in Ithaca. Cayuga Lake dock views. Great clam chowder &amp; halibut.' },
-        { icon:'🍕', name:'Revelry Yards',             badge:'rb-brew',   badgeLabel:'Brew',   sub:'Ithaca · Wood-fired pizza, craft micro-brewery upstairs. Lunch, brunch &amp; dinner. Lively atmosphere.' },
+        { icon:'🌱', name:'Moosewood Restaurant',      badge:'rb-casual', badgeLabel:'Casual', sub:'215 N Cayuga St, Ithaca · Legendary vegetarian institution since 1973. A genuine Ithaca landmark.', url:'https://www.moosewoodrestaurant.com/menu' },
+        { icon:'🐟', name:'BoatYard Grill',            badge:'rb-casual', badgeLabel:'Casual', sub:'525 Taughannock Blvd, Ithaca · Best seafood in Ithaca. Cayuga Lake dock views. Great clam chowder &amp; halibut.', url:'https://boatyardgrill.com/hours.php' },
+        { icon:'🍕', name:'Revelry Yards',             badge:'rb-brew',   badgeLabel:'Brew',   sub:'Ithaca · Wood-fired pizza, craft micro-brewery upstairs. Lunch, brunch &amp; dinner. Lively atmosphere.', url:'https://www.revelryyards.com/menus.html' },
       ],
       nohike: [
-        { icon:'🔬', name:'Corning Museum of Glass',      badge:'rb-must', badgeLabel:'★ Must-do', sub:'Corning, ~45 min from Watkins Glen · $25/adult, kids under 17 free. Open 9am–5pm daily. You can make your own glass piece. One of the best museums in the US — easily fills 3 hours.' },
+        { icon:'🔬', name:'Corning Museum of Glass',      badge:'rb-must', badgeLabel:'★ Must-do', sub:'Corning, ~45 min from Watkins Glen · $25/adult, kids under 17 free. Open 9am–5pm daily. You can make your own glass piece. One of the best museums in the US — easily fills 3 hours.', url:'https://visit.cmog.org/plan-your-visit' },
         { icon:'🍷', name:'Seneca Lake Wine Trail',        sub:'35+ wineries along both shores. Drive the loop, stop at 3–4. Highlights: Wagner Vineyards, Castel Grisch, Hazlitt\'s 1852. No reservation usually needed mid-week.' },
-        { icon:'🦕', name:'Museum of the Earth',           sub:'1259 Trumansburg Rd, Ithaca · Fossils, dinosaurs, hands-on paleontology. Very kid-friendly. ~$10/adult.' },
+        { icon:'🦕', name:'Museum of the Earth',           sub:'1259 Trumansburg Rd, Ithaca · Fossils, dinosaurs, hands-on paleontology. Very kid-friendly. ~$10/adult.', url:'https://www.museumoftheearth.org/visit/plan-your-visit' },
         { icon:'🌾', name:'Windmill Farm &amp; Craft Market', sub:'Penn Yan, ~30 min · Saturdays only. Large open-air market: local food, crafts, produce, baked goods. Worth the drive.' },
         { icon:'🎭', name:'Hangar Theatre',                sub:'Ithaca · Professional regional theater in a converted 1940s airplane hangar. Check schedule for fall shows.' },
       ]
@@ -182,15 +182,15 @@ const REGIONS = [
     infoCard: {
       prefix: 'hv',
       eat: [
-        { icon:'🥞', name:'Main Street Bistro',          badge:'rb-casual', badgeLabel:'Casual', sub:'59 Main St · New Paltz\'s beloved breakfast &amp; brunch institution for 30+ years. Arrive early on weekends — line forms outside.' },
-        { icon:'🍺', name:'Garvan\'s Gastropub',         badge:'rb-brew',   badgeLabel:'Brew',   sub:'215 Huguenot St · Traditional Irish food in an actual 1759 building. Full of character. Great for an evening out.' },
-        { icon:'🌶', name:'Lola\'s',                     badge:'rb-casual', badgeLabel:'Casual', sub:'Main St · Eclectic menu mixing Southern comfort, Thai, and global flavors. Strong cocktails. Local favorite.' },
-        { icon:'🍷', name:'Jar\'d Wine Pub',             badge:'rb-wine',   badgeLabel:'Wine',   sub:'68 Main St · Natural &amp; biodynamic wines, cozy back porch overlooking the Wallkill rail trail. Low-key and great.' },
+        { icon:'🥞', name:'Main Street Bistro',          badge:'rb-casual', badgeLabel:'Casual', sub:'59 Main St · New Paltz\'s beloved breakfast &amp; brunch institution for 30+ years. Arrive early on weekends — line forms outside.', url:'https://www.mainstreetbistro.com/menu/' },
+        { icon:'🍺', name:'Garvan\'s Gastropub',         badge:'rb-brew',   badgeLabel:'Brew',   sub:'215 Huguenot St · Traditional Irish food in an actual 1759 building. Full of character. Great for an evening out.', url:'https://www.garvans.com/dinner.html' },
+        { icon:'🌶', name:'Lola\'s',                     badge:'rb-casual', badgeLabel:'Casual', sub:'Main St · Eclectic menu mixing Southern comfort, Thai, and global flavors. Strong cocktails. Local favorite.', url:'https://www.lolascafeandcatering.com/menu/new-paltz-menu/' },
+        { icon:'🍷', name:'Jar\'d Wine Pub',             badge:'rb-wine',   badgeLabel:'Wine',   sub:'68 Main St · Natural &amp; biodynamic wines, cozy back porch overlooking the Wallkill rail trail. Low-key and great.', url:'https://www.tripadvisor.com/Restaurant_Review-g48245-d4041829-Reviews-Jar_d_Wine_Pub-New_Paltz_Catskill_Region_New_York.html' },
         { icon:'🍺', name:'Bacchus Restaurant &amp; Bar',badge:'rb-brew',   badgeLabel:'Brew',   sub:'Long list of Hudson Valley craft beers + full pub menu. Lively on weekend evenings.' },
       ],
       nohike: [
-        { icon:'🏛', name:'Huguenot Street Historic District', sub:'New Paltz · America\'s oldest surviving street (1692). Six original stone houses still standing. Self-guided walking or paid guided tours.' },
-        { icon:'🎨', name:'Samuel Dorsky Museum of Art',       sub:'SUNY New Paltz campus · Free. Strong rotating exhibitions, contemporary &amp; American art. Worth 1–2 hours.' },
+        { icon:'🏛', name:'Huguenot Street Historic District', sub:'New Paltz · America\'s oldest surviving street (1692). Six original stone houses still standing. Self-guided walking or paid guided tours.', url:'https://www.huguenotstreet.org/visit' },
+        { icon:'🎨', name:'Samuel Dorsky Museum of Art',       sub:'SUNY New Paltz campus · Free. Strong rotating exhibitions, contemporary &amp; American art. Worth 1–2 hours.', url:'https://www.newpaltz.edu/museum/information/museumvisit.html' },
         { icon:'🎸', name:'Woodstock Village',                 sub:'~30 min west · The iconic music town. Great galleries, eclectic shops, live music &amp; coffee. Easy half-day escape.' },
         { icon:'🏡', name:'FDR Home &amp; Presidential Library',sub:'Hyde Park, ~50 min north · Roosevelt\'s family estate + Eleanor\'s Val-Kill cottage. ~$20/adult. Fascinating in any season.' },
         { icon:'🎨', name:'Olana State Historic Site',         sub:'Hudson, ~1 hr north · Frederic Church\'s Persian-style mansion with jaw-dropping Hudson Valley panorama. Stunning in October foliage.' },
@@ -253,7 +253,7 @@ const DAYS = {
     badge: 'explore', badgeLabel: 'Explore',
     content: [
       { type:'activity', icon:'☕', title:'Slow village morning', sub:'Origin Coffee Co. (2669 Main St) for specialty coffee and breakfast. No alarm — recovery day, especially if the Sep 27 drive was tiring.' },
-      { type:'activity', icon:'🚣', title:'Mirror Lake Boat Rentals', sub:'Pedal-boats and hydrobikes daily 10am–sunset through mid-October. No reservations. Calm flat water, perfect for small kids.' },
+      { type:'activity', icon:'🚣', title:'Mirror Lake Boat Rentals', sub:'Pedal-boats and hydrobikes daily 10am–sunset through mid-October. No reservations. Calm flat water, perfect for small kids.', url:'https://www.mlboatrental.com/' },
       { type:'activity', icon:'🌿', title:'Mirror Lake Loop walk', sub:'Easy flat shoreline loop, stroller-friendly. Beautiful late-September foliage right from the village. Good substitute if the boats don\'t interest the kids.' },
       { type:'activity', icon:'🏘', title:'Day trip option: Saranac Lake (15 min)', tag:'optional', sub:'Calmer and less touristy than Lake Placid. Adirondack Carousel ($2.50/ride, Fri 12–5pm, Sat 10am–5pm, Sun 12–5pm) — 24 hand-carved wildlife figures, very popular with young kids. Lake Flower waterfront walk. Significantly cheaper dining and lodging than Lake Placid.' },
       { type:'activity', icon:'🦋', title:'Paul Smith\'s VIC (20 min from Saranac Lake)', tag:'optional', sub:'Free trails, Tue–Sun 9am–5pm. One fully paved stroller/wheelchair-accessible mile with lookouts. Free butterfly house. Best zero-cost nature stop in the region if you want an easy walk.' },
@@ -263,7 +263,7 @@ const DAYS = {
     date: 'Sep 29', title: 'High Falls Gorge + Lake Placid village',
     badge: 'explore', badgeLabel: 'Explore',
     content: [
-      { type:'activity', icon:'💧', title:'High Falls Gorge', sub:'Short paid walk along AuSable River gorge. Easy Path is stroller-suitable; suspended walkways better with backpack carrier. ~45 min. Free parking.' },
+      { type:'activity', icon:'💧', title:'High Falls Gorge', sub:'Short paid walk along AuSable River gorge. Easy Path is stroller-suitable; suspended walkways better with backpack carrier. ~45 min. Free parking.', url:'https://highfallsgorge.com/tickets/', urlLabel:'🎟 Tickets &amp; hours' },
       { type:'hiketabs', prefix:'sep29', tabs:[
         { id:'base', label:'Afternoon Trail', active:true,
           title:'Brewster Peninsula Loop',
@@ -280,7 +280,7 @@ const DAYS = {
     content: [
       { type:'drive', text:'~45 min drive to Tupper Lake · day trip from Lake Placid base',
         route:{ from:'Lake Placid, NY', to:'The Wild Center, Tupper Lake, NY' } },
-      { type:'activity', icon:'🦦', title:'The Wild Center', sub:'Wild Walk canopy trail, Pines Play Area, animal encounters, 115 acres. Best full family nature day near Lake Placid. Open daily.' },
+      { type:'activity', icon:'🦦', title:'The Wild Center', sub:'Wild Walk canopy trail, Pines Play Area, animal encounters, 115 acres. Best full family nature day near Lake Placid. Open daily.', url:'https://www.wildcenter.org/visit/' },
       { type:'hiketabs', prefix:'sep30', tabs:[
         { id:'base', label:'Trail Option', active:true,
           title:'Wild Center Trail',
@@ -295,7 +295,7 @@ const DAYS = {
     date: 'Oct 1', title: 'Whiteface Veterans\' Memorial Highway',
     badge: 'hike', badgeLabel: 'Hike/Ride',
     content: [
-      { type:'activity', icon:'🏔', title:'Whiteface Veterans\' Memorial Highway', sub:'Open through 12 Oct. Drive-up summit with the best foliage view in the Adirondacks. Summit is at least 10°F colder than the base — pack extra layers. Note: the gondola runs Fri–Sun only after 11 Sep; Oct 1 is a Thursday, so the highway is the right call.' },
+      { type:'activity', icon:'🏔', title:'Whiteface Veterans\' Memorial Highway', sub:'Open through 12 Oct. Drive-up summit with the best foliage view in the Adirondacks. Summit is at least 10°F colder than the base — pack extra layers. Note: the gondola runs Fri–Sun only after 11 Sep; Oct 1 is a Thursday, so the highway is the right call.', url:'https://lakeplacidlegacysites.com/todo/whiteface-veterans-memorial-highway/' },
       { type:'activity', icon:'🏋', title:'Mt. Van Hoevenberg (backup)', tag:'rain plan', sub:'Indoor climbing wall or Legacy Tour if weather closes the summit. Good all-ages fallback.' },
       { type:'hiketabs', prefix:'oct1', tabs:[
         { id:'base',    label:'Base Hike', active:true,
@@ -342,7 +342,7 @@ const DAYS = {
     date: 'Oct 5', title: 'Watkins Glen Gorge Trail',
     badge: 'hike', badgeLabel: 'Hike',
     content: [
-      { type:'activity', icon:'🏞', title:'Watkins Glen Gorge Trail', sub:'800 stone steps, 19 waterfalls, dramatic gorge walls. The best gorge hike in NY. Arrive early — gets busy. Note: the park shuttle runs weekends only after Sep 8 — Oct 5 is a Monday so no shuttle. Plan an out-and-back, not a full loop.' },
+      { type:'activity', icon:'🏞', title:'Watkins Glen Gorge Trail', sub:'800 stone steps, 19 waterfalls, dramatic gorge walls. The best gorge hike in NY. Arrive early — gets busy. Note: the park shuttle runs weekends only after Sep 8 — Oct 5 is a Monday so no shuttle. Plan an out-and-back, not a full loop.', url:'https://parks.ny.gov/visit/state-parks/watkins-glen-state-park' },
       { type:'hiketabs', prefix:'wg', tabs:[
         { id:'base',    label:'Base',    active:true,
           title:'Gorge Trail out-and-back',
@@ -364,8 +364,8 @@ const DAYS = {
       { type:'activity', icon:'💧', title:'Taughannock Falls State Park',
         sub:'Tallest waterfall in the Northeast (215 ft — taller than Niagara!). Wide, flat gorge trail — easy for all ages, ~1.5 mi rt.',
         trailUrl:'https://www.alltrails.com/trail/us/new-york/taughannock-falls-via-gorge-trail' },
-      { type:'activity', icon:'🔬', title:'Sciencenter, Ithaca', tag:'rain plan', sub:'601 1st St, Ithaca · 250+ interactive exhibits, free parking. Curiosity Corner specifically designed for age 4 and under. Best indoor backup in the area — go here if weather shuts down the gorge.' },
-      { type:'activity', icon:'🌿', title:'Cornell Botanic Gardens, Ithaca', tag:'optional', sub:'Free. Beautiful fall colour. Only viable in dry weather — mostly outdoor.' },
+      { type:'activity', icon:'🔬', title:'Sciencenter, Ithaca', tag:'rain plan', sub:'601 1st St, Ithaca · 250+ interactive exhibits, free parking. Curiosity Corner specifically designed for age 4 and under. Best indoor backup in the area — go here if weather shuts down the gorge.', url:'https://sciencenter.org/visit/hours-pricing/' },
+      { type:'activity', icon:'🌿', title:'Cornell Botanic Gardens, Ithaca', tag:'optional', sub:'Free. Beautiful fall colour. Only viable in dry weather — mostly outdoor.', url:'https://cornellbotanicgardens.org/visit' },
       { type:'activity', icon:'🍕', title:'Ithaca Commons for dinner',       sub:'Collegetown energy, great food diversity.' },
     ]
   },
@@ -383,7 +383,7 @@ const DAYS = {
     date: 'Oct 8', title: 'Minnewaska State Park · Shawangunk Ridge',
     badge: 'hike', badgeLabel: 'Hike',
     content: [
-      { type:'activity', icon:'🏔', title:'Minnewaska State Park Preserve', sub:'Sky Lakes, white conglomerate cliffs, incredible foliage. Reserve parking online in advance — fills up fast on weekends.' },
+      { type:'activity', icon:'🏔', title:'Minnewaska State Park Preserve', sub:'Sky Lakes, white conglomerate cliffs, incredible foliage. Reserve parking online in advance — fills up fast on weekends.', url:'https://parks.ny.gov/visit/state-parks/minnewaska-state-park-preserve' },
       { type:'hiketabs', prefix:'minn', tabs:[
         { id:'base',    label:'Base',    active:true,
           title:'Awosting Falls + Lake Minnewaska loop',
@@ -396,9 +396,9 @@ const DAYS = {
           stats:['8 mi','~900 ft','Moderate'],
           url:'https://www.alltrails.com/trail/us/new-york/lake-awosting-via-reserve-access-and-purple-loop' },
       ]},
-      { type:'activity', icon:'🌉', title:'Walkway Over the Hudson', sub:'Highland, ~20 min from New Paltz · Free, open 7am–sunset. 1.28 miles gate-to-gate, 212 ft above the Hudson River. Fully fenced — excellent with small children. The best dramatic Hudson Valley view without any trail difficulty. Easy 5.1 km out-and-back.' },
+      { type:'activity', icon:'🌉', title:'Walkway Over the Hudson', sub:'Highland, ~20 min from New Paltz · Free, open 7am–sunset. 1.28 miles gate-to-gate, 212 ft above the Hudson River. Fully fenced — excellent with small children. The best dramatic Hudson Valley view without any trail difficulty. Easy 5.1 km out-and-back.', url:'https://walkway.org/visit/' },
       { type:'activity', icon:'🏰', title:'Mohonk Preserve / Mountain House', tag:'splurge', style:'margin-top:10px',
-        sub:'Spectacular Victorian castle resort. Day hiker fee ~$30/person. Worth it if budget allows.' },
+        sub:'Spectacular Victorian castle resort. Day hiker fee ~$30/person. Worth it if budget allows.', url:'https://www.mohonk.com/experience-passes/hiking-trails-pass/' },
     ]
   },
   d13: {
