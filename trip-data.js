@@ -436,8 +436,8 @@ const RESOURCES = {
       items: [
         { label: 'EL AL flight booking (EWR round-trip)', type: 'booking', priority: 'critical', status: 'pending' },
         { label: 'ESTA — US visa waiver application', type: 'booking', priority: 'critical', status: 'pending', url: 'https://esta.cbp.dhs.gov/', notes: 'Apply at least 72 hrs before departure' },
-        { label: 'Newark Airport (EWR) terminal map', type: 'info', priority: 'recommended', status: 'pending', url: 'https://www.newarkairport.com/maps-and-guides' },
-        { label: 'EWR Rental Car Center — AirTrain directions', type: 'info', priority: 'recommended', status: 'pending', url: 'https://www.newarkairport.com/transportation/airport-car-rentals' },
+        { label: 'Newark Airport (EWR) terminal map', type: 'info', priority: 'recommended', status: 'pending', url: 'https://www.newarkairport.com/explore-ewr/airport-map' },
+        { label: 'EWR Rental Car Center — AirTrain directions', type: 'info', priority: 'recommended', status: 'pending', url: 'https://www.newarkairport.com/transportation/car-rentals' },
       ]
     },
     {
@@ -475,7 +475,7 @@ const RESOURCES = {
         { label: 'Official I LOVE NY Fall Foliage Report', type: 'live-map', priority: 'critical', status: 'pending', url: 'https://www.iloveny.com/things-to-do/fall/foliage-report/', notes: 'Statewide weekly report + interactive color map (Adirondacks, Catskills, Finger Lakes regions)' },
         { label: 'ExploreFall — New York', type: 'live-map', priority: 'recommended', status: 'pending', url: 'https://www.explorefall.com/states/new-york', notes: 'County-by-county color predictions and reader reports' },
         { label: 'SmokyMountains.com Predictive Foliage Map', type: 'forecast', priority: 'recommended', status: 'pending', url: 'https://smokymountains.com/fall-foliage-map/', notes: 'Nationwide week-by-week slider — drag to your travel dates' },
-        { label: 'Adirondack Foliage Report', type: 'live-map', priority: 'recommended', status: 'pending', url: 'https://visitadirondacks.com/things-to-do/foliage', notes: 'Best for the Lake Placid / High Peaks stretch (peaks late Sep — you arrive on time)' },
+        { label: 'Adirondack Foliage Report', type: 'live-map', priority: 'recommended', status: 'pending', url: 'https://visitadirondacks.com/fall', notes: 'Best for the Lake Placid / High Peaks stretch (peaks late Sep — you arrive on time)' },
         { label: 'Monitor foliage reports — 7 days before Sep 27 arrival', type: 'todo', priority: 'critical', status: 'pending' },
       ]
     },
@@ -484,10 +484,10 @@ const RESOURCES = {
       icon: '🎟',
       title: 'Reservations & Attractions',
       items: [
-        { label: 'Minnewaska State Park — parking reservation', type: 'booking', priority: 'critical', status: 'pending', url: 'https://parks.ny.gov/parks/minnewaska', notes: 'Fills fast on Oct weekends' },
+        { label: 'Minnewaska State Park — parking reservation', type: 'booking', priority: 'critical', status: 'pending', url: 'https://parks.ny.gov/visit/state-parks/minnewaska-state-park-preserve', notes: 'Fills fast on Oct weekends' },
         { label: 'Ausable Chasm — hours & rates', type: 'booking', priority: 'recommended', status: 'pending', url: 'https://www.ausablechasm.com/hours-rates' },
         { label: 'Whiteface Mountain Gondola', type: 'booking', priority: 'recommended', status: 'pending', url: 'https://whiteface.com/', notes: 'Gondola Fri–Sun only after Sep 11' },
-        { label: 'Watkins Glen State Park entry', type: 'booking', priority: 'recommended', status: 'pending', url: 'https://parks.ny.gov/parks/watkinsglen' },
+        { label: 'Watkins Glen State Park entry', type: 'booking', priority: 'recommended', status: 'pending', url: 'https://parks.ny.gov/visit/state-parks/watkins-glen-state-park' },
         { label: 'Mohonk day hiker pass (optional splurge ~$30/pp)', type: 'booking', priority: 'optional', status: 'pending' },
         { label: 'Wild Center — Tupper Lake visitor info', type: 'info', priority: 'recommended', status: 'pending', url: 'https://wildcenter.org/' },
         { label: 'Adirondacks Visitor Guide — first-time visitors', type: 'info', priority: 'recommended', status: 'pending', url: 'https://visitadirondacks.com/first-time-visitors' },
@@ -498,7 +498,7 @@ const RESOURCES = {
       icon: '🌤',
       title: 'Live Weather',
       items: [
-        { label: 'Whiteface Mountain summit forecast (Adirondacks)', type: 'live-weather', priority: 'critical', status: 'pending', url: 'https://www.mountain-forecast.com/peaks/Whiteface-Mountain/forecasts/1483', notes: 'Summit often 10–20°F colder than the village — pack extra layers' },
+        { label: 'Whiteface Mountain summit forecast (Adirondacks)', type: 'live-weather', priority: 'critical', status: 'pending', url: 'https://www.mountain-forecast.com/peaks/Whiteface-Mountain/forecasts/1466', notes: 'Summit often 10–20°F colder than the village — pack extra layers' },
         { label: 'Adirondacks / North Country — NWS Burlington', type: 'live-weather', priority: 'recommended', status: 'pending', url: 'https://www.weather.gov/btv/' },
         { label: 'Capital Region & Hudson Valley — NWS Albany', type: 'live-weather', priority: 'recommended', status: 'pending', url: 'https://www.weather.gov/aly/' },
         { label: 'Finger Lakes / Southern Tier — NWS Binghamton', type: 'live-weather', priority: 'recommended', status: 'pending', url: 'https://www.weather.gov/bgm/' },
