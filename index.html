@@ -189,7 +189,7 @@
   .trail-link:hover { background: rgba(5,150,105,0.25); border-color: rgba(5,150,105,0.55); }
   .trail-link svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
 
-  /* ── REGION INFO CARDS (eat / skip-hike tabs) ── */
+  /* ── REGION INFO CARDS (eat / more-to-do tabs) ── */
   .region-info-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
     margin-bottom: 14px; overflow: hidden;
@@ -216,6 +216,16 @@
   .rb-brew   { background: rgba(245,158,11,0.15);  color: #fcd34d; }
   .rb-wine   { background: rgba(220,38,38,0.15);   color: #fca5a5; }
   .rb-must   { background: rgba(6,182,212,0.15);   color: #67e8f9; }
+  /* "Hours / menu / info" link on a region-info item */
+  .ri-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 6px; padding: 4px 9px; border-radius: 5px;
+    background: rgba(148,163,184,0.12); border: 1px solid rgba(148,163,184,0.3);
+    color: #cbd5e1; font-size: 10px; font-weight: 700; text-decoration: none;
+    letter-spacing: .02em; transition: background .2s, border-color .2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ri-link:hover { background: rgba(148,163,184,0.22); border-color: rgba(148,163,184,0.5); }
 
   /* ── RESOURCES (trip operations center) ── */
   #logistics { max-width: 760px; margin: 0 auto; padding: 0 16px 64px; }
@@ -345,12 +355,13 @@ const AT_SVG = `<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25
 function renderActivity(a) {
   const tagHtml    = a.tag      ? ` <span class="optional-tag">${a.tag}</span>` : '';
   const trailHtml  = a.trailUrl ? `<br><a class="trail-link" href="${a.trailUrl}" target="_blank" rel="noopener" style="margin-top:8px">${AT_SVG} View on AllTrails</a>` : '';
+  const infoHtml   = a.url      ? `<br><a class="ri-link" href="${a.url}" target="_blank" rel="noopener" style="margin-top:8px">${a.urlLabel || '🔗 Hours &amp; info'} ↗</a>` : '';
   const styleAttr  = a.style    ? ` style="${a.style}"` : '';
   return `<div class="activity"${styleAttr}>
     <div class="activity-icon">${a.icon}</div>
     <div class="activity-text">
       <strong>${a.title}</strong>${tagHtml}
-      <div class="sub">${a.sub}${trailHtml}</div>
+      <div class="sub">${a.sub}${trailHtml}${infoHtml}</div>
     </div>
   </div>`;
 }
@@ -419,26 +430,30 @@ function renderDay(id, day) {
   </div>`;
 }
 
-function renderRiItem(item) {
+function renderRiItem(item, kind) {
   const badgeHtml = item.badge
     ? ` <span class="ri-badge ${item.badge}">${item.badgeLabel}</span>`
+    : '';
+  const linkLabel = item.linkLabel || (kind === 'eat' ? '🍽 Menu &amp; hours' : '🔗 Hours &amp; info');
+  const linkHtml = item.url
+    ? `<br><a class="ri-link" href="${item.url}" target="_blank" rel="noopener">${linkLabel} ↗</a>`
     : '';
   return `<div class="ri-item">
     <div class="ri-icon">${item.icon}</div>
     <div class="ri-text">
       <strong>${item.name}</strong>${badgeHtml}
-      <div class="ri-sub">${item.sub}</div>
+      <div class="ri-sub">${item.sub}${linkHtml}</div>
     </div>
   </div>`;
 }
 
 function renderInfoCard(card) {
-  const eatItems    = card.eat.map(renderRiItem).join('');
-  const nohikeItems = card.nohike.map(renderRiItem).join('');
+  const eatItems    = card.eat.map(i => renderRiItem(i, 'eat')).join('');
+  const nohikeItems = card.nohike.map(i => renderRiItem(i, 'nohike')).join('');
   return `<div class="region-info-card">
     <div class="ri-tabs">
       <button class="ri-tab active" onclick="riTab('${card.prefix}','eat')">🍽 Where to Eat</button>
-      <button class="ri-tab" onclick="riTab('${card.prefix}','nohike')">🎭 Skip the Hike?</button>
+      <button class="ri-tab" onclick="riTab('${card.prefix}','nohike')">🎟 More to Do</button>
     </div>
     <div id="${card.prefix}-eat" class="ri-panel active">${eatItems}</div>
     <div id="${card.prefix}-nohike" class="ri-panel">${nohikeItems}</div>
