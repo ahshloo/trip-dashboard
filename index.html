@@ -235,7 +235,7 @@
   .res-section-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px 10px; border-bottom: 1px solid var(--border); }
   .res-section-header h3 { font-size: 14px; font-weight: 700; flex: 1; }
   .res-intro { font-size: 12px; color: var(--muted); padding: 10px 16px 8px; line-height: 1.5; border-bottom: 1px solid rgba(71,85,105,0.3); }
-  .res-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; border-bottom: 1px solid rgba(71,85,105,0.22); }
+  .res-item { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 9px 16px; border-bottom: 1px solid rgba(71,85,105,0.22); }
   .res-item:last-child { border-bottom: none; }
   .res-item-left { display: flex; align-items: flex-start; gap: 8px; flex: 1; min-width: 0; }
   .res-item-label { font-size: 13px; line-height: 1.4; }
@@ -263,6 +263,31 @@
   .res-btn-weather:hover { background: rgba(59,130,246,0.28); }
   .res-btn-guide   { background: rgba(100,116,139,0.15); border-color: rgba(100,116,139,0.4); color: #94a3b8; }
   .res-btn-guide:hover { background: rgba(100,116,139,0.28); }
+  /* Booking reference — confirmation text + link, saved per task */
+  .res-ref-btn {
+    font-size: 11px; padding: 3px 7px; border-radius: 6px; cursor: pointer;
+    background: rgba(148,163,184,0.12); border: 1px solid rgba(148,163,184,0.3);
+    color: #cbd5e1; min-height: 26px; -webkit-tap-highlight-color: transparent;
+  }
+  .res-ref-btn.has-ref { background: rgba(16,185,129,0.18); border-color: rgba(16,185,129,0.45); }
+  .res-ref { font-size: 11px; color: #6ee7b7; margin-top: 4px; word-break: break-word; }
+  .res-ref a { color: #67e8f9; }
+  .res-ref-editor {
+    flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+    margin-top: 4px; padding-top: 8px; border-top: 1px dashed rgba(71,85,105,0.5);
+  }
+  .res-ref-input {
+    flex: 1; min-width: 150px; font-size: 12px; padding: 6px 9px; border-radius: 6px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text);
+  }
+  .res-ref-input:focus { outline: none; border-color: var(--muted); }
+  .res-ref-actions { display: flex; gap: 6px; }
+  .res-ref-save, .res-ref-clear {
+    font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; cursor: pointer;
+    border: 1px solid; -webkit-tap-highlight-color: transparent; min-height: 30px;
+  }
+  .res-ref-save  { background: rgba(5,150,105,0.2);   border-color: rgba(5,150,105,0.45);   color: #6ee7b7; }
+  .res-ref-clear { background: rgba(100,116,139,0.15); border-color: rgba(100,116,139,0.4); color: #94a3b8; }
 
   /* ── CALENDAR ── */
   #calendar { max-width: 760px; margin: 0 auto; padding: 8px 16px 0; scroll-margin-top: 56px; }
@@ -596,6 +621,34 @@ function goToDay(id) {
   el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+// ── TASK STATE (localStorage) ──────────────────────────────
+// Status changes and booking references survive a page reload by
+// living in localStorage. State is keyed by "<sectionId>-<index>"
+// so it stays valid as long as the RESOURCES item order is stable.
+const TASK_STORE_KEY = 'trip-dashboard-tasks-v1';
+function loadTaskState() {
+  try { return JSON.parse(localStorage.getItem(TASK_STORE_KEY)) || {}; }
+  catch (e) { console.warn('Could not read saved tasks:', e); return {}; }
+}
+function saveTaskState() {
+  try { localStorage.setItem(TASK_STORE_KEY, JSON.stringify(TASK_STATE)); }
+  catch (e) { console.warn('Could not save tasks:', e); }
+}
+let TASK_STATE = loadTaskState();
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+// Accept a pasted link with or without scheme; reject anything that
+// isn't a plain http(s) address so a stored ref can't inject script.
+function normalizeUrl(u) {
+  if (!u) return '';
+  if (/^https?:\/\//i.test(u)) return u;
+  if (/^[\w-]+(\.[\w-]+)+/.test(u)) return 'https://' + u;
+  return '';
+}
+
 const STATUS_LABELS = { pending: '⬜ Pending', reserved: '🟨 Reserved', done: '🟩 Done' };
 const STATUS_CYCLE  = { pending: 'reserved', reserved: 'done', done: 'pending' };
 
@@ -614,31 +667,56 @@ function getResBtn(item) {
   return `<a class="res-btn ${cls}" href="${item.url}" target="_blank" rel="noopener">${label}</a>`;
 }
 
-function renderResItem(item) {
+function renderResItem(item, sectionId, i) {
+  const key      = `${sectionId}-${i}`;
+  const saved    = TASK_STATE[key] || {};
   const priClass = `pri-${item.priority || 'optional'}`;
-  const status   = item.status || 'pending';
+  const status   = saved.status || item.status || 'pending';
   const subParts = [item.dates, item.notes];
   if (item.reservation_deadline) subParts.push(`⚠️ Book by ${item.reservation_deadline}`);
   const sub = subParts.filter(Boolean).join(' · ');
+
+  const refNote = saved.refNote || '';
+  const refUrl  = saved.refUrl  || '';
+  const hasRef  = !!(refNote || refUrl);
+  const refLink = normalizeUrl(refUrl);
+  const refView = hasRef
+    ? `<div class="res-ref">📎 ${refNote ? escapeHtml(refNote) : ''}` +
+      `${refLink ? ` <a href="${escapeHtml(refLink)}" target="_blank" rel="noopener">open ↗</a>` : ''}</div>`
+    : '';
+
   return `<div class="res-item">
     <div class="res-item-left">
       <div class="pri-dot ${priClass}"></div>
       <div>
         <div class="res-item-label">${item.label}</div>
         ${sub ? `<div class="res-item-sub">${sub}</div>` : ''}
+        ${refView}
       </div>
     </div>
     <div class="res-item-right">
       ${getResBtn(item)}
-      <button class="status-chip status-${status}" data-status="${status}"
+      <button class="res-ref-btn${hasRef ? ' has-ref' : ''}" title="Booking reference / confirmation"
+        onclick="toggleRef('${key}')">📎</button>
+      <button class="status-chip status-${status}" data-status="${status}" data-key="${key}"
         onclick="cycleStatus(this)">${STATUS_LABELS[status]}</button>
+    </div>
+    <div class="res-ref-editor" id="refedit-${key}" hidden>
+      <input class="res-ref-input" id="refnote-${key}" placeholder="Confirmation # / notes"
+        value="${escapeHtml(refNote)}">
+      <input class="res-ref-input" id="refurl-${key}" placeholder="Link to ticket / reservation"
+        value="${escapeHtml(refUrl)}">
+      <div class="res-ref-actions">
+        <button class="res-ref-save" onclick="saveRef('${key}')">Save</button>
+        <button class="res-ref-clear" onclick="clearRef('${key}')">Clear</button>
+      </div>
     </div>
   </div>`;
 }
 
 function renderResSection(section) {
   const intro = section.intro ? `<div class="res-intro">${section.intro}</div>` : '';
-  const items = section.items.map(renderResItem).join('');
+  const items = section.items.map((item, i) => renderResItem(item, section.id, i)).join('');
   return `<div class="res-section">
     <div class="res-section-header">
       <span style="font-size:20px">${section.icon}</span>
@@ -749,6 +827,42 @@ function cycleStatus(chip) {
   chip.dataset.status = next;
   chip.className = `status-chip status-${next}`;
   chip.textContent = STATUS_LABELS[next];
+  const key = chip.dataset.key;
+  if (!key) return;
+  const st = TASK_STATE[key] || {};
+  st.status = next;
+  if (next === 'pending' && !st.refNote && !st.refUrl) delete TASK_STATE[key];
+  else TASK_STATE[key] = st;
+  saveTaskState();
+}
+
+// Show/hide the inline reference editor for a task.
+function toggleRef(key) {
+  const ed = document.getElementById('refedit-' + key);
+  if (ed) ed.hidden = !ed.hidden;
+}
+
+// Persist a booking reference (confirmation text + link) for a task.
+function saveRef(key) {
+  const note = (document.getElementById('refnote-' + key).value || '').trim();
+  const url  = (document.getElementById('refurl-'  + key).value || '').trim();
+  const st = TASK_STATE[key] || {};
+  if (note) st.refNote = note; else delete st.refNote;
+  if (url)  st.refUrl  = url;  else delete st.refUrl;
+  if (!st.refNote && !st.refUrl && (!st.status || st.status === 'pending')) delete TASK_STATE[key];
+  else TASK_STATE[key] = st;
+  saveTaskState();
+  renderResources();
+}
+
+function clearRef(key) {
+  const st = TASK_STATE[key];
+  if (st) {
+    delete st.refNote; delete st.refUrl;
+    if (!st.status || st.status === 'pending') delete TASK_STATE[key];
+  }
+  saveTaskState();
+  renderResources();
 }
 
 function riTab(region, tab) {
