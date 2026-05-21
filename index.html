@@ -276,6 +276,8 @@
     flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
     margin-top: 4px; padding-top: 8px; border-top: 1px dashed rgba(71,85,105,0.5);
   }
+  /* the class sets display:flex, so [hidden] needs an explicit override */
+  .res-ref-editor[hidden] { display: none; }
   .res-ref-input {
     flex: 1; min-width: 150px; font-size: 12px; padding: 6px 9px; border-radius: 6px;
     border: 1px solid var(--border); background: var(--bg); color: var(--text);
