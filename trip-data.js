@@ -3,6 +3,11 @@
 //  index.html reads this and renders everything automatically.
 // ─────────────────────────────────────────────────────────────
 
+// ── TRIP SPAN ──────────────────────────────────────────────
+// Overall trip window (ISO dates). Drives the calendar view's
+// month range and the in-range day shading.
+const TRIP = { start: '2026-09-27', end: '2026-10-15' };
+
 // ── MAP ROUTE (lat/lng pairs) ──────────────────────────────
 const ROUTE = [
   [40.6895,-74.1745], // EWR / NJ start

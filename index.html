@@ -264,6 +264,34 @@
   .res-btn-guide   { background: rgba(100,116,139,0.15); border-color: rgba(100,116,139,0.4); color: #94a3b8; }
   .res-btn-guide:hover { background: rgba(100,116,139,0.28); }
 
+  /* ── CALENDAR ── */
+  #calendar { max-width: 760px; margin: 0 auto; padding: 8px 16px 0; scroll-margin-top: 56px; }
+  .cal-legend { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+  .cal-month {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px; margin-bottom: 14px;
+  }
+  .cal-month-name { font-size: 14px; font-weight: 700; color: #e2e8f0; margin-bottom: 10px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  .cal-dow {
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--muted); text-align: center; padding-bottom: 2px;
+  }
+  .cal-cell {
+    aspect-ratio: 1; border-radius: 8px; padding: 4px 5px;
+    display: flex; flex-direction: column; border: 2px solid transparent;
+  }
+  .cal-empty { border: none; }
+  .cal-num { font-size: 12px; font-weight: 600; color: var(--muted); }
+  .cal-inrange { background: rgba(148,163,184,0.07); }
+  .cal-trip {
+    background: var(--card2); cursor: pointer;
+    -webkit-tap-highlight-color: transparent; transition: filter .15s;
+  }
+  .cal-trip:hover { filter: brightness(1.3); }
+  .cal-trip .cal-num { color: #f1f5f9; font-weight: 700; }
+  .cal-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: auto; align-self: flex-end; }
+
   /* ── FOOTER ── */
   footer { text-align: center; padding: 24px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); }
 
@@ -308,6 +336,7 @@
 <!-- NAV -->
 <nav>
   <a href="#map-section">🗺 Map</a>
+  <a href="#calendar">📅 Calendar</a>
   <a href="#nj" class="nj">NJ</a>
   <a href="#adirondacks" class="adk">Adirondacks</a>
   <a href="#lake-george" class="lg">Lake George</a>
@@ -334,6 +363,9 @@
     📅 See day-by-day ↓
   </div>
 </section>
+
+<!-- ═══════════════ CALENDAR ═══════════════ -->
+<section id="calendar"></section>
 
 <!-- ═══════════════ ITINERARY ═══════════════ -->
 <section id="itinerary"></section>
@@ -492,6 +524,78 @@ function renderItinerary() {
   document.getElementById('itinerary').innerHTML = REGIONS.map(renderRegion).join('');
 }
 
+// ── CALENDAR ───────────────────────────────────────────────
+const MONTH_FULL = ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'];
+
+// Build { isoDate -> dayId } and { dayId -> region } lookups from the data.
+function buildDayIndex() {
+  const dateToDay = {}, dayToRegion = {};
+  REGIONS.forEach(r => r.days.forEach(id => { dayToRegion[id] = r; }));
+  Object.keys(DAYS).forEach(id => { dateToDay[DAYS[id].date] = id; });
+  return { dateToDay, dayToRegion };
+}
+
+function renderMonthGrid(year, month, idx, start, end) {
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const lead = new Date(year, month, 1).getDay();
+  let cells = '';
+  for (let i = 0; i < lead; i++) cells += '<div class="cal-cell cal-empty"></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const iso = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+    const cur = new Date(year, month, d);
+    const dayId = idx.dateToDay[iso];
+    if (dayId) {
+      const region = idx.dayToRegion[dayId];
+      const colorVar = region ? region.colorVar : '--border';
+      const day = DAYS[dayId];
+      const title = day.title.replace(/"/g, '&quot;');
+      cells += `<div class="cal-cell cal-trip" style="border-color:var(${colorVar})"
+          onclick="goToDay('${dayId}')" title="${title}">
+        <span class="cal-num">${d}</span>
+        <span class="cal-dot" style="background:var(${colorVar})"></span>
+      </div>`;
+    } else {
+      const inRange = cur >= start && cur <= end;
+      cells += `<div class="cal-cell${inRange ? ' cal-inrange' : ''}">
+        <span class="cal-num">${d}</span>
+      </div>`;
+    }
+  }
+  const dow = WEEKDAY_ABBR.map(w => `<div class="cal-dow">${w}</div>`).join('');
+  return `<div class="cal-month">
+    <div class="cal-month-name">${MONTH_FULL[month]} ${year}</div>
+    <div class="cal-grid">${dow}${cells}</div>
+  </div>`;
+}
+
+function renderCalendar() {
+  const idx = buildDayIndex();
+  const start = parseISO(TRIP.start), end = parseISO(TRIP.end);
+  let html = '', y = start.getFullYear(), m = start.getMonth();
+  const endStamp = end.getFullYear() * 12 + end.getMonth();
+  while (y * 12 + m <= endStamp) {
+    html += renderMonthGrid(y, m, idx, start, end);
+    if (++m > 11) { m = 0; y++; }
+  }
+  document.getElementById('calendar').innerHTML = `
+    <div class="region-header" style="border-color:var(--border); padding-top:8px">
+      <span style="font-size:24px">📅</span>
+      <h2>Trip Calendar</h2>
+      <span class="dates">${formatDate(TRIP.start)} – ${formatDate(TRIP.end)}</span>
+    </div>
+    <div class="cal-legend">Tap a highlighted day to jump to its plan below.</div>
+    ${html}`;
+}
+
+// Open a day card and scroll it into view (used by calendar cells).
+function goToDay(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('open');
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 const STATUS_LABELS = { pending: '⬜ Pending', reserved: '🟨 Reserved', done: '🟩 Done' };
 const STATUS_CYCLE  = { pending: 'reserved', reserved: 'done', done: 'pending' };
 
@@ -606,6 +710,7 @@ async function loadWeatherChip(el, loc) {
 }
 
 // Render everything synchronously so the DOM is ready for the map observer
+safeRender('calendar', renderCalendar);
 safeRender('itinerary', renderItinerary);
 safeRender('resources', renderResources);
 
@@ -719,7 +824,7 @@ window.addEventListener('load', function () {
   });
 
   // ── NAV ACTIVE STATE ──
-  const sections = ['map-section','nj','adirondacks','lake-george','finger-lakes','hudson','logistics'];
+  const sections = ['map-section','calendar','nj','adirondacks','lake-george','finger-lakes','hudson','logistics'];
   const navLinks = document.querySelectorAll('nav a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
