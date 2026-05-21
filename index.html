@@ -288,6 +288,14 @@
   }
   .res-ref-save  { background: rgba(5,150,105,0.2);   border-color: rgba(5,150,105,0.45);   color: #6ee7b7; }
   .res-ref-clear { background: rgba(100,116,139,0.15); border-color: rgba(100,116,139,0.4); color: #94a3b8; }
+  /* Export-tasks button in the ops-center header */
+  .res-export {
+    margin-left: auto; font-size: 11px; font-weight: 700; padding: 6px 12px;
+    border-radius: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+    background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.4);
+    color: #a5b4fc; min-height: 32px;
+  }
+  .res-export:hover { background: rgba(99,102,241,0.28); }
 
   /* ── CALENDAR ── */
   #calendar { max-width: 760px; margin: 0 auto; padding: 8px 16px 0; scroll-margin-top: 56px; }
@@ -648,6 +656,11 @@ function normalizeUrl(u) {
   if (/^[\w-]+(\.[\w-]+)+/.test(u)) return 'https://' + u;
   return '';
 }
+// Turn an HTML-context label back into plain text for the export file.
+function decodeEntities(s) {
+  return String(s).replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+}
 
 const STATUS_LABELS = { pending: '⬜ Pending', reserved: '🟨 Reserved', done: '🟩 Done' };
 const STATUS_CYCLE  = { pending: 'reserved', reserved: 'done', done: 'pending' };
@@ -733,6 +746,7 @@ function renderResources() {
     <div class="region-header" style="border-color:var(--border); padding-top:8px">
       <span style="font-size:24px">✅</span>
       <h2>Trip Operations Center</h2>
+      <button class="res-export" onclick="exportTasks()">⬇ Export tasks</button>
     </div>
     <div class="res-legend">
       <span class="res-legend-item"><span class="pri-dot pri-critical" style="display:inline-block"></span> Critical</span>
@@ -863,6 +877,33 @@ function clearRef(key) {
   }
   saveTaskState();
   renderResources();
+}
+
+// Download every task with its current status and reference as JSON —
+// a portable backup / shareable snapshot of trip progress.
+function exportTasks() {
+  const tasks = [];
+  RESOURCES.sections.forEach(sec => {
+    sec.items.forEach((item, i) => {
+      const st = TASK_STATE[`${sec.id}-${i}`] || {};
+      tasks.push({
+        section: decodeEntities(sec.title),
+        task: decodeEntities(item.label),
+        status: st.status || item.status || 'pending',
+        reference: st.refNote || '',
+        link: st.refUrl || ''
+      });
+    });
+  });
+  const payload = { trip: document.title, exported: new Date().toISOString(), tasks };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'trip-tasks-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(a.href);
 }
 
 function riTab(region, tab) {
