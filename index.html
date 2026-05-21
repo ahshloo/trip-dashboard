@@ -352,6 +352,19 @@
 
 const AT_SVG = `<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
 
+// ── DATES ──────────────────────────────────────────────────
+// Days in trip-data.js carry ISO yyyy-mm-dd dates. These helpers
+// turn them into display strings without any timezone surprises
+// (Date is built from explicit y/m/d parts, so it stays local).
+const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const WEEKDAY_ABBR = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function parseISO(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+function formatDate(iso)     { const d = parseISO(iso); return MONTH_ABBR[d.getMonth()] + ' ' + d.getDate(); }
+function formatDateFull(iso) { const d = parseISO(iso); return WEEKDAY_ABBR[d.getDay()] + ' ' + MONTH_ABBR[d.getMonth()] + ' ' + d.getDate(); }
+
 function renderActivity(a) {
   const tagHtml    = a.tag      ? ` <span class="optional-tag">${a.tag}</span>` : '';
   const trailHtml  = a.trailUrl ? `<br><a class="trail-link" href="${a.trailUrl}" target="_blank" rel="noopener" style="margin-top:8px">${AT_SVG} View on AllTrails</a>` : '';
@@ -419,7 +432,7 @@ function renderDay(id, day) {
   }).join('');
   return `<div class="day-card" id="${id}">
     <div class="day-card-header" onclick="toggle('${id}')">
-      <span class="day-num">${day.date}</span>
+      <span class="day-num">${formatDate(day.date)}</span>
       <span class="day-title">${day.title}</span>
       <span class="day-badge badge-${day.badge}">${day.badgeLabel}</span>
       <span class="chevron">▼</span>

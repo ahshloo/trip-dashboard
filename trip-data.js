@@ -201,6 +201,10 @@ const REGIONS = [
 ];
 
 // ── DAYS ───────────────────────────────────────────────────
+// Each day has a `date` in ISO yyyy-mm-dd form — the single source
+// of truth for when the day happens. index.html formats it for the
+// day cards and the calendar view. Change a date here and the whole
+// dashboard (cards + calendar) updates automatically.
 // content items: { type:'activity'|'drive'|'hiketabs', ... }
 //
 // activity fields:
@@ -217,24 +221,8 @@ const REGIONS = [
 //     desc  — appended inline to title: "<strong>title</strong>desc"
 //     note  — rendered as a separate <p> below stats (no note → <br>)
 const DAYS = {
-  d1: {
-    date: 'Sep 27', title: 'Arrive EWR · Settle in with family',
-    badge: 'flex', badgeLabel: 'Flex',
-    content: [
-      { type:'activity', icon:'✈️', title:'Land at EWR',   sub:'Pick up rental car. Plan for traffic.' },
-      { type:'activity', icon:'🏠', title:'Family time',    sub:'Recharge, grocery run, sync on gear.' },
-    ]
-  },
-  d2: {
-    date: 'Sep 28', title: 'Rest day · Prep &amp; local explore',
-    badge: 'flex', badgeLabel: 'Flex',
-    content: [
-      { type:'activity', icon:'🛒', title:'Pack for Adirondacks',            sub:'Layers, rain gear, hiking shoes, snacks.' },
-      { type:'activity', icon:'🌳', title:'Local park or Palisades walk', tag:'optional', sub:'Easy leg-stretch before the long drive tomorrow.' },
-    ]
-  },
   d3: {
-    date: 'Sep 27', title: 'Arrive EWR → Drive to Lake Placid (~5 hrs)',
+    date: '2026-09-27', title: 'Arrive EWR → Drive to Lake Placid (~5 hrs)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
       { type:'activity', icon:'✈️', title:'Land at EWR', sub:'Pick up rental car at the EWR Rental Car Center — AirTrain to Terminal A, then walk the covered corridor to the rental building.' },
@@ -249,7 +237,7 @@ const DAYS = {
     ]
   },
   d_sep28: {
-    date: 'Sep 28', title: 'First morning in Lake Placid — soft settle-in day',
+    date: '2026-09-28', title: 'First morning in Lake Placid — soft settle-in day',
     badge: 'explore', badgeLabel: 'Explore',
     content: [
       { type:'activity', icon:'☕', title:'Slow village morning', sub:'Origin Coffee Co. (2669 Main St) for specialty coffee and breakfast. No alarm — recovery day, especially if the Sep 27 drive was tiring.' },
@@ -260,7 +248,7 @@ const DAYS = {
     ]
   },
   d4: {
-    date: 'Sep 29', title: 'High Falls Gorge + Lake Placid village',
+    date: '2026-09-29', title: 'High Falls Gorge + Lake Placid village',
     badge: 'explore', badgeLabel: 'Explore',
     content: [
       { type:'activity', icon:'💧', title:'High Falls Gorge', sub:'Short paid walk along AuSable River gorge. Easy Path is stroller-suitable; suspended walkways better with backpack carrier. ~45 min. Free parking.', url:'https://highfallsgorge.com/tickets/', urlLabel:'🎟 Tickets &amp; hours' },
@@ -275,7 +263,7 @@ const DAYS = {
     ]
   },
   d5: {
-    date: 'Sep 30', title: 'Wild Center + Tupper Lake',
+    date: '2026-09-30', title: 'Wild Center + Tupper Lake',
     badge: 'explore', badgeLabel: 'Explore',
     content: [
       { type:'drive', text:'~45 min drive to Tupper Lake · day trip from Lake Placid base',
@@ -292,7 +280,7 @@ const DAYS = {
     ]
   },
   d_oct1: {
-    date: 'Oct 1', title: 'Whiteface Veterans\' Memorial Highway',
+    date: '2026-10-01', title: 'Whiteface Veterans\' Memorial Highway',
     badge: 'hike', badgeLabel: 'Hike/Ride',
     content: [
       { type:'activity', icon:'🏔', title:'Whiteface Veterans\' Memorial Highway', sub:'Open through 12 Oct. Drive-up summit with the best foliage view in the Adirondacks. Summit is at least 10°F colder than the base — pack extra layers. Note: the gondola runs Fri–Sun only after 11 Sep; Oct 1 is a Thursday, so the highway is the right call.', url:'https://lakeplacidlegacysites.com/todo/whiteface-veterans-memorial-highway/' },
@@ -310,7 +298,7 @@ const DAYS = {
     ]
   },
   d6: {
-    date: 'Oct 2', title: 'Drive Lake Placid → Lake George (~1.5 hrs)',
+    date: '2026-10-02', title: 'Drive Lake Placid → Lake George (~1.5 hrs)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
       { type:'drive', text:'~70 miles · ~1.5 hrs · NY-73 E → I-87 S',
@@ -320,7 +308,7 @@ const DAYS = {
     ]
   },
   d7: {
-    date: 'Oct 3', title: 'Prospect Mountain + Lake George village',
+    date: '2026-10-03', title: 'Prospect Mountain + Lake George village',
     badge: 'explore', badgeLabel: 'Explore',
     content: [
       { type:'activity', icon:'🚗', title:'Prospect Mountain Veterans Memorial Highway', sub:'Drive-up summit (or hike if trail open). Sweeping 100-mile foliage view. Free to hike, small fee to drive.' },
@@ -329,7 +317,7 @@ const DAYS = {
     ]
   },
   d8: {
-    date: 'Oct 4', title: 'Drive Lake George → Watkins Glen (~5 hrs)',
+    date: '2026-10-04', title: 'Drive Lake George → Watkins Glen (~5 hrs)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
       { type:'drive', text:'~217 miles · ~5h05–5h15 · I-87 S → I-90 W → I-88 S → NY-414 S · Treat as a full transfer day',
@@ -339,7 +327,7 @@ const DAYS = {
     ]
   },
   d9: {
-    date: 'Oct 5', title: 'Watkins Glen Gorge Trail',
+    date: '2026-10-05', title: 'Watkins Glen Gorge Trail',
     badge: 'hike', badgeLabel: 'Hike',
     content: [
       { type:'activity', icon:'🏞', title:'Watkins Glen Gorge Trail', sub:'800 stone steps, 19 waterfalls, dramatic gorge walls. The best gorge hike in NY. Arrive early — gets busy. Note: the park shuttle runs weekends only after Sep 8 — Oct 5 is a Monday so no shuttle. Plan an out-and-back, not a full loop.', url:'https://parks.ny.gov/visit/state-parks/watkins-glen-state-park' },
@@ -358,7 +346,7 @@ const DAYS = {
     ]
   },
   d10: {
-    date: 'Oct 6', title: 'Taughannock Falls + Ithaca',
+    date: '2026-10-06', title: 'Taughannock Falls + Ithaca',
     badge: 'hike', badgeLabel: 'Hike',
     content: [
       { type:'activity', icon:'💧', title:'Taughannock Falls State Park',
@@ -370,7 +358,7 @@ const DAYS = {
     ]
   },
   d11: {
-    date: 'Oct 7', title: 'Drive Finger Lakes → New Paltz (~3 hrs)',
+    date: '2026-10-07', title: 'Drive Finger Lakes → New Paltz (~3 hrs)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
       { type:'drive', text:'~200 miles · ~3 hrs · I-86 E → NY-17 → I-87 S → Exit 18',
@@ -380,7 +368,7 @@ const DAYS = {
     ]
   },
   d12: {
-    date: 'Oct 8', title: 'Minnewaska State Park · Shawangunk Ridge',
+    date: '2026-10-08', title: 'Minnewaska State Park · Shawangunk Ridge',
     badge: 'hike', badgeLabel: 'Hike',
     content: [
       { type:'activity', icon:'🏔', title:'Minnewaska State Park Preserve', sub:'Sky Lakes, white conglomerate cliffs, incredible foliage. Reserve parking online in advance — fills up fast on weekends.', url:'https://parks.ny.gov/visit/state-parks/minnewaska-state-park-preserve' },
@@ -402,7 +390,7 @@ const DAYS = {
     ]
   },
   d13: {
-    date: 'Oct 9', title: 'Drive New Paltz → NJ (~1.5 hrs)',
+    date: '2026-10-09', title: 'Drive New Paltz → NJ (~1.5 hrs)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
       { type:'drive', text:'~90 miles · ~1.5 hrs · I-87 S → I-287 W',
