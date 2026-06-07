@@ -423,7 +423,7 @@ const RESOURCES = {
       icon: '✈️',
       title: 'Flights',
       items: [
-        { label: 'EL AL flight booking (EWR round-trip)', type: 'booking', priority: 'critical', status: 'pending' },
+        { label: 'EL AL flight booking (EWR round-trip)', type: 'booking', priority: 'critical', status: 'done', refNote: 'Flight tickets (iCloud)', refUrl: 'https://www.icloud.com/iclouddrive/0afUqBB17d_tyn1tZTOaAH50g#New_flight_tickets' },
         { label: 'ESTA — US visa waiver application', type: 'booking', priority: 'critical', status: 'pending', url: 'https://esta.cbp.dhs.gov/', notes: 'Apply at least 72 hrs before departure' },
         { label: 'Newark Airport (EWR) terminal map', type: 'info', priority: 'recommended', status: 'pending', url: 'https://www.newarkairport.com/maps-and-guides' },
         { label: 'EWR Rental Car Center — AirTrain directions', type: 'info', priority: 'recommended', status: 'pending', url: 'https://www.newarkairport.com/transportation/airport-car-rentals' },
@@ -448,7 +448,7 @@ const RESOURCES = {
       icon: '🏨',
       title: 'Hotels & Stays',
       items: [
-        { label: 'Lake Placid — Mirror Lake Inn or Main St motel', type: 'booking', priority: 'critical', status: 'pending', dates: 'Sep 27 – Oct 2', reservation_deadline: '2026-07-01' },
+        { label: 'Lake Placid — Mirror Lake Inn or Main St motel', type: 'booking', priority: 'critical', status: 'done', dates: 'Sep 27 – Oct 2', reservation_deadline: '2026-07-01', refNote: 'Accommodation booking (iCloud)', refUrl: 'https://www.icloud.com/iclouddrive/00cnF63Bkv2tFuED7Waq6EBfg#Lake_placid_accommodation_' },
         { label: 'Lake George — lakefront hotel (Columbus Day weekend!)', type: 'booking', priority: 'critical', status: 'pending', dates: 'Oct 2 – Oct 4', reservation_deadline: '2026-07-15' },
         { label: 'Watkins Glen — Seneca Lodge or lakeside inn', type: 'booking', priority: 'critical', status: 'pending', dates: 'Oct 4 – Oct 7', reservation_deadline: '2026-08-01' },
         { label: 'New Paltz — village hotel / B&B', type: 'booking', priority: 'critical', status: 'pending', dates: 'Oct 7 – Oct 9', reservation_deadline: '2026-08-01' },

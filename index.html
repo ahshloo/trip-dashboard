@@ -366,7 +366,7 @@
 </style>
 <!-- ?v= cache-buster: bump this whenever trip-data.js changes so browsers
      (notably iOS Safari on GitHub Pages) fetch the fresh data file -->
-<script src="trip-data.js?v=20260521"></script>
+<script src="trip-data.js?v=20260607"></script>
 </head>
 <body>
 
@@ -693,8 +693,8 @@ function renderResItem(item, sectionId, i) {
   if (item.reservation_deadline) subParts.push(`⚠️ Book by ${item.reservation_deadline}`);
   const sub = subParts.filter(Boolean).join(' · ');
 
-  const refNote = saved.refNote || '';
-  const refUrl  = saved.refUrl  || '';
+  const refNote = saved.refNote || item.refNote || '';
+  const refUrl  = saved.refUrl  || item.refUrl  || '';
   const hasRef  = !!(refNote || refUrl);
   const refLink = normalizeUrl(refUrl);
   const refView = hasRef
@@ -894,8 +894,8 @@ function exportTasks() {
         section: decodeEntities(sec.title),
         task: decodeEntities(item.label),
         status: st.status || item.status || 'pending',
-        reference: st.refNote || '',
-        link: st.refUrl || ''
+        reference: st.refNote || item.refNote || '',
+        link: st.refUrl || item.refUrl || ''
       });
     });
   });
