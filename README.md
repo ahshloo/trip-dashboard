@@ -149,11 +149,59 @@ to the device, survives reloads, and never leaves the browser. The
 
 ## Sharing with friends
 
-- **They want their own dashboard** → they click *Use this template*, write
-  their own trip file (or have an LLM write it), enable GitHub Pages.
-- **You're planning a trip together** → add a second trip file to *your*
-  repo's `trips/` folder and send them the `?trip=` link. Note that the
-  checklist state is per-device, not synced between people.
+There are two ways to share, and they behave very differently. The short
+version: **a templated/forked copy is fully independent — the owner of the
+original repo never sees it.** A trip only appears on *your* site if its
+file lives in *your* repo.
+
+### One-time setup for the repo owner
+
+1. Merge this code to `main`.
+2. Settings → **Pages** → deploy from the `main` branch (if not already on).
+3. Settings → **General** → tick **Template repository** — this adds the
+   green *Use this template* button friends will click.
+4. Share the repo URL.
+
+### Path A — a friend wants their own dashboard
+
+Friend's steps (needs a free GitHub account, no coding required if they use
+an LLM):
+
+1. Open your repo → click **Use this template** → *Create a new repository*.
+2. Write their trip file: copy `trips/upstate-ny-2026.js` to
+   `trips/<their-trip-id>.js` and replace the contents. Easiest route:
+   paste the example file + the schema section of this README + their rough
+   itinerary into Claude and ask for a trip file in the same format.
+3. Update `trips/manifest.js` to point at their file.
+4. Their repo → Settings → Pages → deploy from `main`.
+5. Their dashboard is live at `https://<their-username>.github.io/<repo>/`.
+
+You do nothing, and you see nothing — their copy is completely detached
+from yours. If they want your later improvements to the renderer, they have
+to pull them in themselves (GitHub's *Sync fork* button, for forks).
+
+### Path B — a trip hosted on *your* site
+
+For trips you plan together, or friends who don't want their own repo:
+
+1. The friend writes just the trip data file (step A2 above) and sends it
+   to you — or opens a pull request if they're comfortable with GitHub.
+2. You drop it into `trips/`, add a manifest entry, and push.
+3. Your homepage now shows a trip picker, and their trip is shareable at
+   `https://<you>.github.io/<repo>/?trip=<their-trip-id>`.
+
+Here you *do* see their itinerary — it's in your repo.
+
+### Who sees what
+
+| | Itinerary visible to you? | Checklist ticks shared? |
+|---|---|---|
+| Path A (their copy) | No — unless they send their link | No |
+| Path B (your repo) | Yes — the file is in your repo | No — ticks are per-device |
+
+Checklist progress never syncs between people or devices: it lives in each
+visitor's browser localStorage. The **Export tasks** button is the manual
+way to send someone a snapshot.
 
 ## Credits
 
