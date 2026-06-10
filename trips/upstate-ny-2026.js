@@ -70,6 +70,39 @@ route: [
   [40.6895,-74.1745]  // ★ EWR / NJ end
 ],
 
+// ── FLEX ROUTES (dashed on the map) ────────────────────────
+// Optional branches that only happen if the Niagara option is
+// chosen at the Oct 2–3 decision point. Rendered as dashed lines
+// in the Niagara region color.
+routesAlt: [
+  { label: 'Flex Oct 4: Watkins Glen → Niagara Falls (~2.5–3 hrs)', color: '#0EA5E9', points: [
+    [42.3806,-76.8733], // Watkins Glen
+    [42.87,-76.98],     // Geneva / NY-14 N
+    [43.00,-77.42],     // Victor / I-90 W
+    [43.02,-77.75],     // Rochester south
+    [43.00,-78.19],     // Batavia
+    [42.98,-78.74],     // Buffalo north / I-290
+    [43.02,-78.96],     // Grand Island / I-190 N
+    [43.0830,-79.0640]  // ★ NIAGARA FALLS
+  ]},
+  { label: 'Flex Oct 5: Niagara Falls → NJ (~6–6.5 hrs)', color: '#0EA5E9', points: [
+    [43.0830,-79.0640], // Niagara Falls
+    [42.90,-78.85],     // Buffalo / I-90 E
+    [43.00,-78.19],     // Batavia
+    [43.02,-77.75],     // Rochester
+    [43.05,-77.05],     // I-90 E past Geneva
+    [43.05,-76.15],     // Syracuse / I-81 S
+    [42.60,-76.18],     // Cortland
+    [42.10,-75.91],     // Binghamton
+    [41.41,-75.66],     // Scranton / I-380
+    [41.12,-75.36],     // Mt Pocono
+    [40.98,-75.19],     // Stroudsburg / I-80 E
+    [40.90,-74.70],     // Netcong, NJ
+    [40.86,-74.42],     // Parsippany / I-280
+    [40.6895,-74.1745]  // ★ Newark / NJ base
+  ]},
+],
+
 // ── MAP MARKERS — MAIN STOPS ───────────────────────────────
 // Always visible at any zoom: the trip's anchor locations.
 // color falls back to the region's color when omitted.
@@ -81,6 +114,7 @@ stops: [
   { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', regionId:'finger-lakes', title:'Ithaca / Cornell Botanic Gardens', dates:'Oct 3' },
   { lat:42.6958, lng:-74.3368, label:'HC', color:'#DC2626', regionId:'hudson',       title:'Howe Caverns',                     dates:'Oct 5' },
   { lat:41.7476, lng:-74.0868, label:'NP', color:'#DC2626', regionId:'hudson',       title:'New Paltz',                        dates:'Oct 5–7' },
+  { lat:43.0830, lng:-79.0640, label:'NF', color:'#0EA5E9', regionId:'niagara',      title:'Niagara Falls (flex option)',      dates:'Oct 4–5 · if chosen' },
 ],
 
 // ── MAP POIs — EVERYTHING ELSE ─────────────────────────────
@@ -129,7 +163,16 @@ pois: [
   { lat:42.4570, lng:-76.5110, tier:2, cat:'activity', icon:'🛥', name:'Cayuga Lake boat day',       area:'Ithaca, NY',      sub:'Pontoon rental or sightseeing cruise from the Ithaca waterfront. Relaxed on-the-water foliage day.', gq:'Cayuga Boat Rentals, Ithaca NY' },
   { lat:42.4180, lng:-76.9170, tier:2, cat:'activity', icon:'🐄', name:'Farm Sanctuary',             area:'Watkins Glen, NY', sub:'Guided farm-animal tours at the famous rescue sanctuary. Optional — book tour slot ahead.', url:'https://www.farmsanctuary.org/visit/', gq:'Farm Sanctuary, Watkins Glen NY' },
   { lat:42.4003, lng:-76.5594, tier:2, cat:'hike',     icon:'🏞', name:'Robert H. Treman State Park', area:'Ithaca, NY',     sub:'Enfield Glen gorge walk to 115-ft Lucifer Falls. Optional quieter alternative to Watkins Glen.', url:'https://parks.ny.gov/visit/state-parks/robert-h-treman-state-park' },
-  { lat:43.0830, lng:-79.0640, tier:2, cat:'scenic',   icon:'🌊', name:'Niagara Falls (flex option)', area:'Niagara Falls, NY', sub:'Optional 1-night add-on Oct 4–5, decided evening of Oct 2–3. Maid of the Mist, Cave of the Winds, Goat Island, night illumination.', url:'https://www.niagarafallsstatepark.com/' },
+
+  // — Niagara flex option (Oct 4–5, only if chosen) —
+  { lat:43.0856, lng:-79.0664, tier:2, cat:'activity', icon:'⛴', name:'Maid of the Mist',          area:'Niagara Falls, NY', sub:'Flex Oct 5 morning · Boat to the base of Horseshoe Falls, ponchos provided. Timed tickets online.', url:'https://www.maidofthemist.com/' },
+  { lat:43.0793, lng:-79.0743, tier:2, cat:'activity', icon:'💨', name:'Cave of the Winds',         area:'Niagara Falls, NY', sub:'Flex Oct 4 afternoon · Elevator 175 ft down to the Hurricane Deck below Bridal Veil Falls. You will get soaked.', url:'https://www.niagarafallsstatepark.com/attractions-and-tours/cave-of-the-winds' },
+  { lat:43.0786, lng:-79.0760, tier:2, cat:'scenic',   icon:'🏝', name:'Goat Island',               area:'Niagara Falls, NY', sub:'Flex Oct 5 · Terrapin Point panorama + Three Sisters Islands rapids. Free, stroller-friendly.', gq:'Goat Island, Niagara Falls State Park NY' },
+  { lat:43.0870, lng:-79.0680, tier:3, cat:'scenic',   icon:'🌈', name:'Night illumination (Prospect Point)', area:'Niagara Falls, NY', sub:'Flex Oct 4 evening · Falls lit in color nightly from dusk; some nights add fireworks.', url:'https://www.niagarafallsusa.com/' },
+  { lat:43.1369, lng:-79.0772, tier:3, cat:'activity', icon:'🦋', name:'Butterfly Conservatory',    area:'Niagara Falls, ON 🇨🇦', sub:'Option B (2nd night) only · 2,000+ free-flying butterflies. Canadian side — passports required.', url:'https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' },
+  { lat:43.1176, lng:-79.0686, tier:3, cat:'activity', icon:'🚡', name:'Whirlpool Aero Car',        area:'Niagara Falls, ON 🇨🇦', sub:'Option B (2nd night) only · 1916 cable car over the whirlpool rapids. Canadian side.', url:'https://www.niagaraparks.com/visit/attractions/whirlpool-aero-car/' },
+  { lat:43.0791, lng:-79.0789, tier:3, cat:'activity', icon:'🚇', name:'Journey Behind the Falls',  area:'Niagara Falls, ON 🇨🇦', sub:'Option B (2nd night) only · Tunnels behind the Horseshoe Falls curtain. Canadian side.', url:'https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' },
+  { lat:43.2557, lng:-79.0717, tier:3, cat:'scenic',   icon:'🍇', name:'Niagara-on-the-Lake',       area:'Niagara-on-the-Lake, ON 🇨🇦', sub:'Option B (2nd night) only · Beautiful historic town ~25 min north, surrounded by wineries (ice wine country).', gq:'Niagara-on-the-Lake, Ontario' },
 
   // — Finger Lakes: food —
   { lat:42.3838, lng:-76.8714, tier:3, cat:'food', icon:'🍷', name:'Graft Wine + Cider Bar',  area:'Watkins Glen, NY', sub:'Farm-to-table, all local. Best sit-down dinner in town.', url:'https://www.graftwineciderbar.com/' },
@@ -246,6 +289,17 @@ regions: [
       ]
     },
     days: ['d7', 'd8', 'd9', 'd10', 'd15']
+  },
+  {
+    id: 'niagara',
+    emoji: '🌊',
+    title: 'Niagara Falls · Flex Option',
+    navLabel: 'Niagara (flex)',
+    color: '#0EA5E9',
+    dates: 'Oct 4–5 · only if chosen',
+    weather: { name: 'Niagara Falls, NY', lat: 43.0962, lon: -79.0377 },
+    infoCard: null,
+    days: ['d16', 'd17']
   },
   {
     id: 'hudson',
@@ -445,7 +499,32 @@ days: {
       { type:'activity', icon:'🌊', title:'Relaxed lake time', sub:'No agenda after the boat. Taughannock Falls beach area or Myers Park in Lansing for shoreline lounging, playground and snacks. This day exists to NOT cram activities.' },
       { type:'activity', icon:'🐄', title:'Farm Sanctuary', tag:'optional', sub:'Watkins Glen · Guided tours of the famous farm-animal rescue — very kid-friendly. Sunday tours run in October; check schedule and book ahead.', url:'https://www.farmsanctuary.org/visit/' },
       { type:'activity', icon:'🏞', title:'Robert H. Treman State Park', tag:'optional', sub:'~15 min from Ithaca · Enfield Glen gorge walk to 115-ft Lucifer Falls. Only if everyone still wants one more gorge — skipping it is fine.', url:'https://parks.ny.gov/visit/state-parks/robert-h-treman-state-park' },
-      { type:'activity', icon:'🌊', title:'Niagara version of this day', tag:'optional', sub:'If the Niagara option was chosen on Oct 2–3: check out this morning instead, drive ~2.5 hrs to Niagara Falls (1 night). Maid of the Mist, Cave of the Winds, Goat Island, night illumination. Then Oct 5 straight to NJ (~6.5 hrs, optionally one Hudson Valley stop en route) — the New Paltz leg is skipped.' },
+      { type:'activity', icon:'🌊', title:'Niagara version of this day', tag:'optional', sub:'If the Niagara option was chosen on Oct 2–3, this whole day is replaced — see the dedicated "Niagara Falls · Flex Option" card below for the full plan (drive, Maid of the Mist, Cave of the Winds, Goat Island, illumination, overnight, and the Oct 5 drive to NJ).' },
+    ]
+  },
+  d16: {
+    date: '2026-10-04', title: 'FLEX Day 1: Watkins Glen → Niagara Falls',
+    badge: 'drive', badgeLabel: 'Flex Option',
+    content: [
+      { type:'activity', icon:'🌀', title:'Only if chosen on the Oct 2–3 decision point', sub:'This card activates only if the family said YES in the Finger Lakes: still excited, kids handling hotels well, weather favorable, not yet waterfalled-out. Otherwise ignore it — the base plan (Oct 4 lake day, Oct 5–7 New Paltz) stands. One night is the right dose; see Option B below for when two would make sense.' },
+      { type:'drive', text:'~150 miles · ~2.5–3 hrs · NY-14 N → I-90 W → I-190 N · Leave Watkins Glen in the morning, arrive early afternoon',
+        route:{ from:'Watkins Glen, NY', to:'Niagara Falls State Park, Niagara Falls, NY' } },
+      { type:'activity', icon:'🌊', title:'Niagara Falls afternoon', sub:'Check in, then walk into the state park for the first look from Prospect Point. Park the car once — everything on the NY side is walkable from the falls-adjacent hotels.' },
+      { type:'activity', icon:'💨', title:'Cave of the Winds', sub:'Elevator 175 ft down, then wooden walkways to the Hurricane Deck at the base of Bridal Veil Falls. You WILL get soaked — sandals and ponchos provided. Check fall operating status before counting on it.', url:'https://www.niagarafallsstatepark.com/attractions-and-tours/cave-of-the-winds' },
+      { type:'activity', icon:'🌈', title:'Illuminated falls at night', sub:'The falls are lit in color every night from dusk — visible from Prospect Point, a short walk from the NY-side hotels. Fireworks run some fall evenings; check the schedule.', url:'https://www.niagarafallsusa.com/' },
+      { type:'activity', icon:'🏨', title:'Sleep Niagara Falls (NY side)', sub:'One night. Book a hotel walkable to the state park so the illumination is a stroll, not a drive. Book only once the decision is made — keep it refundable.' },
+    ]
+  },
+  d17: {
+    date: '2026-10-05', title: 'FLEX Day 2: Maid of the Mist → NJ',
+    badge: 'drive', badgeLabel: 'Flex Option',
+    content: [
+      { type:'activity', icon:'⛴', title:'Maid of the Mist', sub:'First boats of the morning have the shortest lines. The classic ride to the base of Horseshoe Falls — ponchos provided, kids love it. Runs into early November, weather permitting. Timed tickets online.', url:'https://www.maidofthemist.com/' },
+      { type:'activity', icon:'🏝', title:'Goat Island walk', sub:'Stroller-friendly paths between the American and Horseshoe Falls: Terrapin Point for the big panorama, Three Sisters Islands for rapids up close. Free.' },
+      { type:'activity', icon:'🍽', title:'Lunch before the drive', sub:'Eat properly in Niagara Falls before setting out — it\'s the longest drive of the trip and a good meal buys quiet miles.' },
+      { type:'drive', text:'~400 miles · ~6–6.5 hrs · I-90 E → I-81 S → I-380/I-80 E · The New Paltz leg is skipped — cancel that hotel. Plan two proper breaks (Syracuse and Scranton areas split it in thirds).',
+        route:{ from:'Niagara Falls, NY', to:'Newark, NJ' } },
+      { type:'activity', icon:'🇨🇦', title:'Option B: a 2nd Niagara night?', tag:'optional', sub:'Only makes sense if you add the Canadian side: Butterfly Conservatory, Whirlpool Aero Car, Journey Behind the Falls, Niagara-on-the-Lake (beautiful town) and winery visits. Needs passports + border crossing both ways with kids, and pushes NJ arrival to Oct 6. For this trip, 1 night is the recommended dose — treat Option B as a stretch goal, not the default.' },
     ]
   },
   d11: {
