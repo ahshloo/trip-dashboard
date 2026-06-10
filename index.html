@@ -7,17 +7,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0f172a">
-<title>Upstate NY Family Foliage 2026</title>
+<title>Trip Dashboard</title>
 <!-- Leaflet — primary CDN (jsDelivr is faster/more reliable on mobile than unpkg) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
 <style>
   :root {
-    --nj: #D97706;
-    --adirondacks: #059669;
-    --lake-george: #0284C7;
-    --finger-lakes: #7C3AED;
-    --hudson: #DC2626;
     --bg: #0f172a;
     --card: #1e293b;
     --card2: #334155;
@@ -51,11 +46,6 @@
     min-height: 44px; display: flex; align-items: center; /* 44px Apple tap target minimum */
   }
   nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.1); }
-  nav a.nj { border-bottom: 2px solid var(--nj); }
-  nav a.adk { border-bottom: 2px solid var(--adirondacks); }
-  nav a.lg { border-bottom: 2px solid var(--lake-george); }
-  nav a.fl { border-bottom: 2px solid var(--finger-lakes); }
-  nav a.hv { border-bottom: 2px solid var(--hudson); }
 
   /* ── LAYOUT ── */
   .page { padding-top: 48px; display: flex; flex-direction: column; min-height: 100vh; }
@@ -348,6 +338,20 @@
   /* ── FOOTER ── */
   footer { text-align: center; padding: 24px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); }
 
+  /* ── TRIP PICKER (landing page when several trips exist) ── */
+  #trip-picker { max-width: 560px; margin: 0 auto; padding: 48px 16px 64px; }
+  #trip-picker h1 { font-size: 22px; margin-bottom: 6px; }
+  #trip-picker .picker-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+  .trip-card {
+    display: block; background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; margin-bottom: 12px;
+    text-decoration: none; color: var(--text); transition: border-color .2s, background .2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .trip-card:hover { background: var(--card2); border-color: var(--muted); }
+  .trip-card .trip-title { font-size: 16px; font-weight: 700; }
+  .trip-card .trip-dates { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
   /* ── CUSTOM MAP MARKERS ── */
   .marker-main {
     width: 34px; height: 34px; border-radius: 50%;
@@ -391,37 +395,24 @@
   .drive-bar .drive-text { flex: 1; min-width: 60%; }
   .drive-bar .nav-btn { margin-left: auto; }
 </style>
-<!-- ?v= cache-buster: bump this whenever trip-data.js changes so browsers
-     (notably iOS Safari on GitHub Pages) fetch the fresh data file -->
-<script src="trip-data.js?v=20260610"></script>
+<!-- Trip manifest: the list of available trips. The trip data file
+     itself is loaded dynamically based on the ?trip= URL param. -->
+<script src="trips/manifest.js"></script>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#map-section">🗺 Map</a>
-  <a href="#calendar">📅 Calendar</a>
-  <a href="#nj" class="nj">NJ</a>
-  <a href="#adirondacks" class="adk">Adirondacks</a>
-  <a href="#finger-lakes" class="fl">Finger Lakes</a>
-  <a href="#hudson" class="hv">Hudson Valley</a>
-  <a href="#logistics">✅ Checklist</a>
-</nav>
+<!-- NAV (links generated from the trip's regions) -->
+<nav></nav>
+
+<!-- Landing page shown when several trips exist and none is selected -->
+<section id="trip-picker" hidden></section>
 
 <div class="page">
 
 <!-- ═══════════════ MAP ═══════════════ -->
 <section id="map-section">
   <div id="map"></div>
-  <div class="map-legend">
-    <h4>Legend</h4>
-    <div class="leg-row"><div class="leg-dot" style="background:var(--nj)"></div> NJ / EWR</div>
-    <div class="leg-row"><div class="leg-dot" style="background:var(--adirondacks)"></div> Adirondacks</div>
-    <div class="leg-row"><div class="leg-dot" style="background:var(--finger-lakes)"></div> Finger Lakes</div>
-    <div class="leg-row"><div class="leg-dot" style="background:var(--hudson)"></div> Hudson Valley</div>
-    <div class="leg-row"><div class="leg-dot" style="background:#475569"></div> Activities <span style="color:var(--muted)">(zoom in)</span></div>
-    <div class="leg-row"><div class="leg-dot" style="background:#b45309"></div> Food <span style="color:var(--muted)">(zoom in more)</span></div>
-  </div>
+  <div class="map-legend"></div>
   <div class="scroll-hint" onclick="document.getElementById('itinerary').scrollIntoView({behavior:'smooth'})">
     📅 See day-by-day ↓
   </div>
@@ -436,19 +427,23 @@
 <!-- ═══════════════ LOGISTICS / CHECKLIST ═══════════════ -->
 <section id="logistics"></section>
 
-<footer>Upstate NY Family Foliage 2026 · Sep 27 – Oct 15 · Built with ❤️ for the Ofek family</footer>
+<footer></footer>
 
 </div><!-- .page -->
 
 <script>
 // ══════════════════════════════════════
-// RENDERING  (reads from trip-data.js)
+// RENDERING  (reads window.TRIP_DATA, loaded per-trip by the
+// bootstrap at the bottom of this file)
 // ══════════════════════════════════════
+
+// Filled in by initDashboard() once the trip data file has loaded.
+let META, TRIP, ROUTE, STOPS, POIS, REGIONS, DAYS, QUICK_LINKS, RESOURCES;
 
 const AT_SVG = `<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
 
 // ── DATES ──────────────────────────────────────────────────
-// Days in trip-data.js carry ISO yyyy-mm-dd dates. These helpers
+// Days in the trip data carry ISO yyyy-mm-dd dates. These helpers
 // turn them into display strings without any timezone surprises
 // (Date is built from explicit y/m/d parts, so it stays local).
 const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -572,9 +567,9 @@ function renderRegion(region) {
   const wxChip = region.weather
     ? `<span class="wx-chip" id="wxchip-${region.id}">🌡️ …</span>`
     : '';
-  const header = `<div id="${region.id}" class="region-header" style="border-color:var(${region.colorVar})">
+  const header = `<div id="${region.id}" class="region-header" style="border-color:${region.color}">
     <span style="font-size:24px">${region.emoji}</span>
-    <h2 style="color:var(${region.colorVar})">${region.title}</h2>
+    <h2 style="color:${region.color}">${region.title}</h2>
     <span class="dates">${region.dates}</span>
     ${wxChip}
   </div>`;
@@ -610,13 +605,13 @@ function renderMonthGrid(year, month, idx, start, end) {
     const dayId = idx.dateToDay[iso];
     if (dayId) {
       const region = idx.dayToRegion[dayId];
-      const colorVar = region ? region.colorVar : '--border';
+      const color = region ? region.color : 'var(--border)';
       const day = DAYS[dayId];
       const title = day.title.replace(/"/g, '&quot;');
-      cells += `<div class="cal-cell cal-trip" style="border-color:var(${colorVar})"
+      cells += `<div class="cal-cell cal-trip" style="border-color:${color}"
           onclick="goToDay('${dayId}')" title="${title}">
         <span class="cal-num">${d}</span>
-        <span class="cal-dot" style="background:var(${colorVar})"></span>
+        <span class="cal-dot" style="background:${color}"></span>
       </div>`;
     } else {
       const inRange = cur >= start && cur <= end;
@@ -661,18 +656,28 @@ function goToDay(id) {
 
 // ── TASK STATE (localStorage) ──────────────────────────────
 // Done-state and booking references survive a page reload by living
-// in localStorage, keyed by each item's stable `key` from trip-data.js.
-// (v2: simplified pending/reserved/done cycle to a one-tap done toggle.)
-const TASK_STORE_KEY = 'trip-dashboard-tasks-v2';
+// in localStorage, keyed by each item's stable `key` from the trip
+// data. The store is namespaced per trip (meta.id) so several trips
+// on the same domain keep separate checklist state.
+let TASK_STORE_KEY = null;
+let TASK_STATE = {};
 function loadTaskState() {
-  try { return JSON.parse(localStorage.getItem(TASK_STORE_KEY)) || {}; }
+  try {
+    const saved = localStorage.getItem(TASK_STORE_KEY);
+    if (saved) return JSON.parse(saved) || {};
+    // One-time migration from a pre-multi-trip storage key.
+    if (META.legacyTaskKey) {
+      const legacy = localStorage.getItem(META.legacyTaskKey);
+      if (legacy) return JSON.parse(legacy) || {};
+    }
+    return {};
+  }
   catch (e) { console.warn('Could not read saved tasks:', e); return {}; }
 }
 function saveTaskState() {
   try { localStorage.setItem(TASK_STORE_KEY, JSON.stringify(TASK_STATE)); }
   catch (e) { console.warn('Could not save tasks:', e); }
 }
-let TASK_STATE = loadTaskState();
 
 function escapeHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -792,8 +797,8 @@ function renderResources() {
   const filters = [['open', 'To do'], ['done', 'Done'], ['all', 'All']].map(([f, label]) =>
     `<button class="res-filter${RES_FILTER === f ? ' active' : ''}" onclick="setResFilter('${f}')">${label}</button>`
   ).join('');
-  const foliage = (typeof FOLIAGE_LINKS !== 'undefined' && FOLIAGE_LINKS.length)
-    ? `<div class="quick-links">🍂 Foliage check: ` + FOLIAGE_LINKS.map(l =>
+  const quickLinks = (QUICK_LINKS && QUICK_LINKS.length)
+    ? `<div class="quick-links">${META.quickLinksLabel || '🔗 Links:'} ` + QUICK_LINKS.map(l =>
         `<a href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join(' · ') + `</div>`
     : '';
   const sections = RESOURCES.sections.map(renderResSection).join('');
@@ -806,7 +811,7 @@ function renderResources() {
       <h2>Trip Checklist</h2>
       <button class="res-export" onclick="exportTasks()">⬇ Export tasks</button>
     </div>
-    ${foliage}
+    ${quickLinks}
     <div class="res-progress">
       <div class="res-progress-label"><span>${doneTotal} of ${total} done</span><span>${pct}%</span></div>
       <div class="res-progress-bar"><div class="res-progress-fill" style="width:${pct}%"></div></div>
@@ -859,19 +864,72 @@ async function loadWeatherChip(el, loc) {
   }
 }
 
-// Render everything synchronously so the DOM is ready for the map observer
-safeRender('calendar', renderCalendar);
-safeRender('itinerary', renderItinerary);
-safeRender('resources', renderResources);
+// ── CHROME (nav / legend / footer — generated from trip data) ──
+function renderNav() {
+  const regionLinks = REGIONS.map(r =>
+    `<a href="#${r.id}" style="border-bottom:2px solid ${r.color}">${r.navLabel || r.title}</a>`
+  ).join('');
+  document.querySelector('nav').innerHTML =
+    `<a href="#map-section">🗺 Map</a>
+     <a href="#calendar">📅 Calendar</a>
+     ${regionLinks}
+     <a href="#logistics">✅ Checklist</a>`;
+}
 
-// Kick off the live "now" weather chips (async, fire-and-forget)
-safeRender('weather-chips', function () {
-  REGIONS.forEach(function (r) {
-    if (!r.weather) return;
-    const chip = document.getElementById('wxchip-' + r.id);
-    if (chip) loadWeatherChip(chip, r.weather);
+function renderLegend() {
+  const regionRows = REGIONS.map(r =>
+    `<div class="leg-row"><div class="leg-dot" style="background:${r.color}"></div> ${r.navLabel || r.title}</div>`
+  ).join('');
+  const hasTier2 = POIS.some(p => p.tier === 2);
+  const hasTier3 = POIS.some(p => p.tier === 3);
+  const poiRows =
+    (hasTier2 ? `<div class="leg-row"><div class="leg-dot" style="background:#475569"></div> Activities <span style="color:var(--muted)">(zoom in)</span></div>` : '') +
+    (hasTier3 ? `<div class="leg-row"><div class="leg-dot" style="background:#b45309"></div> Food <span style="color:var(--muted)">(zoom in more)</span></div>` : '');
+  document.querySelector('.map-legend').innerHTML = `<h4>Legend</h4>${regionRows}${poiRows}`;
+}
+
+function renderFooter() {
+  document.querySelector('footer').textContent = META.footer || META.title;
+}
+
+// ── DASHBOARD BOOT (called once the trip data file has loaded) ──
+function initDashboard(data) {
+  META        = data.meta;
+  TRIP        = { start: META.start, end: META.end };
+  ROUTE       = data.route      || [];
+  STOPS       = data.stops      || [];
+  POIS        = data.pois       || [];
+  REGIONS     = data.regions    || [];
+  DAYS        = data.days       || {};
+  QUICK_LINKS = data.quickLinks || [];
+  RESOURCES   = data.resources  || { sections: [] };
+
+  document.title = META.title;
+  TASK_STORE_KEY = 'trip-tasks-' + META.id;
+  TASK_STATE = loadTaskState();
+
+  // In case the picker was shown before this trip finished loading
+  document.getElementById('trip-picker').hidden = true;
+  document.querySelector('.page').style.display = '';
+  document.querySelector('nav').style.display = '';
+
+  safeRender('nav',       renderNav);
+  safeRender('legend',    renderLegend);
+  safeRender('footer',    renderFooter);
+  safeRender('calendar',  renderCalendar);
+  safeRender('itinerary', renderItinerary);
+  safeRender('resources', renderResources);
+  safeRender('map',       initMap);
+
+  // Kick off the live "now" weather chips (async, fire-and-forget)
+  safeRender('weather-chips', function () {
+    REGIONS.forEach(function (r) {
+      if (!r.weather) return;
+      const chip = document.getElementById('wxchip-' + r.id);
+      if (chip) loadWeatherChip(chip, r.weather);
+    });
   });
-});
+}
 
 // ══════════════════════════════════════
 // NON-MAP UTILS (work without Leaflet)
@@ -881,14 +939,11 @@ function toggle(id) {
 }
 
 function hikeTab(prefix, tab) {
-  ['base','upgrade','stretch'].forEach(t => {
-    const el = document.getElementById(`${prefix}-${t}`);
-    if (el) el.classList.remove('active');
-  });
   const target = document.getElementById(`${prefix}-${tab}`);
   if (!target) return;
-  target.classList.add('active');
   const card = target.closest('.hike-tabs');
+  card.querySelectorAll('.hike-option').forEach(el => el.classList.remove('active'));
+  target.classList.add('active');
   card.querySelectorAll('.htab').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${tab}'`));
   });
@@ -973,10 +1028,11 @@ function riTab(region, tab) {
 }
 
 // ══════════════════════════════════════
-// MAP — initialise only after window load
-// so the Leaflet <script> is guaranteed done
+// MAP — called from initDashboard. Leaflet loads synchronously in
+// <head>, so by the time the trip data arrives it is either present
+// or its CDN failed (handled below).
 // ══════════════════════════════════════
-window.addEventListener('load', function () {
+function initMap() {
 
   if (typeof L === 'undefined') {
     // Leaflet CDN failed — show a friendly fallback inside the map div
@@ -996,7 +1052,14 @@ window.addEventListener('load', function () {
     zoomControl: true,
     tap: true,          // enable tap handler on iOS
     tapTolerance: 15    // more forgiving touch on phones
-  }).setView([42.8, -74.5], 7);
+  });
+
+  // Auto-fit the view to this trip's geography (route + stops + POIs).
+  const points = ROUTE
+    .concat(STOPS.map(s => [s.lat, s.lng]))
+    .concat(POIS.map(p => [p.lat, p.lng]));
+  if (points.length) map.fitBounds(L.latLngBounds(points), { padding: [30, 30] });
+  else map.setView([39, -98], 4);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors © <a href="https://carto.com/">CARTO</a>',
@@ -1008,7 +1071,7 @@ window.addEventListener('load', function () {
   // Force a size recalculation in case the container dimensions weren't final at init time
   setTimeout(() => map.invalidateSize(), 200);
 
-  // ── ROUTE & MARKERS (from trip-data.js) ──
+  // ── ROUTE & MARKERS (from the trip data) ──
   L.polyline(ROUTE, { color:'#1E40AF', weight:4, opacity:0.85, smoothFactor:1 }).addTo(map);
 
   // Every popup gets a one-tap handoff into the native Google Maps app.
@@ -1019,8 +1082,10 @@ window.addEventListener('load', function () {
 
   // Main trip stops — always visible, give the zoomed-out overview.
   STOPS.forEach(s => {
+    const region = REGIONS.find(r => r.id === s.regionId);
+    const color = s.color || (region && region.color) || '#475569';
     const icon = L.divIcon({
-      html: `<div class="marker-main" style="background:${s.color}">${s.label}</div>`,
+      html: `<div class="marker-main" style="background:${color}">${s.label}</div>`,
       className: '', iconSize: [34,34], iconAnchor: [17,17], popupAnchor: [0,-20]
     });
     L.marker([s.lat, s.lng], { icon })
@@ -1063,7 +1128,7 @@ window.addEventListener('load', function () {
   updatePoiLayers();
 
   // ── NAV ACTIVE STATE ──
-  const sections = ['map-section','calendar','nj','adirondacks','finger-lakes','hudson','logistics'];
+  const sections = ['map-section','calendar'].concat(REGIONS.map(r => r.id), ['logistics']);
   const navLinks = document.querySelectorAll('nav a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -1079,7 +1144,54 @@ window.addEventListener('load', function () {
     if (el) observer.observe(el);
   });
 
-}); // end window load
+} // end initMap
+
+// ══════════════════════════════════════
+// BOOTSTRAP — pick a trip from the manifest, load its data file,
+// then render. URL form: index.html?trip=<id>. With a single trip
+// in the manifest it loads directly; with several and no ?trip
+// param, a picker landing page is shown instead.
+// ══════════════════════════════════════
+function showTripPicker(trips, message) {
+  document.querySelector('.page').style.display = 'none';
+  document.querySelector('nav').style.display = 'none';
+  const picker = document.getElementById('trip-picker');
+  const cards = trips.map(t => `
+    <a class="trip-card" href="?trip=${encodeURIComponent(t.id)}">
+      <div class="trip-title">${t.title}</div>
+      <div class="trip-dates">${t.dates || ''}</div>
+    </a>`).join('');
+  picker.innerHTML = `
+    <h1>🧳 Trip Dashboards</h1>
+    <div class="picker-sub">${message || 'Pick a trip to open its map, itinerary and checklist.'}</div>
+    ${cards || '<div class="picker-sub">No trips in trips/manifest.js yet — see the README to add one.</div>'}`;
+  picker.hidden = false;
+}
+
+(function bootstrap() {
+  const trips = (typeof TRIPS_MANIFEST !== 'undefined' && TRIPS_MANIFEST) || [];
+  const requested = new URLSearchParams(location.search).get('trip');
+  const entry = requested
+    ? trips.find(t => t.id === requested)
+    : (trips.length === 1 ? trips[0] : null);
+
+  if (!entry) {
+    const msg = requested ? `No trip called “${requested}” — pick one below.` : '';
+    showTripPicker(trips, msg);
+    return;
+  }
+
+  const s = document.createElement('script');
+  s.src = entry.file + (entry.v ? '?v=' + entry.v : '');
+  s.onload = function () {
+    if (window.TRIP_DATA) initDashboard(window.TRIP_DATA);
+    else showTripPicker(trips, `“${entry.title}” didn't define window.TRIP_DATA — check ${entry.file}.`);
+  };
+  s.onerror = function () {
+    showTripPicker(trips, `Couldn't load ${entry.file} — check trips/manifest.js.`);
+  };
+  document.head.appendChild(s);
+})();
 </script>
 </body>
 </html>

@@ -1,15 +1,30 @@
 // ─────────────────────────────────────────────────────────────
-//  TRIP DATA  –  edit this file to change days, regions, etc.
-//  index.html reads this and renders everything automatically.
+//  TRIP DATA  –  Upstate NY Family Foliage 2026
+//  index.html reads window.TRIP_DATA and renders everything.
+//  Schema reference: see README.md. To add a new trip, copy this
+//  file, change everything, and register it in trips/manifest.js.
 // ─────────────────────────────────────────────────────────────
+window.TRIP_DATA = {
 
-// ── TRIP SPAN ──────────────────────────────────────────────
-// Overall trip window (ISO dates). Drives the calendar view's
-// month range and the in-range day shading.
-const TRIP = { start: '2026-09-25', end: '2026-10-15' };
+// ── META ───────────────────────────────────────────────────
+// id        — unique slug; namespaces saved checklist state
+// start/end — overall trip window (ISO dates). Drives the
+//             calendar's month range and in-range day shading.
+// quickLinksLabel — prefix shown before the quickLinks row
+// legacyTaskKey   — (optional) old localStorage key to migrate
+meta: {
+  id: 'upstate-ny-2026',
+  title: 'Upstate NY Family Foliage 2026',
+  footer: 'Upstate NY Family Foliage 2026 · Sep 27 – Oct 15 · Built with ❤️ for the Ofek family',
+  start: '2026-09-25',
+  end: '2026-10-15',
+  quickLinksLabel: '🍂 Foliage check:',
+  legacyTaskKey: 'trip-dashboard-tasks-v2',
+},
 
 // ── MAP ROUTE (lat/lng pairs) ──────────────────────────────
-const ROUTE = [
+// The map auto-fits to the route + stops, so no center/zoom needed.
+route: [
   [40.6895,-74.1745], // EWR / NJ start
   [40.77,-74.07],     // NJ Turnpike north
   [40.85,-73.96],     // George Washington Bridge
@@ -53,11 +68,12 @@ const ROUTE = [
   [40.85,-73.96],     // GWB
   [40.77,-74.07],     // back into NJ
   [40.6895,-74.1745]  // ★ EWR / NJ end
-];
+],
 
 // ── MAP MARKERS — MAIN STOPS ───────────────────────────────
 // Always visible at any zoom: the trip's anchor locations.
-const STOPS = [
+// color falls back to the region's color when omitted.
+stops: [
   { lat:40.6895, lng:-74.1745, label:'NJ', color:'#D97706', regionId:'nj',           title:'NJ Family Base / EWR',            dates:'Oct 7–15' },
   { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', regionId:'adirondacks',  title:'Lake Placid / Mirror Lake',        dates:'Sep 25 – 30' },
   { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', regionId:'finger-lakes', title:'Watkins Glen State Park',          dates:'Sep 30 – Oct 4' },
@@ -65,14 +81,14 @@ const STOPS = [
   { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', regionId:'finger-lakes', title:'Ithaca / Cornell Botanic Gardens', dates:'Oct 3' },
   { lat:42.6958, lng:-74.3368, label:'HC', color:'#DC2626', regionId:'hudson',       title:'Howe Caverns',                     dates:'Oct 4' },
   { lat:41.7476, lng:-74.0868, label:'NP', color:'#DC2626', regionId:'hudson',       title:'New Paltz',                        dates:'Oct 4–7' },
-];
+],
 
 // ── MAP POIs — EVERYTHING ELSE ─────────────────────────────
 // tier 2 appears from zoom 9 (day-trip activities, hikes, optional
 // stops); tier 3 from zoom 11 (restaurants, in-town spots).
 // cat drives the marker colour: activity | hike | scenic | food
 // gq (optional) overrides the Google-Maps search query.
-const POIS = [
+pois: [
   // — Arrival-day & drive stops —
   { lat:43.0790, lng:-73.7850, tier:2, cat:'activity', icon:'🎠', name:'Saratoga Springs stop',        area:'Saratoga Springs, NY', sub:'Arrival-day break: Congress Park, lunch on Broadway, Target for supplies.', gq:'Congress Park, Saratoga Springs, NY' },
   { lat:43.0760, lng:-73.7900, tier:3, cat:'activity', icon:'🏛', name:'Children\'s Museum at Saratoga', area:'Saratoga Springs, NY', sub:'65 S Broadway · $14/person, ages 0–10. Arrival-day or rainy-day backup.' },
@@ -142,17 +158,20 @@ const POIS = [
   { lat:40.7430, lng:-74.1720, tier:2, cat:'activity', icon:'🏛', name:'The Newark Museum of Art', area:'Newark, NJ',       sub:'Thu–Sun 12–5pm, $10/adult. Fully accessible.' },
   { lat:40.7660, lng:-74.1730, tier:2, cat:'scenic',   icon:'🌳', name:'Branch Brook Park',        area:'Newark, NJ',       sub:'Free, dawn–10pm. Easy leg-stretch for all ages.' },
   { lat:40.7040, lng:-74.0550, tier:2, cat:'activity', icon:'🗽', name:'Statue of Liberty ferry',  area:'Jersey City, NJ',  sub:'Liberty State Park terminal. Best as a half-day.', gq:'Liberty State Park ferry terminal, Jersey City NJ' },
-];
+],
 
 // ── REGIONS ────────────────────────────────────────────────
-// Each region has: id, emoji, title, colorVar (CSS var name),
-// dates, infoCard (or null), and an ordered list of day ids.
-const REGIONS = [
+// Each region has: id, emoji, title, navLabel (short name for the
+// top nav + map legend), color (hex — used for the nav underline,
+// region header, calendar dots and stop markers), dates,
+// weather (or omit), infoCard (or null), and an ordered list of day ids.
+regions: [
   {
     id: 'nj',
     emoji: '🏠',
     title: 'NJ Family Base',
-    colorVar: '--nj',
+    navLabel: 'NJ',
+    color: '#D97706',
     dates: 'Oct 7 – 15',
     weather: { name: 'Newark, NJ', lat: 40.7357, lon: -74.1724 },
     infoCard: {
@@ -173,7 +192,8 @@ const REGIONS = [
     id: 'adirondacks',
     emoji: '🏔',
     title: 'Adirondacks · Lake Placid',
-    colorVar: '--adirondacks',
+    navLabel: 'Adirondacks',
+    color: '#059669',
     dates: 'Sep 25–30',
     weather: { name: 'Lake Placid, NY', lat: 44.2795, lon: -73.9799 },
     infoCard: {
@@ -199,7 +219,8 @@ const REGIONS = [
     id: 'finger-lakes',
     emoji: '🍷',
     title: 'Finger Lakes',
-    colorVar: '--finger-lakes',
+    navLabel: 'Finger Lakes',
+    color: '#7C3AED',
     dates: 'Sep 30 – Oct 4',
     weather: { name: 'Watkins Glen, NY', lat: 42.3806, lon: -76.8733 },
     infoCard: {
@@ -226,7 +247,8 @@ const REGIONS = [
     id: 'hudson',
     emoji: '🍂',
     title: 'Hudson Valley · Catskills',
-    colorVar: '--hudson',
+    navLabel: 'Hudson Valley',
+    color: '#DC2626',
     dates: 'Oct 4 – Oct 7',
     weather: { name: 'New Paltz, NY', lat: 41.7476, lon: -74.0868 },
     infoCard: {
@@ -248,7 +270,7 @@ const REGIONS = [
     },
     days: ['d11', 'd12', 'd13', 'd14']
   }
-];
+],
 
 // ── DAYS ───────────────────────────────────────────────────
 // Each day has a `date` in ISO yyyy-mm-dd form — the single source
@@ -270,7 +292,7 @@ const REGIONS = [
 //   tabs   — array of { id, label, active?, title, desc?, note?, stats[], url }
 //     desc  — appended inline to title: "<strong>title</strong>desc"
 //     note  — rendered as a separate <p> below stats (no note → <br>)
-const DAYS = {
+days: {
   d1: {
     date: '2026-09-25', title: 'Arrive EWR → Lake Placid (~5 hrs)',
     badge: 'drive', badgeLabel: 'Drive',
@@ -461,15 +483,15 @@ const DAYS = {
       { type:'activity', icon:'🏠', title:'Return to NJ family base', sub:'Oct 7–15 wind-down and family time. A Lake George reunion weekend (~Oct 10–12) makes an easy excursion from here before the EWR departure.' },
     ]
   },
-};
+},
 
 // ── QUICK LINKS ────────────────────────────────────────────
-// Compact links shown at the top of the checklist — replaces the
-// old Foliage Tracking and Live Weather sections.
-const FOLIAGE_LINKS = [
+// Compact links shown at the top of the checklist, prefixed by
+// meta.quickLinksLabel. Omit (or leave empty) to hide the row.
+quickLinks: [
   { label: 'I LOVE NY foliage report', url: 'https://www.iloveny.com/things-to-do/fall/foliage-report/' },
   { label: 'Predictive foliage map', url: 'https://smokymountains.com/fall-foliage-map/' },
-];
+],
 
 // ── RESOURCES (trip checklist) ─────────────────────────────
 // Each section has: id, icon, title, intro (optional), items[]
@@ -483,7 +505,7 @@ const FOLIAGE_LINKS = [
 //   dates        — (optional) e.g. "Sep 27 – Oct 2"
 //   notes        — (optional) sub-text hint
 //   reservation_deadline — (optional) e.g. "2026-08-01"
-const RESOURCES = {
+resources: {
   sections: [
     {
       id: 'flights',
@@ -537,4 +559,6 @@ const RESOURCES = {
       ]
     }
   ]
+},
+
 };
