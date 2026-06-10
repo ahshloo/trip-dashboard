@@ -248,6 +248,17 @@ regions: [
     days: ['d7', 'd8', 'd9', 'd10', 'd15']
   },
   {
+    id: 'niagara',
+    emoji: '🌊',
+    title: 'Niagara Falls · Flex Option',
+    navLabel: 'Niagara (flex)',
+    color: '#0EA5E9',
+    dates: 'Oct 4–5 · only if chosen',
+    weather: { name: 'Niagara Falls, NY', lat: 43.0962, lon: -79.0377 },
+    infoCard: null,
+    days: ['d16']
+  },
+  {
     id: 'hudson',
     emoji: '🍂',
     title: 'Hudson Valley · Catskills',
@@ -445,7 +456,23 @@ days: {
       { type:'activity', icon:'🌊', title:'Relaxed lake time', sub:'No agenda after the boat. Taughannock Falls beach area or Myers Park in Lansing for shoreline lounging, playground and snacks. This day exists to NOT cram activities.' },
       { type:'activity', icon:'🐄', title:'Farm Sanctuary', tag:'optional', sub:'Watkins Glen · Guided tours of the famous farm-animal rescue — very kid-friendly. Sunday tours run in October; check schedule and book ahead.', url:'https://www.farmsanctuary.org/visit/' },
       { type:'activity', icon:'🏞', title:'Robert H. Treman State Park', tag:'optional', sub:'~15 min from Ithaca · Enfield Glen gorge walk to 115-ft Lucifer Falls. Only if everyone still wants one more gorge — skipping it is fine.', url:'https://parks.ny.gov/visit/state-parks/robert-h-treman-state-park' },
-      { type:'activity', icon:'🌊', title:'Niagara version of this day', tag:'optional', sub:'If the Niagara option was chosen on Oct 2–3: check out this morning instead, drive ~2.5 hrs to Niagara Falls (1 night). Maid of the Mist, Cave of the Winds, Goat Island, night illumination. Then Oct 5 straight to NJ (~6.5 hrs, optionally one Hudson Valley stop en route) — the New Paltz leg is skipped.' },
+      { type:'activity', icon:'🌊', title:'Niagara version of this day', tag:'optional', sub:'If the Niagara option was chosen on Oct 2–3, this whole day is replaced — see the dedicated "Niagara Falls · Flex Option" card below for the full plan (drive, Maid of the Mist, Cave of the Winds, Goat Island, illumination, overnight, and the Oct 5 drive to NJ).' },
+    ]
+  },
+  d16: {
+    date: '2026-10-04', title: 'FLEX: Niagara Falls (replaces lake day + New Paltz leg)',
+    badge: 'explore', badgeLabel: 'Flex Option',
+    content: [
+      { type:'activity', icon:'🌀', title:'Only if chosen on the Oct 2–3 decision point', sub:'This card activates only if the family said YES in the Finger Lakes: still excited, kids handling hotels well, weather favorable, not yet waterfalled-out. Otherwise ignore it — the base plan (Oct 4 lake day, Oct 5–7 New Paltz) stands.' },
+      { type:'drive', text:'~150 miles · ~2.5 hrs · NY-14 N → I-90 W → I-190 N · Check out of Watkins Glen in the morning, aim to arrive by midday',
+        route:{ from:'Watkins Glen, NY', to:'Niagara Falls State Park, Niagara Falls, NY' } },
+      { type:'activity', icon:'⛴', title:'Maid of the Mist', sub:'The classic boat ride to the base of Horseshoe Falls — ponchos provided, kids love it. Runs into early November, weather permitting. Buy timed tickets online to skip the line.', url:'https://www.maidofthemist.com/' },
+      { type:'activity', icon:'💨', title:'Cave of the Winds', sub:'Elevator 175 ft down, then wooden walkways to the Hurricane Deck at the base of Bridal Veil Falls. You WILL get soaked — sandals and ponchos provided. Check fall operating status before counting on it.', url:'https://www.niagarafallsstatepark.com/attractions-and-tours/cave-of-the-winds' },
+      { type:'activity', icon:'🏝', title:'Goat Island walk', sub:'Stroller-friendly paths between the American and Horseshoe Falls: Terrapin Point for the big panorama, Three Sisters Islands for rapids up close. Free; park once in the state park lot.' },
+      { type:'activity', icon:'🌈', title:'Night illumination', sub:'The falls are lit in color every night from dusk — visible from Prospect Point, a short walk from the NY-side hotels. Fireworks run some fall evenings; check the schedule.', url:'https://www.niagarafallsusa.com/' },
+      { type:'activity', icon:'🏨', title:'Overnight on the NY side', sub:'Book a hotel walkable to the state park so the illumination is a stroll, not a drive. Book only once the decision is made — keep it refundable.' },
+      { type:'drive', text:'Next morning (Oct 5): ~400 miles · ~6.5 hrs to NJ · I-90 E → I-81 S → I-80 E · Optionally break it with one Hudson Valley stop en route. The New Paltz leg is skipped — cancel that hotel.',
+        route:{ from:'Niagara Falls, NY', to:'Newark, NJ' } },
     ]
   },
   d11: {
