@@ -60,6 +60,12 @@ window.TRIP_DATA = {
   route: [ [43.77, 11.25], ... ],  // lat/lng polyline drawn on the map.
                                    // The map auto-fits to route+stops+pois.
 
+  routesAlt: [                     // optional — dashed overlay polylines for
+    { label: 'Flex: detour',       // alternate/contingency drives. label
+      color: '#0EA5E9',            // (optional) shows as a popup on tap;
+      points: [ [43.7, 11.2], ... ] } // color defaults to #0EA5E9
+  ],
+
   stops: [                         // anchor markers, visible at every zoom
     { lat: 43.77, lng: 11.25, label: 'FLR', regionId: 'florence',
       title: 'Florence', dates: 'Apr 2–6' },

@@ -438,7 +438,7 @@
 // ══════════════════════════════════════
 
 // Filled in by initDashboard() once the trip data file has loaded.
-let META, TRIP, ROUTE, STOPS, POIS, REGIONS, DAYS, QUICK_LINKS, RESOURCES;
+let META, TRIP, ROUTE, ROUTES_ALT, STOPS, POIS, REGIONS, DAYS, QUICK_LINKS, RESOURCES;
 
 const AT_SVG = `<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
 
@@ -897,6 +897,7 @@ function initDashboard(data) {
   META        = data.meta;
   TRIP        = { start: META.start, end: META.end };
   ROUTE       = data.route      || [];
+  ROUTES_ALT  = data.routesAlt  || [];
   STOPS       = data.stops      || [];
   POIS        = data.pois       || [];
   REGIONS     = data.regions    || [];
@@ -1054,8 +1055,9 @@ function initMap() {
     tapTolerance: 15    // more forgiving touch on phones
   });
 
-  // Auto-fit the view to this trip's geography (route + stops + POIs).
+  // Auto-fit the view to this trip's geography (route + alt routes + stops + POIs).
   const points = ROUTE
+    .concat(ROUTES_ALT.flatMap(r => r.points))
     .concat(STOPS.map(s => [s.lat, s.lng]))
     .concat(POIS.map(p => [p.lat, p.lng]));
   if (points.length) map.fitBounds(L.latLngBounds(points), { padding: [30, 30] });
@@ -1073,6 +1075,12 @@ function initMap() {
 
   // ── ROUTE & MARKERS (from the trip data) ──
   L.polyline(ROUTE, { color:'#1E40AF', weight:4, opacity:0.85, smoothFactor:1 }).addTo(map);
+
+  // Alternate / flex routes — dashed so they read as "optional branch".
+  ROUTES_ALT.forEach(r => {
+    const line = L.polyline(r.points, { color: r.color || '#0EA5E9', weight: 3, opacity: 0.8, dashArray: '6 8', smoothFactor: 1 }).addTo(map);
+    if (r.label) line.bindPopup(`<div style="font-family:-apple-system,sans-serif;font-size:13px;font-weight:600;color:#1e293b">${r.label}</div>`);
+  });
 
   // Every popup gets a one-tap handoff into the native Google Maps app.
   function gmapsSearchBtn(query) {
