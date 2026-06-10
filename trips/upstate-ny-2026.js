@@ -15,7 +15,7 @@ window.TRIP_DATA = {
 meta: {
   id: 'upstate-ny-2026',
   title: 'Upstate NY Family Foliage 2026',
-  footer: 'Upstate NY Family Foliage 2026 · Sep 27 – Oct 15 · Built with ❤️ for the Ofek family',
+  footer: 'Upstate NY Family Foliage 2026 · Sep 25 – Oct 15 · Built with ❤️ for the Ofek family',
   start: '2026-09-25',
   end: '2026-10-15',
   quickLinksLabel: '🍂 Foliage check:',
@@ -76,11 +76,11 @@ route: [
 stops: [
   { lat:40.6895, lng:-74.1745, label:'NJ', color:'#D97706', regionId:'nj',           title:'NJ Family Base / EWR',            dates:'Oct 7–15' },
   { lat:44.2795, lng:-73.9799, label:'LP', color:'#059669', regionId:'adirondacks',  title:'Lake Placid / Mirror Lake',        dates:'Sep 25 – 30' },
-  { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', regionId:'finger-lakes', title:'Watkins Glen State Park',          dates:'Sep 30 – Oct 4' },
+  { lat:42.3806, lng:-76.8733, label:'WG', color:'#7C3AED', regionId:'finger-lakes', title:'Watkins Glen State Park',          dates:'Sep 30 – Oct 5' },
   { lat:42.1460, lng:-77.0547, label:'CG', color:'#7C3AED', regionId:'finger-lakes', title:'Corning Museum of Glass',          dates:'Oct 1' },
   { lat:42.4476, lng:-76.4869, label:'IT', color:'#7C3AED', regionId:'finger-lakes', title:'Ithaca / Cornell Botanic Gardens', dates:'Oct 3' },
-  { lat:42.6958, lng:-74.3368, label:'HC', color:'#DC2626', regionId:'hudson',       title:'Howe Caverns',                     dates:'Oct 4' },
-  { lat:41.7476, lng:-74.0868, label:'NP', color:'#DC2626', regionId:'hudson',       title:'New Paltz',                        dates:'Oct 4–7' },
+  { lat:42.6958, lng:-74.3368, label:'HC', color:'#DC2626', regionId:'hudson',       title:'Howe Caverns',                     dates:'Oct 5' },
+  { lat:41.7476, lng:-74.0868, label:'NP', color:'#DC2626', regionId:'hudson',       title:'New Paltz',                        dates:'Oct 5–7' },
 ],
 
 // ── MAP POIs — EVERYTHING ELSE ─────────────────────────────
@@ -126,6 +126,10 @@ pois: [
   { lat:42.4500, lng:-76.4690, tier:2, cat:'scenic',   icon:'🌿', name:'Cornell Botanic Gardens',    area:'Ithaca, NY',      sub:'Free, beautiful fall colour. Dry-weather option.', url:'https://cornellbotanicgardens.org/visit' },
   { lat:42.4550, lng:-76.5090, tier:3, cat:'activity', icon:'🎭', name:'Hangar Theatre',             area:'Ithaca, NY',      sub:'Regional theater in a converted 1940s hangar.' },
   { lat:42.4396, lng:-76.4970, tier:3, cat:'activity', icon:'🛍', name:'Ithaca Commons',             area:'Ithaca, NY',      sub:'Collegetown energy, great food diversity for dinner.' },
+  { lat:42.4570, lng:-76.5110, tier:2, cat:'activity', icon:'🛥', name:'Cayuga Lake boat day',       area:'Ithaca, NY',      sub:'Pontoon rental or sightseeing cruise from the Ithaca waterfront. Relaxed on-the-water foliage day.', gq:'Cayuga Boat Rentals, Ithaca NY' },
+  { lat:42.4180, lng:-76.9170, tier:2, cat:'activity', icon:'🐄', name:'Farm Sanctuary',             area:'Watkins Glen, NY', sub:'Guided farm-animal tours at the famous rescue sanctuary. Optional — book tour slot ahead.', url:'https://www.farmsanctuary.org/visit/', gq:'Farm Sanctuary, Watkins Glen NY' },
+  { lat:42.4003, lng:-76.5594, tier:2, cat:'hike',     icon:'🏞', name:'Robert H. Treman State Park', area:'Ithaca, NY',     sub:'Enfield Glen gorge walk to 115-ft Lucifer Falls. Optional quieter alternative to Watkins Glen.', url:'https://parks.ny.gov/visit/state-parks/robert-h-treman-state-park' },
+  { lat:43.0830, lng:-79.0640, tier:2, cat:'scenic',   icon:'🌊', name:'Niagara Falls (flex option)', area:'Niagara Falls, NY', sub:'Optional 1-night add-on Oct 4–5, decided evening of Oct 2–3. Maid of the Mist, Cave of the Winds, Goat Island, night illumination.', url:'https://www.niagarafallsstatepark.com/' },
 
   // — Finger Lakes: food —
   { lat:42.3838, lng:-76.8714, tier:3, cat:'food', icon:'🍷', name:'Graft Wine + Cider Bar',  area:'Watkins Glen, NY', sub:'Farm-to-table, all local. Best sit-down dinner in town.', url:'https://www.graftwineciderbar.com/' },
@@ -144,8 +148,6 @@ pois: [
   { lat:42.0410, lng:-74.1180, tier:2, cat:'activity', icon:'🎸', name:'Woodstock Village',       area:'Woodstock, NY',         sub:'The iconic music town. Galleries, shops, live music. Half-day escape.' },
   { lat:41.7690, lng:-73.9350, tier:2, cat:'activity', icon:'🏡', name:'FDR Home & Library',      area:'Hyde Park, NY',         sub:'Roosevelt estate + Val-Kill. ~$20/adult.' },
   { lat:42.2170, lng:-73.7890, tier:2, cat:'scenic',   icon:'🎨', name:'Olana State Historic Site', area:'Hudson, NY',          sub:'Persian-style mansion, jaw-dropping valley panorama in foliage.' },
-  { lat:41.7530, lng:-74.0850, tier:3, cat:'activity', icon:'🏛', name:'Huguenot Street',         area:'New Paltz, NY',         sub:'America\'s oldest street (1692), six original stone houses.', url:'https://www.huguenotstreet.org/visit' },
-  { lat:41.7380, lng:-74.0850, tier:3, cat:'activity', icon:'🎨', name:'Dorsky Museum of Art',    area:'New Paltz, NY',         sub:'SUNY campus, free, strong rotating exhibitions.' },
 
   // — Hudson Valley: food —
   { lat:41.7470, lng:-74.0860, tier:3, cat:'food', icon:'🥞', name:'Main Street Bistro',  area:'New Paltz, NY', sub:'Beloved breakfast & brunch institution. Early on weekends.', url:'https://www.mainstreetbistro.com/menu/' },
@@ -221,7 +223,7 @@ regions: [
     title: 'Finger Lakes',
     navLabel: 'Finger Lakes',
     color: '#7C3AED',
-    dates: 'Sep 30 – Oct 4',
+    dates: 'Sep 30 – Oct 5',
     weather: { name: 'Watkins Glen, NY', lat: 42.3806, lon: -76.8733 },
     infoCard: {
       prefix: 'fl',
@@ -235,13 +237,15 @@ regions: [
       ],
       nohike: [
         { icon:'🔬', name:'Corning Museum of Glass',      badge:'rb-must', badgeLabel:'★ Must-do', sub:'Corning, ~45 min from Watkins Glen · $25/adult, kids under 17 free. Open 9am–5pm daily. You can make your own glass piece. One of the best museums in the US — easily fills 3 hours.', url:'https://visit.cmog.org/plan-your-visit' },
+        { icon:'🛥', name:'Cayuga Lake boat day',          sub:'Pontoon rental or sightseeing cruise from the Ithaca waterfront. The relaxed on-the-water day is now a core part of this leg — book a slot a day or two ahead.' },
+        { icon:'🐄', name:'Farm Sanctuary',                sub:'Watkins Glen · Guided tours of the famous farm-animal rescue. Optional, very kid-friendly. Check tour schedule and book ahead.', url:'https://www.farmsanctuary.org/visit/' },
         { icon:'🍷', name:'Seneca Lake Wine Trail',        sub:'35+ wineries along both shores. Drive the loop, stop at 3–4. Highlights: Wagner Vineyards, Castel Grisch, Hazlitt\'s 1852. No reservation usually needed mid-week.' },
         { icon:'🦕', name:'Museum of the Earth',           sub:'1259 Trumansburg Rd, Ithaca · Fossils, dinosaurs, hands-on paleontology. Very kid-friendly. ~$10/adult.', url:'https://www.museumoftheearth.org/visit/plan-your-visit' },
         { icon:'🌾', name:'Windmill Farm &amp; Craft Market', sub:'Penn Yan, ~30 min · Saturdays only. Large open-air market: local food, crafts, produce, baked goods. Worth the drive.' },
         { icon:'🎭', name:'Hangar Theatre',                sub:'Ithaca · Professional regional theater in a converted 1940s airplane hangar. Check schedule for fall shows.' },
       ]
     },
-    days: ['d7', 'd8', 'd9', 'd10']
+    days: ['d7', 'd8', 'd9', 'd10', 'd15']
   },
   {
     id: 'hudson',
@@ -249,7 +253,7 @@ regions: [
     title: 'Hudson Valley · Catskills',
     navLabel: 'Hudson Valley',
     color: '#DC2626',
-    dates: 'Oct 4 – Oct 7',
+    dates: 'Oct 5 – Oct 7',
     weather: { name: 'New Paltz, NY', lat: 41.7476, lon: -74.0868 },
     infoCard: {
       prefix: 'hv',
@@ -261,14 +265,12 @@ regions: [
         { icon:'🍺', name:'Bacchus Restaurant &amp; Bar',badge:'rb-brew',   badgeLabel:'Brew',   sub:'Long list of Hudson Valley craft beers + full pub menu. Lively on weekend evenings.' },
       ],
       nohike: [
-        { icon:'🏛', name:'Huguenot Street Historic District', sub:'New Paltz · America\'s oldest surviving street (1692). Six original stone houses still standing. Self-guided walking or paid guided tours.', url:'https://www.huguenotstreet.org/visit' },
-        { icon:'🎨', name:'Samuel Dorsky Museum of Art',       sub:'SUNY New Paltz campus · Free. Strong rotating exhibitions, contemporary &amp; American art. Worth 1–2 hours.', url:'https://www.newpaltz.edu/museum/information/museumvisit.html' },
-        { icon:'🎸', name:'Woodstock Village',                 sub:'~30 min west · The iconic music town. Great galleries, eclectic shops, live music &amp; coffee. Easy half-day escape.' },
-        { icon:'🏡', name:'FDR Home &amp; Presidential Library',sub:'Hyde Park, ~50 min north · Roosevelt\'s family estate + Eleanor\'s Val-Kill cottage. ~$20/adult. Fascinating in any season.' },
-        { icon:'🎨', name:'Olana State Historic Site',         sub:'Hudson, ~1 hr north · Frederic Church\'s Persian-style mansion with jaw-dropping Hudson Valley panorama. Stunning in October foliage.' },
+        { icon:'🌉', name:'Walkway Over the Hudson',           sub:'Highland, ~20 min · Free, 212 ft above the river, fully fenced. The best no-effort Hudson Valley view — slotted for the Oct 7 morning en route to NJ.', url:'https://walkway.org/visit/' },
+        { icon:'🎸', name:'Woodstock Village',                 sub:'~30 min west · The iconic music town. Great galleries, eclectic shops, live music &amp; coffee. Only if energy allows — this leg is now a short foliage base, not a sightseeing push.' },
+        { icon:'🍎', name:'Apple orchards',                    sub:'Masker Orchards (Warwick) or Fishkill Farms (Hopewell Junction) · Pick-your-own in peak October season. Easy optional stop on the drive toward NJ.' },
       ]
     },
-    days: ['d11', 'd12', 'd13', 'd14']
+    days: ['d11', 'd12', 'd13']
   }
 ],
 
@@ -419,6 +421,7 @@ days: {
           stats:['3 mi','~500 ft','Moderate'],
           url:'https://www.alltrails.com/trail/us/new-york/watkins-glen-south-rim-trail' },
       ]},
+      { type:'activity', icon:'🌊', title:'Decision point tonight: Niagara flex option', tag:'optional', sub:'Over dinner tonight (or tomorrow evening at the latest), decide on the floating Niagara option. Ask: 1) Are we still excited? 2) Are the kids handling hotels well? 3) Is the weather favorable? 4) Have we already had enough waterfalls and nature? If YES to going — check out Oct 4 instead of Oct 5, drive ~2.5 hrs to Niagara Falls for 1 night (Maid of the Mist, Cave of the Winds, Goat Island, night illumination), then straight to NJ on Oct 5, skipping the New Paltz leg. If NO — keep the base plan: extra Finger Lakes lake day Oct 4, then New Paltz Oct 5–7.' },
     ]
   },
   d10: {
@@ -431,21 +434,33 @@ days: {
       { type:'activity', icon:'🔬', title:'Sciencenter, Ithaca', tag:'rain plan', sub:'601 1st St, Ithaca · 250+ interactive exhibits, free parking. Curiosity Corner specifically designed for age 4 and under. Best indoor backup in the area — go here if weather shuts down the gorge.', url:'https://sciencenter.org/visit/hours-pricing/' },
       { type:'activity', icon:'🌿', title:'Cornell Botanic Gardens, Ithaca', tag:'optional', sub:'Free. Beautiful fall colour. Only viable in dry weather — mostly outdoor.', url:'https://cornellbotanicgardens.org/visit' },
       { type:'activity', icon:'🍕', title:'Ithaca Commons for dinner',       sub:'Collegetown energy, great food diversity.' },
+      { type:'activity', icon:'🌊', title:'Niagara decision — final call tonight', tag:'optional', sub:'If the Niagara option wasn\'t settled last night, lock it in this evening. Going means tomorrow (Oct 4) becomes the drive to Niagara Falls instead of the Cayuga Lake boat day.' },
+    ]
+  },
+  d15: {
+    date: '2026-10-04', title: 'Cayuga Lake boat day + relaxed lake time',
+    badge: 'explore', badgeLabel: 'Lake Day',
+    content: [
+      { type:'activity', icon:'🛥', title:'Cayuga Lake on the water', sub:'Rent a pontoon or take a sightseeing cruise from the Ithaca waterfront — foliage from the lake, zero hiking. Book a morning slot a day or two ahead.', gq:'Cayuga Boat Rentals, Ithaca NY' },
+      { type:'activity', icon:'🌊', title:'Relaxed lake time', sub:'No agenda after the boat. Taughannock Falls beach area or Myers Park in Lansing for shoreline lounging, playground and snacks. This day exists to NOT cram activities.' },
+      { type:'activity', icon:'🐄', title:'Farm Sanctuary', tag:'optional', sub:'Watkins Glen · Guided tours of the famous farm-animal rescue — very kid-friendly. Sunday tours run in October; check schedule and book ahead.', url:'https://www.farmsanctuary.org/visit/' },
+      { type:'activity', icon:'🏞', title:'Robert H. Treman State Park', tag:'optional', sub:'~15 min from Ithaca · Enfield Glen gorge walk to 115-ft Lucifer Falls. Only if everyone still wants one more gorge — skipping it is fine.', url:'https://parks.ny.gov/visit/state-parks/robert-h-treman-state-park' },
+      { type:'activity', icon:'🌊', title:'Niagara version of this day', tag:'optional', sub:'If the Niagara option was chosen on Oct 2–3: check out this morning instead, drive ~2.5 hrs to Niagara Falls (1 night). Maid of the Mist, Cave of the Winds, Goat Island, night illumination. Then Oct 5 straight to NJ (~6.5 hrs, optionally one Hudson Valley stop en route) — the New Paltz leg is skipped.' },
     ]
   },
   d11: {
-    date: '2026-10-04', title: 'Howe Caverns → New Paltz (~4 hrs total)',
+    date: '2026-10-05', title: 'Howe Caverns → New Paltz (~4.5 hrs total)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
-      { type:'drive', text:'Finger Lakes → Howe Caverns → New Paltz · ~3 hrs to the caverns, ~1.5 hrs on to New Paltz · I-86 E → I-88 E → I-87 S',
+      { type:'drive', text:'Finger Lakes → Howe Caverns → New Paltz · ~2.5 hrs to the caverns, ~1.5 hrs on to New Paltz · I-86 E → I-88 E → I-87 S',
         route:{ from:'Watkins Glen, NY', to:'New Paltz, NY', via:['Howe Caverns, Howes Cave, NY'] } },
-      { type:'activity', icon:'🕳', title:'Howe Caverns cave tour', sub:'156 feet underground, 52°F year-round — bring a layer. The classic 1.5-hr guided Traditional Tour walks paved, lit paths through the caverns. Fully rain-proof. Book ahead on a Columbus Day weekend Saturday.', url:'https://howecaverns.com/' },
+      { type:'activity', icon:'🕳', title:'Howe Caverns cave tour', sub:'156 feet underground, 52°F year-round — bring a layer. The classic 1.5-hr guided Traditional Tour walks paved, lit paths through the caverns. Fully rain-proof. Oct 5 is a Monday — quieter than the weekend, but still book ahead.', url:'https://howecaverns.com/' },
       { type:'activity', icon:'🚣', title:'Underground boat ride', sub:'The tour ends with a quiet boat ride across the Lake of Venus on the underground river — a hit with kids.' },
-      { type:'activity', icon:'🏨', title:'Continue to New Paltz', sub:'~1.5 hrs on to New Paltz. Village is walkable; Minnewaska is a 15-min drive and Mohonk is nearby. Check in and take an easy dinner on Main Street.' },
+      { type:'activity', icon:'🏨', title:'Continue to New Paltz', sub:'~1.5 hrs on to New Paltz. The village is now mainly a beautiful foliage base and transition toward NJ — no sightseeing checklist. Check in and take an easy dinner on Main Street.' },
     ]
   },
   d12: {
-    date: '2026-10-05', title: 'Minnewaska State Park · Shawangunk Ridge',
+    date: '2026-10-06', title: 'Minnewaska State Park · Shawangunk Ridge',
     badge: 'hike', badgeLabel: 'Hike',
     content: [
       { type:'activity', icon:'🏔', title:'Minnewaska State Park Preserve', sub:'Sky Lakes, white conglomerate cliffs, incredible foliage. Reserve parking online in advance — fills up fast on weekends.', url:'https://parks.ny.gov/visit/state-parks/minnewaska-state-park-preserve' },
@@ -466,20 +481,13 @@ days: {
     ]
   },
   d13: {
-    date: '2026-10-06', title: 'Walkway Over the Hudson + apple orchard',
-    badge: 'explore', badgeLabel: 'Explore',
-    content: [
-      { type:'activity', icon:'🌉', title:'Walkway Over the Hudson', sub:'Highland, ~20 min from New Paltz · Free, open 7am–sunset. 1.28 miles gate-to-gate, 212 ft above the Hudson River. Fully fenced — excellent with small children. The best dramatic Hudson Valley view without any trail difficulty. Easy 5.1 km out-and-back.', url:'https://walkway.org/visit/' },
-      { type:'activity', icon:'🍎', title:'Apple orchard — Masker Orchards', sub:'Warwick, ~50 min · Classic pick-your-own with hayride access to the rows. Big, festive, very kid-friendly in peak October apple season.', url:'https://www.maskers.com/' },
-      { type:'activity', icon:'🍏', title:'Alternative: Fishkill Farms', tag:'optional', sub:'Hopewell Junction, ~35 min · Smaller, more curated pick-your-own with apples, cider donuts and a farm store. Good rainy-weekend backup to Masker.', url:'https://www.fishkillfarms.com/' },
-    ]
-  },
-  d14: {
-    date: '2026-10-07', title: 'Drive New Paltz → NJ (~1.5 hrs)',
+    date: '2026-10-07', title: 'Walkway Over the Hudson → NJ (~2 hrs total)',
     badge: 'drive', badgeLabel: 'Drive',
     content: [
-      { type:'drive', text:'~90 miles · ~1.5 hrs · I-87 S → I-287 W',
-        route:{ from:'New Paltz, NY', to:'Newark, NJ' } },
+      { type:'activity', icon:'🌉', title:'Walkway Over the Hudson', sub:'Highland, ~20 min from New Paltz and right on the way south · Free, open 7am–sunset. 1.28 miles gate-to-gate, 212 ft above the Hudson River. Fully fenced — excellent with small children. The best dramatic Hudson Valley view without any trail difficulty, then back to the car and onward.', url:'https://walkway.org/visit/' },
+      { type:'drive', text:'~95 miles · ~1.5–2 hrs · I-87 S → I-287 W',
+        route:{ from:'Walkway Over the Hudson, Highland, NY', to:'Newark, NJ' } },
+      { type:'activity', icon:'🍎', title:'Apple orchard stop en route', tag:'optional', sub:'Masker Orchards (Warwick, near the route south) — classic pick-your-own with hayrides, peak October season. Fishkill Farms is the smaller, curated alternative. Skip if everyone just wants to land in NJ.', url:'https://www.maskers.com/' },
       { type:'activity', icon:'🏠', title:'Return to NJ family base', sub:'Oct 7–15 wind-down and family time. A Lake George reunion weekend (~Oct 10–12) makes an easy excursion from here before the EWR departure.' },
     ]
   },
@@ -533,8 +541,9 @@ resources: {
       title: 'Hotels & Stays',
       items: [
         { key: 'hotel-lp', label: 'Lake Placid — Mirror Lake Inn or Main St motel (5 nights)', type: 'booking', priority: 'critical', status: 'done', dates: 'Sep 25 – Sep 30', refNote: 'Accommodation booking (iCloud)', refUrl: 'https://www.icloud.com/iclouddrive/00cnF63Bkv2tFuED7Waq6EBfg#Lake_placid_accommodation_' },
-        { key: 'hotel-fl', label: 'Finger Lakes — Watkins Glen lodge / lakeside inn (4 nights)', type: 'booking', priority: 'critical', status: 'pending', dates: 'Sep 30 – Oct 4', reservation_deadline: '2026-08-01' },
-        { key: 'hotel-hv', label: 'Hudson Valley — New Paltz village hotel / B&B (3 nights)', type: 'booking', priority: 'critical', status: 'pending', dates: 'Oct 4 – Oct 7', reservation_deadline: '2026-08-01' },
+        { key: 'hotel-fl', label: 'Finger Lakes — Watkins Glen lodge / lakeside inn (5 nights)', type: 'booking', priority: 'critical', status: 'pending', dates: 'Sep 30 – Oct 5', reservation_deadline: '2026-08-01', notes: 'Book the last night (Oct 4) free-cancellation — the Niagara flex option would check out Oct 4 instead' },
+        { key: 'hotel-hv', label: 'Hudson Valley — New Paltz village hotel / B&B (2 nights)', type: 'booking', priority: 'critical', status: 'pending', dates: 'Oct 5 – Oct 7', reservation_deadline: '2026-08-01', notes: 'Book free-cancellation — this whole leg is replaced if the Niagara option is chosen on Oct 2–3' },
+        { key: 'hotel-niagara', label: 'Niagara Falls — flex option, 1 night (only if chosen)', type: 'booking', priority: 'optional', status: 'pending', dates: 'Oct 4 – Oct 5', notes: 'Do NOT commit now. Decide evening of Oct 2–3 in the Finger Lakes; book that night if going' },
       ]
     },
     {
@@ -544,8 +553,10 @@ resources: {
       items: [
         { key: 'act-marathon', label: 'Adirondack Half Marathon', type: 'booking', priority: 'critical', status: 'done', url: 'https://www.adirondackmarathon.org/', notes: 'Sun Sep 27 · Schroon Lake · expo & packet pickup Sat Sep 26' },
         { key: 'act-corning', label: 'Corning Museum of Glass', type: 'booking', priority: 'critical', status: 'pending', url: 'https://home.cmog.org/visit', notes: 'Oct 1 · book Make-Your-Own-Glass slot ahead · rain-proof' },
-        { key: 'act-howe', label: 'Howe Caverns Tour', type: 'booking', priority: 'critical', status: 'pending', url: 'https://howecaverns.com/', notes: 'Oct 4 · cave tour + boat ride en route to New Paltz' },
-        { key: 'act-minnewaska', label: 'Minnewaska State Park — parking reservation', type: 'booking', priority: 'critical', status: 'pending', url: 'https://parks.ny.gov/parks/minnewaska', notes: 'Fills fast on Oct weekends' },
+        { key: 'act-howe', label: 'Howe Caverns Tour', type: 'booking', priority: 'critical', status: 'pending', url: 'https://howecaverns.com/', notes: 'Oct 5 · cave tour + boat ride en route to New Paltz' },
+        { key: 'act-minnewaska', label: 'Minnewaska State Park — parking reservation', type: 'booking', priority: 'critical', status: 'pending', url: 'https://parks.ny.gov/parks/minnewaska', notes: 'Oct 6 · fills fast in October foliage season' },
+        { key: 'act-boat', label: 'Cayuga Lake boat — pontoon rental or cruise', type: 'booking', priority: 'recommended', status: 'pending', notes: 'Oct 4 · book 1–2 days ahead from the Finger Lakes once weather is known' },
+        { key: 'act-niagara-decision', label: 'DECIDE: Niagara flex option', type: 'todo', priority: 'recommended', status: 'pending', notes: 'Evening of Oct 2–3 · still excited? kids OK with hotels? weather good? enough waterfalls already? If go: book Niagara night + Maid of the Mist, cancel New Paltz' },
       ]
     },
     {
