@@ -22,4 +22,11 @@ window.TRIPS_MANIFEST = [
     file: 'trips/upstate-ny-2026.js',
     v: '20260610',
   },
+  {
+    id: 'segovia-madrid-summer-2026',
+    title: 'Segovia & Madrid Alpine Summer 2026',
+    dates: 'Aug 18 – 24, 2026',
+    file: 'trips/segovia-madrid-summer-2026.js',
+    v: '20260613',
+  },
 ];
