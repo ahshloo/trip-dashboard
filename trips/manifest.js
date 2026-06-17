@@ -17,15 +17,15 @@
 window.TRIPS_MANIFEST = [
   {
     id: 'segovia-madrid-summer-2026',
-    title: 'Upstate NY Family Foliage 2026',
-    dates: 'Sep 25 – Oct 15, 2026',
-    file: 'trips/upstate-ny-2026.js',
+    title: 'Segovia & Madrid Alpine Summer 2026',
+    dates: 'Aug 18 – Aug 26, 2026',
+    file: 'segovia-madrid-summer-2026',
     v: '20260610',
   },
   {
     id: 'segovia-madrid-summer-2026',
     title: 'Segovia & Madrid Alpine Summer 2026',
-    dates: 'Aug 18 – 24, 2026',
+    dates: 'Aug 18 – 26, 2026',
     file: 'trips/segovia-madrid-summer-2026.js',
     v: '20260613',
   },
