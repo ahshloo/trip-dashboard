@@ -11,7 +11,7 @@ meta: {
   title: 'Segovia & Madrid Alpine Summer 2026',
   footer: 'Segovia & Madrid Alpine Summer 2026 · Aug 18–24 · A water-centric mountain adventure for the whole family',
   start: '2026-08-18',
-  end: '2026-08-24',
+  end: '2026-08-26',
   quickLinksLabel: '🌊 Info & booking:',
 },
 
