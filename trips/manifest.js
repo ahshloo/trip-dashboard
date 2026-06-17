@@ -16,7 +16,7 @@
 // ─────────────────────────────────────────────────────────────
 window.TRIPS_MANIFEST = [
   {
-    id: 'upstate-ny-2026',
+    id: 'segovia-madrid-summer-2026',
     title: 'Upstate NY Family Foliage 2026',
     dates: 'Sep 25 – Oct 15, 2026',
     file: 'trips/upstate-ny-2026.js',
