@@ -9,7 +9,7 @@ window.TRIP_DATA = {
 meta: {
   id: 'segovia-madrid-summer-2026',
   title: 'Segovia & Madrid Alpine Summer 2026',
-  footer: 'Segovia & Madrid Alpine Summer 2026 · Aug 18–24 · A water-centric mountain adventure for the whole family',
+  footer: 'Segovia & Madrid Alpine Summer 2026 · Aug 18–26 · A water-centric mountain adventure for the whole family',
   start: '2026-08-18',
   end: '2026-08-26',
   quickLinksLabel: '🌊 Info & booking:',
